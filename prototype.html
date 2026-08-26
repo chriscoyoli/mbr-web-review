@@ -1,0 +1,1581 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A working prototype of a redesigned mby.pca.org, eleven screens, mobile first.">
+<meta name="robots" content="noindex, nofollow">
+
+<title>Monterey Bay Region Prototype</title>
+<link rel="icon" type="image/png" href="assets/mbr-crest-96.png">
+<link rel="apple-touch-icon" href="assets/mbr-crest.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Public+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --paper:#FBFAF8;      /* Carmel sandstone light */
+  --surface:#FFFFFF;
+  --surface-2:#F2F1ED;
+  --ink:#14213A;        /* deep marine indigo */
+  --ink-2:#43506E;
+  --ink-3:#737E96;
+  --line:#E0DCD3;
+  --line-2:#CBC5B8;
+  --sea:#152C50;        /* structural indigo */
+  --sea-2:#1E3D6B;
+  --on-sea:#F3F1EC;
+  --on-sea-2:#B9C4D8;
+  --amber:#A65510;      /* THE accent */
+  --amber-hi:#C4691A;
+  --amber-soft:#F6E9D8;
+  --fog-a:#C9D3DC;      /* photo-slot atmosphere */
+  --fog-b:#E8E3D8;
+  /* semantic status, information design only */
+  --st-open:#1E6B4F;   --st-open-bg:#E2F0E9;
+  --st-few:#8A5200;    --st-few-bg:#FAEFDD;
+  --st-full:#5B6478;   --st-full-bg:#ECEDF0;
+  --st-canc:#9E2B21;   --st-canc-bg:#FBE8E6;
+  --shadow:0 1px 2px rgba(20,33,58,.05),0 10px 28px -16px rgba(20,33,58,.22);
+  --r:3px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0C1120; --surface:#141B2C; --surface-2:#1B2334;
+    --ink:#EAEDF4; --ink-2:#B4BCCE; --ink-3:#8590A6;
+    --line:#26304A; --line-2:#3A4460;
+    --sea:#0E1830; --sea-2:#1B2E52; --on-sea:#EAEDF4; --on-sea-2:#98A6C2;
+    --amber:#E39A4E; --amber-hi:#F0AE66; --amber-soft:#33240F;
+    --fog-a:#25344A; --fog-b:#2E3140;
+    --st-open:#6FC7A2; --st-open-bg:#11291F;
+    --st-few:#E5B571;  --st-few-bg:#32240F;
+    --st-full:#A0AABF; --st-full-bg:#1F2637;
+    --st-canc:#F09287; --st-canc-bg:#3A1815;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -16px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0C1120; --surface:#141B2C; --surface-2:#1B2334;
+  --ink:#EAEDF4; --ink-2:#B4BCCE; --ink-3:#8590A6;
+  --line:#26304A; --line-2:#3A4460;
+  --sea:#0E1830; --sea-2:#1B2E52; --on-sea:#EAEDF4; --on-sea-2:#98A6C2;
+  --amber:#E39A4E; --amber-hi:#F0AE66; --amber-soft:#33240F;
+  --fog-a:#25344A; --fog-b:#2E3140;
+  --st-open:#6FC7A2; --st-open-bg:#11291F;
+  --st-few:#E5B571;  --st-few-bg:#32240F;
+  --st-full:#A0AABF; --st-full-bg:#1F2637;
+  --st-canc:#F09287; --st-canc-bg:#3A1815;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -16px rgba(0,0,0,.7);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Public Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:"Source Serif 4",Georgia,serif;font-weight:600;margin:0;text-wrap:balance;letter-spacing:-.012em}
+p{margin:0}
+a{color:var(--amber);text-underline-offset:3px}
+:focus-visible{outline:3px solid var(--amber);outline-offset:3px;border-radius:2px}
+img{max-width:100%;display:block}
+.tnum{font-variant-numeric:tabular-nums}
+
+/* ============ HARNESS (not part of the design) ============ */
+.harness{background:var(--surface-2);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:60}
+.harness-in{max-width:1400px;margin:0 auto;padding:10px 16px;display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center}
+.harness .lbl{font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);font-weight:700}
+.harness a.lbl{color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--line-2);padding-bottom:2px}
+.harness a.lbl:hover{color:var(--ink);border-bottom-color:var(--ink)}
+.screens{display:flex;flex-wrap:wrap;gap:4px;min-width:0;flex:1 1 auto}
+.screens button,.widths button{
+  font:inherit;font-size:.76rem;font-weight:600;padding:5px 11px;border-radius:100px;cursor:pointer;
+  background:transparent;color:var(--ink-2);border:1px solid var(--line-2);
+}
+.screens button:hover,.widths button:hover{background:var(--surface);color:var(--ink)}
+.screens button[aria-current="true"],.widths button[aria-pressed="true"]{
+  background:var(--sea);color:var(--on-sea);border-color:var(--sea)
+}
+.widths{display:flex;flex-wrap:wrap;gap:4px;margin-left:auto;align-items:center}
+@media(max-width:700px){.widths{margin-left:0}}
+
+/* ============ CANVAS ============ */
+.canvas{
+  container-type:inline-size;container-name:site;
+  margin:0 auto;background:var(--paper);
+  transition:max-width .18s ease;
+  border-left:1px solid transparent;border-right:1px solid transparent;
+}
+.canvas[data-w="390"]{max-width:390px;border-color:var(--line)}
+.canvas[data-w="768"]{max-width:768px;border-color:var(--line)}
+.canvas[data-w="full"]{max-width:none}
+
+/* ============ SITE SHELL ============ */
+.shell{max-width:1160px;margin:0 auto;padding:0 20px}
+@container site (min-width:900px){.shell{padding:0 40px}}
+
+.topbar{background:var(--sea);color:var(--on-sea)}
+.topbar-in{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;min-height:60px}
+.mark{display:flex;align-items:center;gap:11px;text-decoration:none;color:inherit}
+.mark svg{flex:none}
+.mark .wm{display:flex;flex-direction:column;line-height:1.05}
+.mark .wm b{font-family:"Source Serif 4",serif;font-size:.98rem;font-weight:700;letter-spacing:.005em}
+.mark .wm span{font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--on-sea-2);margin-top:3px}
+
+.navlinks{display:none}
+@container site (min-width:860px){
+  .navlinks{display:flex;align-items:center;gap:4px}
+  .navtoggle{display:none}
+}
+.navlinks a{
+  color:var(--on-sea);text-decoration:none;font-size:.86rem;font-weight:500;
+  padding:8px 11px;border-radius:var(--r);
+}
+.navlinks a:hover{background:rgba(255,255,255,.11)}
+.navlinks a.cta{background:var(--amber-hi);color:#fff;font-weight:700;margin-left:8px;padding:9px 17px}
+:root[data-theme="dark"] .navlinks a.cta,
+:root:not([data-theme="light"]) .navlinks a.cta{color:#1a1208}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .navlinks a.cta{color:#1a1208}}
+.navlinks a.cta:hover{background:var(--amber)}
+.navtoggle{
+  background:transparent;border:1px solid rgba(255,255,255,.3);color:var(--on-sea);
+  border-radius:var(--r);min-width:44px;min-height:44px;display:flex;align-items:center;
+  justify-content:center;cursor:pointer;font:inherit;font-size:.8rem;font-weight:600;gap:7px;padding:0 13px;
+}
+@container site (min-width:860px){.navtoggle{display:none}}
+.mobnav{display:none;padding:8px 0 16px;border-top:1px solid rgba(255,255,255,.16)}
+.mobnav.open{display:block}
+@container site (min-width:860px){.mobnav.open{display:none}}
+.mobnav a{display:block;color:var(--on-sea);text-decoration:none;padding:12px 4px;font-weight:500;border-bottom:1px solid rgba(255,255,255,.09)}
+.mobnav a.cta{background:var(--amber-hi);color:#fff;text-align:center;border-radius:var(--r);margin-top:12px;border:0;font-weight:700}
+
+/* ============ TYPE SCALE ============ */
+.h-hero{font-size:2rem;line-height:1.1}
+@container site (min-width:600px){.h-hero{font-size:2.7rem}}
+@container site (min-width:1000px){.h-hero{font-size:3.5rem;line-height:1.04}}
+.h-sec{font-size:1.5rem;line-height:1.18}
+@container site (min-width:700px){.h-sec{font-size:1.95rem}}
+.h-card{font-size:1.18rem;line-height:1.25}
+.eyebrow{font-size:.66rem;letter-spacing:.17em;text-transform:uppercase;font-weight:700;color:var(--amber)}
+.eyebrow.q{color:var(--ink-3)}
+.lede{font-size:1.05rem;color:var(--ink-2);max-width:60ch}
+.meta{font-size:.79rem;color:var(--ink-3);font-weight:500}
+
+/* ============ PHOTO SLOTS ============ */
+.photo{
+  position:relative;background:linear-gradient(148deg,var(--fog-a),var(--fog-b));
+  overflow:hidden;border-radius:var(--r);
+}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.photo[data-shot]::after{
+  content:attr(data-shot);position:absolute;left:10px;bottom:10px;
+  font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;
+  background:var(--surface);color:var(--ink-2);padding:4px 8px;border-radius:2px;
+  border:1px solid var(--line);max-width:calc(100% - 20px);
+}
+.credit{
+  position:absolute;right:8px;bottom:8px;font-size:.6rem;font-weight:600;letter-spacing:.04em;
+  color:#fff;background:rgba(10,16,30,.62);padding:3px 7px;border-radius:2px;
+  backdrop-filter:saturate(140%) blur(2px);
+}
+.logoframe{
+  display:flex;align-items:center;justify-content:center;background:var(--surface);
+  border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;min-height:104px;
+}
+.logoframe img{max-width:100%;max-height:56px;width:auto;height:auto;object-fit:contain}
+:root[data-theme="dark"] .logoframe,
+:root[data-theme="dark"] .sponsor-logo{background:#F5F4F1}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .logoframe,
+  :root:not([data-theme="light"]) .sponsor-logo{background:#F5F4F1}
+}
+a.logoframe:hover{border-color:var(--amber)}
+.crest{width:44px;height:44px;flex:none;display:block}
+@container site (min-width:860px){.crest{width:54px;height:54px}}
+.foot .crest{width:40px;height:40px}
+.photo.r-hero{aspect-ratio:21/9}
+@container site (min-width:940px){.photo.r-hero{aspect-ratio:16/9}}
+.photo.r-band{aspect-ratio:21/9;max-height:340px}
+@container site (min-width:900px){.photo.r-band{aspect-ratio:3/1}}
+.photo.r-wide{aspect-ratio:16/9;max-height:520px}
+.photo.r-hero{max-height:460px}
+.photo.r-card{aspect-ratio:3/2}
+.photo.r-sq{aspect-ratio:1/1}
+
+/* ============ BUTTONS ============ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font:inherit;font-weight:700;font-size:.92rem;padding:13px 22px;border-radius:var(--r);
+  text-decoration:none;cursor:pointer;border:1.5px solid transparent;min-height:48px;
+}
+.btn-primary{background:var(--amber);color:#fff;border-color:var(--amber)}
+:root[data-theme="dark"] .btn-primary{color:#1a1208}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn-primary{color:#1a1208}}
+.btn-primary:hover{background:var(--amber-hi);border-color:var(--amber-hi)}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--line-2)}
+.btn-ghost:hover{border-color:var(--ink-2);background:var(--surface)}
+.btn-block{width:100%}
+
+/* ============ STATUS ============ */
+.status{
+  display:inline-flex;align-items:center;gap:6px;font-size:.7rem;font-weight:700;
+  letter-spacing:.09em;text-transform:uppercase;padding:4px 10px;border-radius:100px;
+}
+.status{border:1px solid currentColor}
+.status::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;flex:none}
+.s-open{background:var(--st-open-bg);color:var(--st-open)}
+.s-few{background:var(--st-few-bg);color:var(--st-few)}
+.s-full{background:var(--st-full-bg);color:var(--st-full)}
+.s-canc{background:var(--st-canc-bg);color:var(--st-canc)}
+
+/* ============ EVENT CARD ============ */
+.ecard{
+  display:grid;grid-template-columns:auto 1fr;gap:0;background:var(--surface);
+  border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);
+}
+.ecard .rail{width:5px;background:var(--st-open)}
+.ecard.few .rail{background:var(--st-few)}
+.ecard.full .rail{background:var(--st-full)}
+.ecard.canc .rail{background:var(--st-canc)}
+.ecard .in{padding:18px 20px;display:flex;flex-direction:column;gap:10px}
+.ecard .dateline{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px}
+.dstamp{
+  font-size:.74rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);
+  font-variant-numeric:tabular-nums;
+}
+.ecard h3 a{color:var(--ink);text-decoration:none;display:inline-block;padding:4px 0}
+.ecard h3 a:hover{color:var(--amber)}
+.ecard.canc h3{text-decoration:line-through;text-decoration-thickness:1.5px;color:var(--ink-3)}
+.ecard .facts{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:.83rem;color:var(--ink-2)}
+.ecard .facts b{font-weight:600;color:var(--ink)}
+@container site (min-width:760px){
+  .ecard{grid-template-columns:auto 210px 1fr}
+  .ecard .thumb{border-right:1px solid var(--line)}
+}
+.ecard .thumb{display:none}
+@container site (min-width:760px){.ecard .thumb{display:block;aspect-ratio:auto;align-self:stretch;min-height:150px}}
+
+/* ============ LAYOUT HELPERS ============ */
+.sect{padding:44px 0}
+@container site (min-width:900px){.sect{padding:64px 0}}
+.sect.tight{padding:30px 0}
+.sect.alt{background:var(--surface-2)}
+.stack{display:flex;flex-direction:column;gap:16px}
+.stack-lg{display:flex;flex-direction:column;gap:30px}
+.sechead{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 20px;margin-bottom:22px}
+.sechead a{font-size:.85rem;font-weight:600;text-decoration:none;display:inline-block;padding:6px 0}
+.sechead a:hover{text-decoration:underline}
+.grid{display:grid;gap:18px}
+@container site (min-width:640px){.g2{grid-template-columns:1fr 1fr}}
+@container site (min-width:640px){.g3{grid-template-columns:1fr 1fr}}
+@container site (min-width:980px){.g3{grid-template-columns:repeat(3,1fr)}}
+@container site (min-width:560px){.g4{grid-template-columns:1fr 1fr}}
+@container site (min-width:980px){.g4{grid-template-columns:repeat(4,1fr)}}
+.side{display:grid;gap:24px}
+@container site (min-width:940px){.side{grid-template-columns:minmax(0,1fr) 330px;gap:52px;align-items:start}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;box-shadow:var(--shadow)}
+.prose{max-width:66ch;display:flex;flex-direction:column;gap:16px;color:var(--ink-2)}
+.prose h3{color:var(--ink);margin-top:10px}
+.prose strong{color:var(--ink)}
+.divider{border:0;border-top:1px solid var(--line);margin:0}
+
+/* ============ FOOTER ============ */
+.foot{background:var(--sea);color:var(--on-sea-2);margin-top:0}
+.foot a{color:var(--on-sea);text-decoration:none}
+.foot a:hover{text-decoration:underline}
+.foot-grid{display:grid;gap:26px;padding:40px 0 26px}
+@container site (min-width:760px){.foot-grid{grid-template-columns:1.4fr 1fr 1fr 1fr}}
+.foot h4{color:var(--on-sea);font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;font-family:"Public Sans",sans-serif;font-weight:700;margin-bottom:12px}
+.foot ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1px;font-size:.87rem}
+.foot ul a{display:inline-block;padding:7px 0}
+.legal{border-top:1px solid rgba(255,255,255,.14);padding:18px 0 34px;font-size:.74rem;line-height:1.6}
+
+/* ============ FORMS ============ */
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:.8rem;font-weight:600;color:var(--ink)}
+.field .hint{font-size:.75rem;color:var(--ink-3)}
+.field input,.field select,.field textarea{
+  font:inherit;font-size:.95rem;padding:12px 13px;border:1.5px solid var(--line-2);
+  border-radius:var(--r);background:var(--surface);color:var(--ink);min-height:48px;width:100%;
+}
+.field textarea{min-height:120px;resize:vertical}
+.req{color:var(--st-canc);font-weight:700}
+.checkrow{display:flex;gap:11px;align-items:flex-start;font-size:.86rem;color:var(--ink-2)}
+.checkrow input{width:22px;height:22px;flex:none;margin-top:2px;accent-color:var(--amber)}
+
+/* ============ MISC ============ */
+.pill-lite{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--amber-soft);color:var(--amber);padding:4px 10px;border-radius:100px}
+.kpi{display:flex;flex-direction:column;gap:2px}
+.kpi b{font-family:"Source Serif 4",serif;font-size:1.6rem;font-weight:700;color:var(--ink);line-height:1.1}
+.kpi span{font-size:.78rem;color:var(--ink-3)}
+.tiles{display:grid;gap:12px}
+@container site (min-width:520px){.tiles{grid-template-columns:1fr 1fr}}
+@container site (min-width:900px){.tiles{grid-template-columns:repeat(4,1fr)}}
+.tile{
+  display:flex;flex-direction:column;gap:5px;padding:16px 18px;text-decoration:none;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r);color:var(--ink);
+}
+.tile:hover{border-color:var(--amber);background:var(--amber-soft)}
+.tile b{font-family:"Source Serif 4",serif;font-size:1.02rem}
+.tile span{font-size:.79rem;color:var(--ink-2)}
+.tile:hover span{color:var(--ink-2)}
+.progress{height:6px;background:var(--surface-2);border-radius:100px;overflow:hidden;border:1px solid var(--line)}
+.progress i{display:block;height:100%;background:var(--st-few)}
+.sponsor-logo{
+  display:flex;align-items:center;justify-content:center;text-align:center;padding:22px 16px;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r);min-height:96px;
+  font-family:"Source Serif 4",serif;font-weight:600;font-size:.95rem;color:var(--ink);
+  text-decoration:none;line-height:1.25;
+}
+.sponsor-logo:hover{border-color:var(--amber)}
+.calgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.calgrid .dow{background:var(--surface-2);padding:8px 4px;text-align:center;font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.calgrid .day{background:var(--surface);min-height:64px;padding:5px 5px 7px;display:flex;flex-direction:column;gap:4px}
+@container site (min-width:700px){.calgrid .day{min-height:92px;padding:7px}}
+.calgrid .day .n{font-size:.72rem;font-weight:600;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.calgrid .day.out{background:var(--surface-2)}
+.calgrid .day.out .n{opacity:.4}
+.chip{
+  display:block;font-size:.62rem;font-weight:700;line-height:1.25;padding:3px 5px;border-radius:2px;
+  text-decoration:none;overflow:hidden;
+}
+.chip.open{background:var(--st-open-bg);color:var(--st-open)}
+.chip.few{background:var(--st-few-bg);color:var(--st-few)}
+.chip.canc{background:var(--st-canc-bg);color:var(--st-canc);text-decoration:line-through}
+.viewtoggle{display:inline-flex;border:1px solid var(--line-2);border-radius:100px;padding:3px;gap:2px;background:var(--surface)}
+.viewtoggle button{font:inherit;font-size:.8rem;font-weight:600;padding:7px 16px;border-radius:100px;border:0;background:transparent;color:var(--ink-2);cursor:pointer;min-height:38px}
+.viewtoggle button[aria-pressed="true"]{background:var(--sea);color:var(--on-sea)}
+.screen{display:none}
+.screen.active{display:block}
+.breadcrumb{font-size:.78rem;color:var(--ink-3);padding:16px 0 0}
+.breadcrumb a{color:var(--ink-3);text-decoration:none;display:inline-block;padding:5px 0}
+.breadcrumb a:hover{color:var(--amber)}
+table.rate{width:100%;border-collapse:collapse;font-size:.88rem}
+table.rate th,table.rate td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line)}
+table.rate th{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);background:var(--surface-2)}
+table.rate td.tnum{font-variant-numeric:tabular-nums;font-weight:600}
+.scrollx{overflow-x:auto}
+
+/* ============ NOTES (outside prototype) ============ */
+.notes{background:var(--surface-2);border-top:4px solid var(--sea);padding:52px 0 70px}
+.notes .shell{max-width:1160px}
+.notes h2{font-size:1.7rem;margin-bottom:8px}
+.notes h3{font-size:1.15rem;margin:26px 0 8px}
+.notes p,.notes li{color:var(--ink-2);font-size:.94rem}
+.notes ul,.notes ol{margin:10px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:8px}
+.notes .card{background:var(--surface)}
+
+.logoframe[data-noimg]::after{content:"Sponsor logo";font-size:.7rem;font-weight:600;color:var(--ink-3)}
+.photo[data-noimg]{background:linear-gradient(148deg,var(--fog-a),var(--fog-b))}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+<script>
+/* Photographs are hot-linked from the region's own media library. If a host blocks
+   cross-origin images (the Claude artifact preview does), hide the broken image so the
+   ratio-locked frame beneath shows instead of a broken-image icon. Registered early,
+   in capture phase, so it runs before any image has a chance to fail. */
+document.addEventListener('error', function(e){
+  var t = e.target;
+  if (t && t.tagName === 'IMG') {
+    t.style.display = 'none';
+    var f = t.closest('.photo, .logoframe');
+    if (f) f.setAttribute('data-noimg','');
+  }
+}, true);
+</script>
+</head>
+<body>
+<div class="harness">
+  <div class="harness-in">
+    <a href="index.html" class="lbl">&larr; Overview</a>
+    <a href="report.html" class="lbl">The review</a>
+    <span class="lbl">Screen</span>
+    <div class="screens" role="tablist" aria-label="Prototype screens">
+      <button data-screen="home" aria-current="true">Home</button>
+      <button data-screen="events">Events</button>
+      <button data-screen="event">Event detail</button>
+      <button data-screen="join">Join</button>
+      <button data-screen="regalia">Regalia</button>
+      <button data-screen="badge">Badge order</button>
+      <button data-screen="about">About &amp; Board</button>
+      <button data-screen="news">News</button>
+      <button data-screen="article">Article</button>
+      <button data-screen="sponsors">Sponsors</button>
+      <button data-screen="contact">Contact</button>
+    </div>
+    <div class="widths">
+      <span class="lbl" style="align-self:center">Width</span>
+      <button data-w="390" aria-pressed="false">390</button>
+      <button data-w="768" aria-pressed="false">768</button>
+      <button data-w="full" aria-pressed="true">Full</button>
+    </div>
+  </div>
+</div>
+
+<div class="canvas" id="canvas" data-w="full">
+
+<header class="topbar">
+  <div class="shell">
+    <div class="topbar-in">
+      <a class="mark" href="#" aria-label="Monterey Bay Region, Porsche Club of America, home">
+        <img class="crest" src="data:image/png;base64,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" alt="" width="44" height="44" decoding="async">
+        <span class="wm">
+          <b>Monterey Bay Region</b>
+          <span>Porsche Club of America</span>
+        </span>
+      </a>
+      <nav class="navlinks" aria-label="Main">
+        <a href="#" data-goto="events">Events</a>
+        <a href="#" data-goto="news">News</a>
+        <a href="#" data-goto="about">About</a>
+        <a href="#" data-goto="regalia">Regalia</a>
+        <a href="#" data-goto="sponsors">Sponsors</a>
+        <a href="#" data-goto="contact">Contact</a>
+        <a href="#" data-goto="join" class="cta">Join</a>
+      </nav>
+      <button class="navtoggle" id="navtoggle" aria-expanded="false" aria-controls="mobnav">
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M1 3h14M1 8h14M1 13h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        Menu
+      </button>
+    </div>
+    <nav class="mobnav" id="mobnav" aria-label="Main, mobile">
+      <a href="#" data-goto="events">Events</a>
+      <a href="#" data-goto="news">News</a>
+      <a href="#" data-goto="about">About &amp; Board</a>
+      <a href="#" data-goto="regalia">Regalia</a>
+      <a href="#" data-goto="sponsors">Sponsors</a>
+      <a href="#" data-goto="contact">Contact</a>
+      <a href="#" data-goto="join" class="cta">Join the region</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ================= HOME ================= -->
+<div class="screen active" id="s-home">
+  <section class="sect tight" style="padding-top:22px;padding-bottom:22px">
+    <div class="shell">
+      <div class="side" style="align-items:center">
+        <div class="stack" style="gap:16px">
+          <span class="eyebrow">Monterey &amp; San Benito Counties &middot; Zone 7 &middot; Since 1961</span>
+          <h1 class="h-hero">It&rsquo;s not just the cars,<br>it&rsquo;s the people.</h1>
+          <p class="lede">Four hundred Porsche owners on the Central Coast, driving Highway 1 and Carmel Valley, judging concours under the oaks, and arguing about tyre pressures over dinner. Everyone from a vintage 356 to a daily driver is welcome.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:11px">
+            <a href="#" data-goto="events" class="btn btn-primary">See what&rsquo;s on next</a>
+            <a href="#" data-goto="join" class="btn btn-ghost">Join the region</a>
+          </div>
+        </div>
+        <div class="photo r-hero"><img src="https://mby.pca.org/wp-content/uploads/2026-01-25-big-sur-tour-banner-fred.jpg" alt="A line of Porsches pulled over on the Big Sur tour, January 2026" decoding="async" fetchpriority="high"><span class="credit">Fred Brown</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sect alt">
+    <div class="shell">
+      <div class="sechead">
+        <h2 class="h-sec">What&rsquo;s on next</h2>
+        <a href="#" data-goto="events">All events and calendar &rarr;</a>
+      </div>
+      <div class="stack">
+
+        <article class="ecard few">
+          <div class="rail" aria-hidden="true"></div>
+          <div class="thumb photo r-card"><img src="https://mby.pca.org/wp-content/uploads/2025-05-18-elkhorn-slough-reserve-768x512.jpg" alt="Members' cars parked at Elkhorn Slough Reserve" decoding="async" loading="lazy"></div>
+          <div class="in">
+            <div class="dateline">
+              <span class="dstamp">Sat 19 Sep &middot; 8:00am</span>
+              <span class="status s-few">5 spaces left</span>
+            </div>
+            <h3 class="h-card"><a href="#" data-goto="event">2026 Return to Elkhorn Slough</a></h3>
+            <p style="color:var(--ink-2);font-size:.93rem">A morning on the water with Monterey Bay Eco Tours, then lunch in Moss Landing. Family friendly and one of the most popular runs on the calendar.</p>
+            <div class="facts">
+              <span><b>$30</b> per member</span>
+              <span>Moss Landing</span>
+              <span>27 of 32 booked</span>
+              <span>Closes 19 Sep, noon</span>
+            </div>
+            <div><a href="#" data-goto="event" class="btn btn-primary" style="padding:10px 18px;min-height:44px">Book a seat</a></div>
+          </div>
+        </article>
+
+        <article class="ecard">
+          <div class="rail" aria-hidden="true"></div>
+          <div class="in">
+            <div class="dateline">
+              <span class="dstamp">19&ndash;25 Sep</span>
+              <span class="status s-open">National event</span>
+            </div>
+            <h3 class="h-card"><a href="#" data-goto="event">Treffen At Sea, Pacific Wine Country</a></h3>
+            <p style="color:var(--ink-2);font-size:.93rem">A PCA National Treffen, booked through National rather than the region. Listed here so members do not miss it.</p>
+            <div class="facts"><span>Booking handled by <b>PCA National</b></span></div>
+          </div>
+        </article>
+
+        <article class="ecard">
+          <div class="rail" aria-hidden="true"></div>
+          <div class="thumb photo r-card"><img src="https://mby.pca.org/wp-content/uploads/2025-10-18-oktoberfest-icon.jpg" alt="Members gathered at a previous Oktoberfest" decoding="async" loading="lazy"></div>
+          <div class="in">
+            <div class="dateline">
+              <span class="dstamp">Sun 11 Oct</span>
+              <span class="status s-open">Registration opens 14 Sep</span>
+            </div>
+            <h3 class="h-card"><a href="#" data-goto="event">2026 Oktoberfest at BEELINE</a></h3>
+            <p style="color:var(--ink-2);font-size:.93rem">Catered lunch and a technical programme from the team at BEELINE European Auto Care, a long-standing independent shop popular with our Santa Cruz members.</p>
+            <div class="facts"><span>2119 Delaware Ave, Santa Cruz</span><span>Price to be confirmed</span></div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sect">
+    <div class="shell">
+      <div class="sechead">
+        <h2 class="h-sec">What we actually do</h2>
+      </div>
+      <div class="tiles">
+        <a class="tile" href="#" data-goto="events"><b>Driving tours</b><span>Big Sur, the Santa Cruz Mountains, Carmel Valley. Half a day to a long weekend.</span></a>
+        <a class="tile" href="#" data-goto="events"><b>Concours</b><span>Concours in Paradise every July at Carmel Valley Community Park. Around 100 cars.</span></a>
+        <a class="tile" href="#" data-goto="events"><b>Socials &amp; dinners</b><span>Membership meetings the first Monday of the month, plus cars and coffee.</span></a>
+        <a class="tile" href="#" data-goto="events"><b>Tech sessions</b><span>Evenings in the shops of the people who actually keep these cars running.</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sect" style="background:var(--amber-soft)">
+    <div class="shell">
+      <div class="side" style="align-items:center;gap:26px">
+        <div class="stack" style="gap:12px">
+          <span class="eyebrow">New around here?</span>
+          <h2 class="h-sec">You do not need a special Porsche. You need a Porsche.</h2>
+          <p style="color:var(--ink-2);max-width:56ch">Membership is through PCA National and includes your choice of home region. Pick Monterey Bay and you are on the tour list, the dinner list, and the concours field.</p>
+        </div>
+        <div><a href="#" data-goto="join" class="btn btn-primary btn-block">What membership gets you</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sect">
+    <div class="shell">
+      <div class="sechead">
+        <h2 class="h-sec">From the region</h2>
+        <a href="#" data-goto="news">All news &rarr;</a>
+      </div>
+      <div class="grid g3">
+        <a class="card" href="#" data-goto="article" style="text-decoration:none;display:flex;flex-direction:column;gap:11px;padding:0;overflow:hidden">
+          <div class="photo r-card"><img src="https://mby.pca.org/wp-content/uploads/08-92-Historics-1-Vega-Roecker-Mike-Rogers.jpg" alt="The Porsche corral at the Laguna Seca Historic Auto Races, August 1992" decoding="async" loading="lazy"><span class="credit">Vega Roecker</span></div>
+          <div style="padding:0 18px 20px;display:flex;flex-direction:column;gap:8px">
+            <span class="meta">19 August 2026 &middot; Vega Roecker</span>
+            <h3 class="h-card" style="color:var(--ink)">From the Archives</h3>
+            <p style="font-size:.9rem;color:var(--ink-2)">The corral at the Historic Auto Races, 1992, and what a paddock pass used to cost.</p>
+          </div>
+        </a>
+        <a class="card" href="#" data-goto="article" style="text-decoration:none;display:flex;flex-direction:column;gap:11px;padding:0;overflow:hidden">
+          <div class="photo r-card"><img src="https://mby.pca.org/wp-content/uploads/2026-08-12-morgan-porsche-pit-stop-rich-19-scaled.jpg" alt="Members and cars at the Porsche Pit Stop at Taste Morgan" decoding="async" loading="lazy"><span class="credit">Richard Chew</span></div>
+          <div style="padding:0 18px 20px;display:flex;flex-direction:column;gap:8px">
+            <span class="meta">15 August 2026 &middot; Richard Chew</span>
+            <h3 class="h-card" style="color:var(--ink)">Porsche Pit Stop at Taste Morgan</h3>
+            <p style="font-size:.9rem;color:var(--ink-2)">Photographs from the 12 August gathering at The Crossroads.</p>
+          </div>
+        </a>
+        <a class="card" href="#" data-goto="article" style="text-decoration:none;display:flex;flex-direction:column;gap:11px;padding:0;overflow:hidden">
+          <div class="photo r-card"><img src="https://mby.pca.org/wp-content/uploads/2026-07-19-concours-in-paradise-rich-1024x683.jpg" alt="Cars on the grass at Concours in Paradise, July 2026" decoding="async" loading="lazy"><span class="credit">Richard Chew</span></div>
+          <div style="padding:0 18px 20px;display:flex;flex-direction:column;gap:8px">
+            <span class="meta">24 July 2026 &middot; Vega Roecker</span>
+            <h3 class="h-card" style="color:var(--ink)">2026 Concours in Paradise</h3>
+            <p style="font-size:.9rem;color:var(--ink-2)">Around a hundred cars on the grass at Carmel Valley Community Park.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sect alt">
+    <div class="shell">
+      <div class="sechead">
+        <h2 class="h-sec">Supported by</h2>
+        <a href="#" data-goto="sponsors">Sponsor the region &rarr;</a>
+      </div>
+      <div class="grid g4" style="gap:12px">
+        <a class="logoframe" href="#" data-goto="sponsors" aria-label="Porsche Monterey, region sponsor"><img src="https://mby.pca.org/wp-content/uploads/porsche-monterey-logo-v2.png" alt="Porsche Monterey" decoding="async" loading="lazy"></a>
+        <a class="logoframe" href="#" data-goto="sponsors" aria-label="Monterey Touring Vehicles, region sponsor"><img src="https://mby.pca.org/wp-content/uploads/Monterey-Touring-Vehicles-Logo.png" alt="Monterey Touring Vehicles" decoding="async" loading="lazy"></a>
+        <a class="logoframe" href="#" data-goto="sponsors" aria-label="Mohr Imports, region sponsor"><img src="https://mby.pca.org/wp-content/uploads/mohr-imports-logo.png" alt="Mohr Imports" decoding="async" loading="lazy"></a>
+        <a class="logoframe" href="#" data-goto="sponsors" aria-label="Veloce Valuations, region sponsor"><img src="https://mby.pca.org/wp-content/uploads/veloce-sponsor-logo.png" alt="Veloce Valuations" decoding="async" loading="lazy"></a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= EVENTS ================= -->
+<div class="screen" id="s-events">
+  <div class="shell"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="#" data-goto="home">Home</a> / Events</nav></div>
+  <section class="sect tight">
+    <div class="shell">
+      <div class="stack" style="gap:14px">
+        <span class="eyebrow">The calendar</span>
+        <h1 class="h-hero" style="font-size:2.1rem">Events</h1>
+        <p class="lede">Everything the region is running, plus the Zone 7 and National dates worth knowing about. Booking is on this site. You will not be sent anywhere else until the payment screen.</p>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:24px">
+        <div class="viewtoggle" role="group" aria-label="Calendar view">
+          <button id="vList" aria-pressed="true">List</button>
+          <button id="vCal" aria-pressed="false">Calendar</button>
+        </div>
+        <a href="#" class="btn btn-ghost" style="padding:9px 16px;min-height:40px;font-size:.84rem">Subscribe to this calendar</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sect tight" id="listView">
+    <div class="shell">
+      <div class="stack">
+
+        <article class="ecard canc">
+          <div class="rail" aria-hidden="true"></div>
+          <div class="in">
+            <div class="dateline"><span class="dstamp">Fri 28 Aug</span><span class="status s-canc">Cancelled</span></div>
+            <h3 class="h-card">2026 Night at the Races</h3>
+            <p style="color:var(--ink-2);font-size:.93rem"><strong style="color:var(--st-canc)">This event has been cancelled.</strong> Bookings are closed and anyone who paid has been refunded. Watsonville Speedway, originally 2:00pm.</p>
+            <div class="facts"><span>Questions: <b>president@mby.pca.org</b></span></div>
+          </div>
+        </article>
+
+        <article class="ecard few">
+          <div class="rail" aria-hidden="true"></div>
+          <div class="thumb photo r-card"><img src="https://mby.pca.org/wp-content/uploads/2024-elkhorn-slough-vega.jpg" alt="Members on the water at Elkhorn Slough" decoding="async" loading="lazy"><span class="credit">Vega Roecker</span></div>
+          <div class="in">
+            <div class="dateline"><span class="dstamp">Sat 19 Sep &middot; 8:00am&ndash;2:00pm</span><span class="status s-few">5 spaces left</span></div>
+            <h3 class="h-card"><a href="#" data-goto="event">2026 Return to Elkhorn Slough</a></h3>
+            <p style="color:var(--ink-2);font-size:.93rem">A morning on the water with Monterey Bay Eco Tours, then lunch in Moss Landing.</p>
+            <div class="facts"><span><b>$30</b> per member</span><span>Moss Landing</span><span>27 of 32 booked</span><span>Closes 19 Sep, noon</span></div>
+            <div><a href="#" data-goto="event" class="btn btn-primary" style="padding:10px 18px;min-height:44px">Book a seat</a></div>
+          </div>
+        </article>
+
+        <article class="ecard">
+          <div class="rail" aria-hidden="true"></div>
+          <div class="in">
+            <div class="dateline"><span class="dstamp">19&ndash;25 Sep</span><span class="status s-open">National event</span></div>
+            <h3 class="h-card">Treffen At Sea, Pacific Wine Country</h3>
+            <p style="color:var(--ink-2);font-size:.93rem">A PCA National Treffen. Booking is handled by National, not by the region.</p>
+            <div class="facts"><span>Book at <b>pca.org</b></span></div>
+          </div>
+        </article>
+
+        <article class="ecard">
+          <div class="rail" aria-hidden="true"></div>
+          <div class="thumb photo r-card"><img src="https://mby.pca.org/wp-content/uploads/2024-09-28-oktoberfest-vega.jpg" alt="Cars and members at a previous Oktoberfest" decoding="async" loading="lazy"><span class="credit">Vega Roecker</span></div>
+          <div class="in">
+            <div class="dateline"><span class="dstamp">Sun 11 Oct</span><span class="status s-open">Registration opens 14 Sep</span></div>
+            <h3 class="h-card">2026 Oktoberfest at BEELINE</h3>
+            <p style="color:var(--ink-2);font-size:.93rem">Catered lunch and a technical programme at BEELINE European Auto Care, Santa Cruz.</p>
+            <div class="facts"><span>2119 Delaware Ave, Santa Cruz</span><span>Price to be confirmed</span></div>
+          </div>
+        </article>
+
+        <article class="ecard">
+          <div class="rail" aria-hidden="true"></div>
+          <div class="in">
+            <div class="dateline"><span class="dstamp">28 Oct &ndash; 1 Nov</span><span class="status s-open">National event</span></div>
+            <h3 class="h-card">Treffen Santa Fe, Fall 2026</h3>
+            <p style="color:var(--ink-2);font-size:.93rem">Bishop&rsquo;s Lodge, Santa Fe, New Mexico. Booked through PCA National.</p>
+            <div class="facts"><span>Book at <b>pca.org</b></span></div>
+          </div>
+        </article>
+
+      </div>
+      <p style="margin-top:22px;font-size:.85rem;color:var(--ink-3)">Looking for something past? <a href="#" data-goto="news">Event write-ups and photographs</a> are in the news archive.</p>
+    </div>
+  </section>
+
+  <section class="sect tight" id="calView" hidden>
+    <div class="shell">
+      <div class="sechead" style="margin-bottom:14px">
+        <h2 class="h-sec" style="font-size:1.35rem">September 2026</h2>
+        <div style="display:flex;gap:6px">
+          <button class="btn btn-ghost" style="padding:7px 14px;min-height:38px;font-size:.8rem">&larr; August</button>
+          <button class="btn btn-ghost" style="padding:7px 14px;min-height:38px;font-size:.8rem">October &rarr;</button>
+        </div>
+      </div>
+      <div class="scrollx">
+        <div class="calgrid" role="grid" aria-label="September 2026 events" style="min-width:520px">
+          <div class="dow">Sun</div><div class="dow">Mon</div><div class="dow">Tue</div><div class="dow">Wed</div><div class="dow">Thu</div><div class="dow">Fri</div><div class="dow">Sat</div>
+          <div class="day out"><span class="n">30</span></div>
+          <div class="day out"><span class="n">31</span></div>
+          <div class="day"><span class="n">1</span></div>
+          <div class="day"><span class="n">2</span></div>
+          <div class="day"><span class="n">3</span></div>
+          <div class="day"><span class="n">4</span></div>
+          <div class="day"><span class="n">5</span></div>
+
+          <div class="day"><span class="n">6</span></div>
+          <div class="day"><span class="n">7</span><a class="chip open" href="#">Membership meeting <em style="font-style:normal;opacity:.75">[placeholder]</em></a></div>
+          <div class="day"><span class="n">8</span></div>
+          <div class="day"><span class="n">9</span></div>
+          <div class="day"><span class="n">10</span></div>
+          <div class="day"><span class="n">11</span></div>
+          <div class="day"><span class="n">12</span></div>
+
+          <div class="day"><span class="n">13</span></div>
+          <div class="day"><span class="n">14</span></div>
+          <div class="day"><span class="n">15</span></div>
+          <div class="day"><span class="n">16</span></div>
+          <div class="day"><span class="n">17</span></div>
+          <div class="day"><span class="n">18</span></div>
+          <div class="day"><span class="n">19</span><a class="chip few" href="#" data-goto="event">Elkhorn Slough &middot; 5 left</a><a class="chip open" href="#">Treffen At Sea begins</a></div>
+
+          <div class="day"><span class="n">20</span><a class="chip open" href="#">Treffen At Sea</a></div>
+          <div class="day"><span class="n">21</span><a class="chip open" href="#">Treffen At Sea</a></div>
+          <div class="day"><span class="n">22</span><a class="chip open" href="#">Treffen At Sea</a></div>
+          <div class="day"><span class="n">23</span><a class="chip open" href="#">Treffen At Sea</a></div>
+          <div class="day"><span class="n">24</span><a class="chip open" href="#">Treffen At Sea</a></div>
+          <div class="day"><span class="n">25</span><a class="chip open" href="#">Treffen At Sea ends</a></div>
+          <div class="day"><span class="n">26</span></div>
+
+          <div class="day"><span class="n">27</span></div>
+          <div class="day"><span class="n">28</span></div>
+          <div class="day"><span class="n">29</span></div>
+          <div class="day"><span class="n">30</span></div>
+          <div class="day out"><span class="n">1</span></div>
+          <div class="day out"><span class="n">2</span></div>
+          <div class="day out"><span class="n">3</span></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px 18px;margin-top:16px;font-size:.78rem;color:var(--ink-2)">
+        <span class="status s-open">Places available</span>
+        <span class="status s-few">Nearly full</span>
+        <span class="status s-full">Sold out</span>
+        <span class="status s-canc">Cancelled</span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= EVENT DETAIL ================= -->
+<div class="screen" id="s-event">
+  <div class="shell"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="#" data-goto="home">Home</a> / <a href="#" data-goto="events">Events</a> / Elkhorn Slough</nav></div>
+
+  <section class="sect tight">
+    <div class="shell">
+      <div class="stack" style="gap:12px">
+        <div style="display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center">
+          <span class="status s-few">5 spaces left</span>
+          <span class="meta">Driving tour and boat trip &middot; family friendly</span>
+        </div>
+        <h1 class="h-hero" style="font-size:2.2rem">2026 Return to Elkhorn Slough</h1>
+        <p class="lede">Saturday 19 September, 8:00am to 2:00pm. Moss Landing. $30 per person, and five seats left.</p>
+      </div>
+      <div class="photo r-band" style="margin-top:22px"><img src="https://mby.pca.org/wp-content/uploads/2022-10-08-elkhorn-slough-1.jpg" alt="Members on the water at Elkhorn Slough" decoding="async" fetchpriority="high"></div>
+    </div>
+  </section>
+
+  <section class="sect tight">
+    <div class="shell">
+      <div class="side">
+        <div class="stack-lg">
+          <div class="prose">
+            <p style="font-size:1.05rem;color:var(--ink)">Two hours on the water in the middle of the largest tract of tidal salt marsh in California outside San Francisco Bay, followed by lunch in Moss Landing. Sea otters, harbour seals, and several hundred species of bird. One of the most consistently oversubscribed dates on our calendar, which is why we are running it again.</p>
+            <p>Meet at the Monterey Bay Eco Tours dock in Moss Landing. The boat leaves on time and cannot wait, so please arrive by <strong>9:45am</strong> at the latest. If you are driving up together, the informal run north along Highway 1 leaves Seaside at 8:00am.</p>
+            <h3>What to bring</h3>
+            <p>A jacket, whatever the forecast says. Sunscreen. A camera or a long lens if you have one. Food and drink are permitted on board.</p>
+            <h3>Cancellations</h3>
+            <p>Full refunds until seven days before the event. Inside seven days we will refund only if we can fill your seat from the waiting list, because the boat is chartered whether it is full or not. <span class="pill-lite">Placeholder policy</span></p>
+          </div>
+
+          <div class="card" style="padding:0;overflow:hidden">
+            <div class="photo r-wide" data-shot="Placeholder: map of the meeting point"></div>
+            <div style="padding:16px 20px">
+              <h3 class="h-card" style="font-size:1rem">Monterey Bay Eco Tours</h3>
+              <p style="font-size:.88rem;color:var(--ink-2);margin-top:4px">Moss Landing, California. Parking is on site and free.</p>
+            </div>
+          </div>
+
+          <div>
+            <h2 class="h-sec" style="font-size:1.3rem;margin-bottom:14px">Book your seat</h2>
+            <form class="card" style="display:flex;flex-direction:column;gap:18px" onsubmit="return false">
+              <div class="grid g2" style="gap:16px">
+                <div class="field">
+                  <label for="f-att">Name on the booking <span class="req" aria-hidden="true">*</span></label>
+                  <input id="f-att" name="attendee" required autocomplete="name">
+                </div>
+                <div class="field">
+                  <label for="f-seats">Seats <span class="req" aria-hidden="true">*</span></label>
+                  <select id="f-seats" name="seats" required>
+                    <option>1 seat, $30</option>
+                    <option selected>2 seats, $60</option>
+                    <option>3 seats, $90</option>
+                    <option>4 seats, $120</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="f-em">Email <span class="req" aria-hidden="true">*</span></label>
+                  <input id="f-em" type="email" name="email" required autocomplete="email">
+                  <span class="hint">Your confirmation and the dock directions go here.</span>
+                </div>
+                <div class="field">
+                  <label for="f-ph">Mobile <span class="req" aria-hidden="true">*</span></label>
+                  <input id="f-ph" type="tel" name="phone" required autocomplete="tel">
+                  <span class="hint">Only used if the trip has to move on the day.</span>
+                </div>
+              </div>
+              <div class="field">
+                <label for="f-note">Anything we should know</label>
+                <textarea id="f-note" name="note" style="min-height:84px" placeholder="Mobility needs, who you are travelling with, dietary requirements for lunch."></textarea>
+              </div>
+              <fieldset style="border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;margin:0">
+                <legend style="font-size:.8rem;font-weight:600;padding:0 6px">How would you like to pay?</legend>
+                <div style="display:flex;flex-direction:column;gap:12px;margin-top:6px">
+                  <label class="checkrow"><input type="radio" name="pay" checked style="border-radius:50%"> <span><strong style="color:var(--ink)">Card</strong><br><span style="font-size:.8rem">Handled by Stripe. We never see or store your card details.</span></span></label>
+                  <label class="checkrow"><input type="radio" name="pay" style="border-radius:50%"> <span><strong style="color:var(--ink)">PayPal</strong></span></label>
+                  <label class="checkrow"><input type="radio" name="pay" style="border-radius:50%"> <span><strong style="color:var(--ink)">Cheque</strong><br><span style="font-size:.8rem">Payable to PCA-Monterey Bay Region, posted to PO Box 524, Monterey CA 93942. Your seat is held for 10 days.</span></span></label>
+                </div>
+              </fieldset>
+              <label class="checkrow"><input type="checkbox" required> <span>I am happy for the region to hold my details for this event. <a href="#">What we do with them</a> <span class="req" aria-hidden="true">*</span></span></label>
+              <button type="submit" class="btn btn-primary btn-block">Continue to payment, $60</button>
+              <p style="font-size:.79rem;color:var(--ink-3);text-align:center">You will see one more screen to confirm before anything is charged.</p>
+            </form>
+          </div>
+        </div>
+
+        <aside class="stack">
+          <div class="card">
+            <h2 style="font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-family:'Public Sans',sans-serif;font-weight:700;color:var(--ink-3);margin-bottom:14px">The details</h2>
+            <dl style="display:grid;grid-template-columns:auto 1fr;gap:11px 16px;margin:0;font-size:.9rem">
+              <dt style="color:var(--ink-3);font-weight:600">When</dt><dd style="margin:0"><strong>Saturday 19 September</strong><br>8:00am to 2:00pm</dd>
+              <dt style="color:var(--ink-3);font-weight:600">Where</dt><dd style="margin:0">Monterey Bay Eco Tours<br>Moss Landing, CA</dd>
+              <dt style="color:var(--ink-3);font-weight:600">Cost</dt><dd style="margin:0" class="tnum"><strong>$30</strong> per person</dd>
+              <dt style="color:var(--ink-3);font-weight:600">Closes</dt><dd style="margin:0">Friday 19 September, noon</dd>
+              <dt style="color:var(--ink-3);font-weight:600">Open to</dt><dd style="margin:0">Members and their guests</dd>
+            </dl>
+            <hr class="divider" style="margin:18px 0">
+            <div class="stack" style="gap:8px">
+              <div style="display:flex;justify-content:space-between;font-size:.84rem"><span style="color:var(--ink-2)">Seats taken</span><strong class="tnum">27 of 32</strong></div>
+              <div class="progress" role="img" aria-label="27 of 32 seats booked"><i style="width:84%"></i></div>
+              <p style="font-size:.79rem;color:var(--st-few);font-weight:600">Five left. This one filled up last year.</p>
+            </div>
+            <a href="#" class="btn btn-primary btn-block" style="margin-top:16px">Book a seat</a>
+            <a href="#" class="btn btn-ghost btn-block" style="margin-top:8px">Add to my calendar</a>
+          </div>
+          <div class="card">
+            <h2 style="font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-family:'Public Sans',sans-serif;font-weight:700;color:var(--ink-3);margin-bottom:10px">Run by</h2>
+            <p style="font-size:.9rem;color:var(--ink-2)">Tour Chair, Monterey Bay Region<br><a href="#">tours@mby.pca.org</a></p>
+            <p style="font-size:.8rem;color:var(--ink-3);margin-top:10px">Questions about accessibility or bringing children are always welcome before you book.</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="sect alt">
+    <div class="shell">
+      <div class="sechead"><h2 class="h-sec" style="font-size:1.35rem">Also coming up</h2><a href="#" data-goto="events">All events &rarr;</a></div>
+      <div class="grid g2">
+        <article class="ecard"><div class="rail" aria-hidden="true"></div><div class="in">
+          <div class="dateline"><span class="dstamp">Sun 11 Oct</span><span class="status s-open">Opens 14 Sep</span></div>
+          <h3 class="h-card"><a href="#">2026 Oktoberfest at BEELINE</a></h3></div></article>
+        <article class="ecard"><div class="rail" aria-hidden="true"></div><div class="in">
+          <div class="dateline"><span class="dstamp">28 Oct &ndash; 1 Nov</span><span class="status s-open">National</span></div>
+          <h3 class="h-card"><a href="#">Treffen Santa Fe, Fall 2026</a></h3></div></article>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= JOIN ================= -->
+<div class="screen" id="s-join">
+  <div class="shell"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="#" data-goto="home">Home</a> / Join</nav></div>
+  <section class="sect tight">
+    <div class="shell">
+      <div class="side" style="align-items:center">
+        <div class="stack" style="gap:16px">
+          <span class="eyebrow">Membership</span>
+          <h1 class="h-hero" style="font-size:2.4rem">Join the Monterey Bay Region</h1>
+          <p class="lede">Membership is through Porsche Club of America, and you choose your home region when you sign up. Choose Monterey Bay and you are on the tour list, the dinner list, and the concours field on the Central Coast.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:11px">
+            <a href="#" class="btn btn-primary">Join at PCA National</a>
+            <a href="#" data-goto="events" class="btn btn-ghost">Come to an event first</a>
+          </div>
+          <p style="font-size:.83rem;color:var(--ink-3)">Joining takes about five minutes on pca.org. You will be asked for your car&rsquo;s VIN and your home region. <strong>Our region code is MBY.</strong></p>
+        </div>
+        <div class="photo r-hero"><img src="https://mby.pca.org/wp-content/uploads/2026-04-18-springtime-sojourn-rich.jpg" alt="Members and their cars on the Springtime Sojourn tour" decoding="async" fetchpriority="high"><span class="credit">Richard Chew</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sect alt">
+    <div class="shell">
+      <div class="sechead"><h2 class="h-sec">What you actually get here</h2></div>
+      <div class="grid g3">
+        <div class="card stack" style="gap:8px"><h3 class="h-card">Twenty or so region events a year</h3><p style="font-size:.92rem;color:var(--ink-2)">Driving tours on Highway 1 and through Carmel Valley, the Concours in Paradise every July, tech sessions, and a membership dinner on the first Monday of most months.</p></div>
+        <div class="card stack" style="gap:8px"><h3 class="h-card">Zone 7 and National on top</h3><p style="font-size:.92rem;color:var(--ink-2)">Nine neighbouring regions run their own calendars, and the Zone 7 concours and autocross series are open to you. Treffen and Parade are national.</p></div>
+        <div class="card stack" style="gap:8px"><h3 class="h-card">The people who know these cars</h3><p style="font-size:.92rem;color:var(--ink-2)">Four hundred owners locally, and the club&rsquo;s national technical resources. Somebody in this region has already solved whatever your car is doing.</p></div>
+        <div class="card stack" style="gap:8px"><h3 class="h-card"><em>Panorama</em>, every month</h3><p style="font-size:.92rem;color:var(--ink-2)">PCA&rsquo;s national magazine arrives with membership, along with the members-only classifieds at The Mart.</p></div>
+        <div class="card stack" style="gap:8px"><h3 class="h-card">Dual region, if you split your time</h3><p style="font-size:.92rem;color:var(--ink-2)">Plenty of our members belong to a second region as well. If you are half here and half somewhere else, you can have both.</p></div>
+        <div class="card stack" style="gap:8px"><h3 class="h-card">Family membership included</h3><p style="font-size:.92rem;color:var(--ink-2)">One membership covers an affiliate member in the same household, which matters because most of our events are the kind you bring somebody to.</p></div>
+      </div>
+      <p style="margin-top:20px;font-size:.85rem;color:var(--ink-3)">Current PCA National dues are set by National and change from time to time. <span class="pill-lite">Check pca.org for today&rsquo;s figure</span></p>
+    </div>
+  </section>
+
+  <section class="sect">
+    <div class="shell">
+      <div class="side">
+        <div class="prose">
+          <h2 class="h-sec">Not sure yet?</h2>
+          <p>Come to something first. Nearly everything on our calendar welcomes guests, and nobody is going to ask what you drive at the door. The membership meeting on the first Monday of the month is the easiest place to start, and the tours are the fastest way to meet people.</p>
+          <p>If you would rather ask a question before you turn up, our membership chair reads every email.</p>
+          <p><a href="#" data-goto="contact" class="btn btn-ghost">Email the membership chair</a></p>
+        </div>
+        <div class="card">
+          <h3 class="h-card" style="margin-bottom:12px">Already a PCA member elsewhere?</h3>
+          <p style="font-size:.92rem;color:var(--ink-2)">You can change your home region, or add Monterey Bay as a second region, from your account on pca.org. It takes about a minute and does not change your renewal date.</p>
+          <a href="#" class="btn btn-primary btn-block" style="margin-top:16px">Change or add a region</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= REGALIA ================= -->
+<div class="screen" id="s-regalia">
+  <div class="shell"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="#" data-goto="home">Home</a> / Regalia</nav></div>
+  <section class="sect tight">
+    <div class="shell">
+      <div class="stack" style="gap:14px">
+        <span class="eyebrow">Regalia</span>
+        <h1 class="h-hero" style="font-size:2.2rem">Region clothing and badges</h1>
+        <p class="lede">Two places, for two different reasons. Clothing is printed and posted by PCA National, so the region holds no stock and takes no risk. Name badges are made locally in batches and handed out at meetings.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sect tight">
+    <div class="shell">
+      <div class="grid g2">
+        <div class="card stack" style="gap:14px;padding:0;overflow:hidden">
+          <div class="photo r-wide" data-shot="Placeholder: webstore product shot"></div>
+          <div style="padding:0 22px 24px" class="stack">
+            <span class="eyebrow">Shirts, caps, jackets, decals</span>
+            <h2 class="h-card" style="font-size:1.35rem">The PCA region webstore</h2>
+            <p style="font-size:.94rem;color:var(--ink-2)">Polos, tees, dress shirts, fleece, soft shells and caps, all carrying the Monterey Bay Region logo. Printed to order by PCA National in Columbia, Maryland, and posted directly to you. Allow seven to twelve working days.</p>
+            <p style="font-size:.85rem;color:var(--ink-3)">Sizes, colours and returns are handled by National. The region does not hold stock, so nothing sells out and nothing is ever left in a garage.</p>
+            <a href="#" class="btn btn-primary">Open the webstore</a>
+            <p style="font-size:.78rem;color:var(--ink-3)"><span class="pill-lite">Not yet open</span> The region does not have a webstore today. Seventy-seven other regions do.</p>
+          </div>
+        </div>
+
+        <div class="card stack" style="gap:14px;padding:0;overflow:hidden">
+          <div class="photo r-wide"><img src="https://mby.pca.org/wp-content/uploads/2026-04-04-mby-name-badge-store.jpg" alt="The Monterey Bay Region engraved name badge" decoding="async" loading="lazy"></div>
+          <div style="padding:0 22px 24px" class="stack">
+            <span class="eyebrow">Made locally</span>
+            <h2 class="h-card" style="font-size:1.35rem">Region name badge</h2>
+            <p style="font-size:.94rem;color:var(--ink-2)">The engraved badge members wear at meetings and on the concours field. Magnetic clasp, no pin holes in your shirt. $15.</p>
+            <p style="font-size:.85rem;color:var(--ink-3)">Made up in batches once enough orders come in, then handed to you at a meeting or an event. Not posted.</p>
+            <a href="#" data-goto="badge" class="btn btn-primary">Order a name badge</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:22px;border-left:3px solid var(--amber)">
+        <h3 class="h-card" style="font-size:1.05rem">Why we do not run our own shop</h3>
+        <p style="font-size:.92rem;color:var(--ink-2);margin-top:6px">A region this size sells a few dozen items a year. Running a full online shop for that means somebody has to keep the software patched, the payments secure, and the stock counted, and it slows down every other page on the site. The national webstore does the same job with none of that, and because PCA does the printing there is no question about who is allowed to use the club&rsquo;s marks.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= BADGE ================= -->
+<div class="screen" id="s-badge">
+  <div class="shell"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="#" data-goto="home">Home</a> / <a href="#" data-goto="regalia">Regalia</a> / Name badge</nav></div>
+  <section class="sect tight">
+    <div class="shell">
+      <div class="side">
+        <div class="stack" style="gap:20px">
+          <div class="photo r-sq"><img src="https://mby.pca.org/wp-content/uploads/2026-04-04-mby-name-badge-store.jpg" alt="The Monterey Bay Region engraved name badge" decoding="async" loading="lazy"></div>
+        </div>
+        <div class="stack" style="gap:18px">
+          <span class="eyebrow">Region name badge</span>
+          <h1 class="h-hero" style="font-size:2rem">Monterey Bay Region name badge</h1>
+          <p style="font-family:'Source Serif 4',serif;font-size:1.9rem;font-weight:700" class="tnum">$15.00</p>
+          <p style="color:var(--ink-2)">Engraved with the region logo and your name, with a magnetic clasp so it does not put holes in a good shirt. Worn at membership meetings, on the concours field, and at anything where half the room has not met the other half yet.</p>
+
+          <form class="card stack" style="gap:16px" onsubmit="return false">
+            <div class="field">
+              <label for="b-name">Name as it should appear on the badge <span class="req" aria-hidden="true">*</span></label>
+              <input id="b-name" required maxlength="24" placeholder="e.g. Chris Coyoli">
+              <span class="hint">Up to 24 characters. Exactly as typed, including capitals.</span>
+            </div>
+            <div class="field">
+              <label for="b-line2">Second line, optional</label>
+              <input id="b-line2" maxlength="24" placeholder="e.g. 1968 912">
+              <span class="hint">Most members put their car here. Some put nothing.</span>
+            </div>
+            <div class="field">
+              <label for="b-qty">How many</label>
+              <select id="b-qty"><option>1 badge, $15</option><option>2 badges, $30</option><option>3 badges, $45</option></select>
+              <span class="hint">Ordering more than one? Tell us the other names in the box below.</span>
+            </div>
+            <div class="field">
+              <label for="b-note">Anything else</label>
+              <textarea id="b-note" style="min-height:76px"></textarea>
+            </div>
+            <button class="btn btn-primary btn-block">Pay $15 and order</button>
+            <p style="font-size:.79rem;color:var(--ink-3);text-align:center">Payment is handled by Stripe on their own secure page. The region never sees your card details.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sect alt">
+    <div class="shell">
+      <div class="grid g3">
+        <div class="stack" style="gap:6px"><h3 class="h-card" style="font-size:1rem">When you will get it</h3><p style="font-size:.9rem;color:var(--ink-2)">Badges are engraved in batches. We run a batch whenever ten or so orders have built up, and normally at least once a quarter. <strong>Current batch closes 30 September.</strong> <span class="pill-lite">Placeholder date</span></p></div>
+        <div class="stack" style="gap:6px"><h3 class="h-card" style="font-size:1rem">How you will get it</h3><p style="font-size:.9rem;color:var(--ink-2)">Handed to you at a membership meeting or a region event. We will email you when yours is ready and which event to collect it at.</p></div>
+        <div class="stack" style="gap:6px"><h3 class="h-card" style="font-size:1rem">If something is wrong</h3><p style="font-size:.9rem;color:var(--ink-2)">Misspelled, damaged, or the clasp fails, email <a href="#">regalia@mby.pca.org</a> and we will remake it. Engraving is personalised, so we cannot take back a correctly made badge.</p></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= ABOUT & BOARD ================= -->
+<div class="screen" id="s-about">
+  <div class="shell"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="#" data-goto="home">Home</a> / About</nav></div>
+  <section class="sect tight">
+    <div class="shell">
+      <div class="stack" style="gap:16px">
+        <span class="eyebrow">Chartered 1961 &middot; 65 years in March 2026</span>
+        <h1 class="h-hero" style="font-size:2.4rem">About the region</h1>
+        <p class="lede">More than four hundred members across Monterey and San Benito Counties, one of 149 regions of the Porsche Club of America and one of ten regions in Zone 7.</p>
+      </div>
+      <div class="photo r-band" style="margin-top:26px"><img src="https://mby.pca.org/wp-content/uploads/2026-07-19-concours-in-paradise-rich-1536x1025.jpg" alt="The concours field at Carmel Valley Community Park" decoding="async" fetchpriority="high"><span class="credit">Richard Chew</span></div>
+    </div>
+  </section>
+
+  <section class="sect tight">
+    <div class="shell">
+      <div class="side">
+        <div class="prose">
+          <p style="font-size:1.05rem;color:var(--ink)">Whether you drive a vintage 356, a daily-driver Boxster, or something with a roll cage in it, you are welcome here. The club has never been about what is in the garage.</p>
+          <p>We run driving tours along the Central Coast, from a half-day loop through Carmel Valley to long weekends down Highway 1 and up into the Santa Cruz Mountains. Our Concours in Paradise takes over Carmel Valley Community Park every July and draws around a hundred cars. Members compete in the Zone 7 autocross series at Salinas Municipal Airport. In between there are tech sessions in the shops of the people who keep these cars running, cars and coffee mornings, and a membership dinner on the first Monday of most months.</p>
+          <h3>The club we belong to</h3>
+          <p>The Porsche Club of America is the largest single-marque car club in the world, with more than 170,000 members. Membership includes <em>Panorama</em> magazine every month, the members-only classifieds at The Mart, and the club&rsquo;s technical resources. Membership records and dues are held by PCA National, not by the region.</p>
+          <h3>Where we came from</h3>
+          <p>The region was chartered in 1961 and has had a president in every year since. For two decades the club published <em>The Montereyan</em>, a monthly newsletter that ran from 1975 to 1997 and is now one of the better records of Central Coast car culture in that period. The full archive is online.</p>
+          <p><a href="#" class="btn btn-ghost">Read the region history</a></p>
+        </div>
+        <aside class="stack">
+          <div class="card stack" style="gap:16px">
+            <div class="kpi"><b class="tnum">400+</b><span>members</span></div>
+            <hr class="divider">
+            <div class="kpi"><b class="tnum">1961</b><span>chartered</span></div>
+            <hr class="divider">
+            <div class="kpi"><b>Zone 7</b><span>one of ten regions</span></div>
+            <hr class="divider">
+            <div class="kpi"><b>1st Monday</b><span>membership meeting, most months</span></div>
+          </div>
+          <div class="card">
+            <h3 class="h-card" style="font-size:1rem;margin-bottom:8px">Post</h3>
+            <p style="font-size:.9rem;color:var(--ink-2)">Monterey Bay Region, PCA<br>PO Box 524<br>Monterey, CA 93942</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="sect alt">
+    <div class="shell">
+      <div class="sechead">
+        <h2 class="h-sec">The board</h2>
+        <a href="#" data-goto="contact">Contact the board &rarr;</a>
+      </div>
+      <p class="lede" style="margin-bottom:24px">Every one of these is a volunteer with a day job. Email the role, not the person, and it will keep working after they hand over.</p>
+      <div class="grid g4">
+        <div class="card stack" style="gap:10px"><div class="photo r-sq" data-shot="Photograph to add"></div><div><h3 class="h-card" style="font-size:1.02rem">Mark McMahon</h3><p class="meta" style="margin-top:2px">President</p><p style="font-size:.85rem;margin-top:6px"><a href="#">president@mby.pca.org</a></p></div></div>
+        <div class="card stack" style="gap:10px"><div class="photo r-sq" data-shot="Photograph to add"></div><div><h3 class="h-card" style="font-size:1.02rem">Al Munoz-Flores</h3><p class="meta" style="margin-top:2px">Vice President</p><p style="font-size:.85rem;margin-top:6px"><a href="#">vp@mby.pca.org</a></p></div></div>
+        <div class="card stack" style="gap:10px"><div class="photo r-sq" data-shot="Photograph to add"></div><div><h3 class="h-card" style="font-size:1.02rem">Steve Rouland</h3><p class="meta" style="margin-top:2px">Secretary</p><p style="font-size:.85rem;margin-top:6px"><a href="#">secretary@mby.pca.org</a></p></div></div>
+        <div class="card stack" style="gap:10px"><div class="photo r-sq" data-shot="Photograph to add"></div><div><h3 class="h-card" style="font-size:1.02rem">Paul Sedillos</h3><p class="meta" style="margin-top:2px">Treasurer</p><p style="font-size:.85rem;margin-top:6px"><a href="#">treasurer@mby.pca.org</a></p></div></div>
+      </div>
+
+      <h3 class="h-sec" style="font-size:1.3rem;margin:34px 0 14px">Committee chairs</h3>
+      <div class="scrollx">
+        <table class="rate">
+          <thead><tr><th>Role</th><th>Who</th><th>Email</th></tr></thead>
+          <tbody>
+            <tr><td>Membership</td><td class="pill-lite">To be filled in</td><td>membership@mby.pca.org</td></tr>
+            <tr><td>Tours</td><td class="pill-lite">To be filled in</td><td>tours@mby.pca.org</td></tr>
+            <tr><td>Concours</td><td class="pill-lite">To be filled in</td><td>concours@mby.pca.org</td></tr>
+            <tr><td>Sponsorship and advertising</td><td class="pill-lite">To be filled in</td><td>sponsors@mby.pca.org</td></tr>
+            <tr><td>Regalia</td><td class="pill-lite">To be filled in</td><td>regalia@mby.pca.org</td></tr>
+            <tr><td>Website</td><td>Richard Chew</td><td>webmaster@mby.pca.org</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:14px;font-size:.84rem;color:var(--ink-3)">Committee names beyond the four officers were not published on the current site. They are shown here as placeholders so the board can see the shape of the page.</p>
+    </div>
+  </section>
+</div>
+
+<!-- ================= NEWS ================= -->
+<div class="screen" id="s-news">
+  <div class="shell"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="#" data-goto="home">Home</a> / News</nav></div>
+  <section class="sect tight">
+    <div class="shell">
+      <div class="stack" style="gap:14px">
+        <span class="eyebrow">The region news</span>
+        <h1 class="h-hero" style="font-size:2.2rem">News and write-ups</h1>
+        <p class="lede">Event reports, photographs, meeting notes, and pieces from the archive. This is also what goes out by email, so if you read it here you have read the newsletter.</p>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:22px">
+        <button class="btn btn-ghost" style="padding:7px 15px;min-height:38px;font-size:.8rem;border-color:var(--sea);background:var(--sea);color:var(--on-sea)">Everything</button>
+        <button class="btn btn-ghost" style="padding:7px 15px;min-height:38px;font-size:.8rem">Event reports</button>
+        <button class="btn btn-ghost" style="padding:7px 15px;min-height:38px;font-size:.8rem">Photographs</button>
+        <button class="btn btn-ghost" style="padding:7px 15px;min-height:38px;font-size:.8rem">From the archives</button>
+        <button class="btn btn-ghost" style="padding:7px 15px;min-height:38px;font-size:.8rem">Meetings</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="sect tight">
+    <div class="shell">
+      <article class="card" style="padding:0;overflow:hidden;margin-bottom:20px">
+        <div class="side" style="gap:0">
+          <div style="padding:26px 26px 28px" class="stack">
+            <span class="meta">19 August 2026 &middot; Vega Roecker &middot; From the archives</span>
+            <h2 class="h-sec" style="font-size:1.7rem"><a href="#" data-goto="article" style="color:var(--ink);text-decoration:none">From the Archives</a></h2>
+            <p style="color:var(--ink-2)">A photograph of the Porsche corral at the Laguna Seca Historic Auto Races in 1992, and a short note on how the corral worked back when you could still turn up on the morning and get in.</p>
+            <p><a href="#" data-goto="article" style="font-weight:600">Read this &rarr;</a></p>
+          </div>
+          <div class="photo r-card"><img src="https://mby.pca.org/wp-content/uploads/08-92-Historics-1-Vega-Roecker-Mike-Rogers.jpg" alt="The Porsche corral at the Laguna Seca Historic Auto Races, August 1992" decoding="async" loading="lazy"><span class="credit">Vega Roecker</span></div>
+        </div>
+      </article>
+
+      <div class="grid g3">
+        <a class="card" href="#" data-goto="article" style="text-decoration:none;padding:0;overflow:hidden;display:flex;flex-direction:column">
+          <div class="photo r-card"><img src="https://mby.pca.org/wp-content/uploads/2026-08-12-morgan-porsche-pit-stop-rich-21-scaled.jpg" alt="Cars lined up at Taste Morgan" decoding="async" loading="lazy"><span class="credit">Richard Chew</span></div>
+          <div class="stack" style="padding:16px 18px 20px;gap:7px"><span class="meta">15 August 2026 &middot; Richard Chew</span><h3 class="h-card" style="color:var(--ink)">2026 Porsche Pit Stop at Taste Morgan</h3><p style="font-size:.89rem;color:var(--ink-2)">Photographs from the 12 August gathering at The Crossroads.</p></div>
+        </a>
+        <a class="card" href="#" data-goto="article" style="text-decoration:none;padding:0;overflow:hidden;display:flex;flex-direction:column">
+          <div class="photo r-card"><img src="https://mby.pca.org/wp-content/uploads/2026-07-19-concours-in-paradise-vega-1-scaled.jpg" alt="Judging under way at Concours in Paradise" decoding="async" loading="lazy"><span class="credit">Vega Roecker</span></div>
+          <div class="stack" style="padding:16px 18px 20px;gap:7px"><span class="meta">24 July 2026 &middot; Vega Roecker</span><h3 class="h-card" style="color:var(--ink)">2026 Concours in Paradise</h3><p style="font-size:.89rem;color:var(--ink-2)">Around a hundred cars on the grass at Carmel Valley Community Park.</p></div>
+        </a>
+        <a class="card" href="#" data-goto="article" style="text-decoration:none;padding:0;overflow:hidden;display:flex;flex-direction:column">
+          <div class="photo r-card"><img src="https://mby.pca.org/wp-content/uploads/2026-07-13-mby-membership-meeting-vega-1-scaled.jpg" alt="Members at the July 2026 membership meeting" decoding="async" loading="lazy"><span class="credit">Vega Roecker</span></div>
+          <div class="stack" style="padding:16px 18px 20px;gap:7px"><span class="meta">15 July 2026 &middot; Vega Roecker</span><h3 class="h-card" style="color:var(--ink)">July 2026 Membership Meeting</h3><p style="font-size:.89rem;color:var(--ink-2)">An evening at the local Porsche dealer with a technical question and answer session.</p></div>
+        </a>
+        <a class="card" href="#" data-goto="article" style="text-decoration:none;padding:0;overflow:hidden;display:flex;flex-direction:column">
+          <div class="photo r-card"><img src="https://mby.pca.org/wp-content/uploads/2026-07-08-tour-to-alices-restaurant-2.jpg" alt="Cars parked on the tour to Alice's Restaurant" decoding="async" loading="lazy"></div>
+          <div class="stack" style="padding:16px 18px 20px;gap:7px"><span class="meta">11 July 2026 &middot; Vega Roecker</span><h3 class="h-card" style="color:var(--ink)">2026 Tour to Alice&rsquo;s Restaurant</h3><p style="font-size:.89rem;color:var(--ink-2)">A midweek mountain run out of Seaside via Highway 1 and Highway 17.</p></div>
+        </a>
+        <a class="card" href="#" data-goto="article" style="text-decoration:none;padding:0;overflow:hidden;display:flex;flex-direction:column">
+          <div class="photo r-card"><img src="https://mby.pca.org/wp-content/uploads/2026-02-22-big-sur-tour-2-steve.jpg" alt="A coastal run south along Highway 1" decoding="async" loading="lazy"><span class="credit">Steve Rouland</span></div>
+          <div class="stack" style="padding:16px 18px 20px;gap:7px"><span class="meta">12 June 2026 &middot; Richard Chew</span><h3 class="h-card" style="color:var(--ink)">2026 SLO Coastal Escape Photos</h3><p style="font-size:.89rem;color:var(--ink-2)">Three days down the coast and back.</p></div>
+        </a>
+        <a class="card" href="#" data-goto="article" style="text-decoration:none;padding:0;overflow:hidden;display:flex;flex-direction:column">
+          <div class="photo r-card"><img src="https://mby.pca.org/wp-content/uploads/2026-04-18-springtime-sojourn-tony.jpg" alt="Cars on the Springtime Sojourn tour" decoding="async" loading="lazy"><span class="credit">Tony</span></div>
+          <div class="stack" style="padding:16px 18px 20px;gap:7px"><span class="meta">5 May 2026 &middot; Richard Chew</span><h3 class="h-card" style="color:var(--ink)">2026 Springtime Sojourn Photo Contest</h3><p style="font-size:.89rem;color:var(--ink-2)">The entries, and the winner.</p></div>
+        </a>
+      </div>
+
+      <div style="display:flex;gap:8px;justify-content:center;margin-top:30px;align-items:center">
+        <button class="btn btn-ghost" style="padding:9px 16px;min-height:42px;font-size:.83rem">&larr; Newer</button>
+        <span style="font-size:.83rem;color:var(--ink-3)" class="tnum">Page 1 of 22</span>
+        <button class="btn btn-ghost" style="padding:9px 16px;min-height:42px;font-size:.83rem">Older &rarr;</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= ARTICLE ================= -->
+<div class="screen" id="s-article">
+  <div class="shell"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="#" data-goto="home">Home</a> / <a href="#" data-goto="news">News</a> / Concours in Paradise</nav></div>
+  <section class="sect tight">
+    <div class="shell" style="max-width:780px">
+      <div class="stack" style="gap:14px">
+        <span class="eyebrow">Event report</span>
+        <h1 class="h-hero" style="font-size:2.3rem">2026 Concours in Paradise</h1>
+        <p class="meta">24 July 2026 &middot; Vega Roecker &middot; 4 minute read</p>
+      </div>
+    </div>
+    <div class="shell" style="margin-top:24px">
+      <div class="photo r-band"><img src="https://mby.pca.org/wp-content/uploads/2026-07-19-concours-in-paradise-rich-2048x1366.jpg" alt="The concours field at Carmel Valley Community Park, July 2026" decoding="async" fetchpriority="high"><span class="credit">Richard Chew</span></div>
+      <p class="meta" style="margin-top:8px">The field at Carmel Valley Community Park, Sunday 19 July.</p>
+    </div>
+  </section>
+
+  <section class="sect tight">
+    <div class="shell" style="max-width:720px">
+      <div class="prose" style="max-width:none">
+        <p style="font-size:1.1rem;color:var(--ink)">Around a hundred cars came to Carmel Valley Community Park on 19 July for the region&rsquo;s longest-running event, and for once the marine layer burned off before judging started.</p>
+        <p>Concours in Paradise has been on the Monterey Bay calendar for decades, and the shape of it has not changed much: the field opens early, the cars come in over the grass, and by nine there is a line of them under the oaks with owners going over paintwork with a detailing cloth for the fourth time. <span class="pill-lite">Placeholder body copy</span></p>
+        <p>The whole point of a concours in a club like this one is that the judging is done by members, on cars owned by members, in front of the people who will be driving those cars home afterwards. Nobody trailers anything in. Several of the entries had been on the Springtime Sojourn in April, which is a good sign.</p>
+        <h3>Class results</h3>
+        <p>Full results and the judges&rsquo; sheets are with the concours chair and will be posted here shortly. <span class="pill-lite">Placeholder</span></p>
+        <h3>Thank you</h3>
+        <p>To the volunteers who set the field out on Saturday afternoon, to the judges who spent a hot morning on their knees, and to our sponsors, who make the whole thing possible.</p>
+      </div>
+
+      <div class="card" style="margin-top:32px">
+        <h3 class="h-card" style="font-size:1.05rem;margin-bottom:10px">Photographs</h3>
+        <p style="font-size:.92rem;color:var(--ink-2)">The full album from the day, around 180 photographs.</p>
+        <a href="#" class="btn btn-ghost" style="margin-top:14px">Open the album</a>
+      </div>
+
+      <div style="margin-top:32px;padding-top:22px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between">
+        <p class="meta">Filed under: Event reports, Concours</p>
+        <a href="#" data-goto="news" style="font-weight:600;font-size:.88rem">&larr; All news</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sect alt">
+    <div class="shell">
+      <div class="sechead"><h2 class="h-sec" style="font-size:1.35rem">Read next</h2></div>
+      <div class="grid g2">
+        <a class="card" href="#" style="text-decoration:none"><span class="meta">15 August 2026</span><h3 class="h-card" style="color:var(--ink);margin-top:5px">2026 Porsche Pit Stop at Taste Morgan</h3></a>
+        <a class="card" href="#" style="text-decoration:none"><span class="meta">11 July 2026</span><h3 class="h-card" style="color:var(--ink);margin-top:5px">2026 Tour to Alice&rsquo;s Restaurant</h3></a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= SPONSORS ================= -->
+<div class="screen" id="s-sponsors">
+  <div class="shell"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="#" data-goto="home">Home</a> / Sponsors</nav></div>
+  <section class="sect tight">
+    <div class="shell">
+      <div class="stack" style="gap:14px">
+        <span class="eyebrow">Our sponsors</span>
+        <h1 class="h-hero" style="font-size:2.3rem">The businesses behind the region</h1>
+        <p class="lede">These are the dealers, shops and specialists who keep our cars running and our events paid for. Several of them offer something to Monterey Bay members. All of them are worth your business.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sect tight">
+    <div class="shell">
+      <div class="sechead" style="margin-bottom:16px"><h2 class="h-sec" style="font-size:1.4rem">Principal sponsors</h2></div>
+      <div class="grid g2">
+        <div class="card stack" style="gap:12px">
+          <div class="logoframe"><img src="https://mby.pca.org/wp-content/uploads/porsche-monterey-logo-v2.png" alt="Porsche Monterey" decoding="async" loading="lazy"></div>
+          <h3 class="h-card">Porsche Monterey</h3>
+          <p style="font-size:.92rem;color:var(--ink-2)">Our local authorised dealer, and the host of several membership meetings a year.</p>
+          <p style="font-size:.86rem"><strong style="color:var(--amber)">Member benefit:</strong> <span class="pill-lite">To be confirmed with the sponsor</span></p>
+          <p style="font-size:.85rem"><a href="#">Visit their site</a></p>
+        </div>
+        <div class="card stack" style="gap:12px">
+          <div class="logoframe"><img src="https://mby.pca.org/wp-content/uploads/Monterey-Touring-Vehicles-Logo.png" alt="Monterey Touring Vehicles" decoding="async" loading="lazy"></div>
+          <h3 class="h-card">Monterey Touring Vehicles</h3>
+          <p style="font-size:.92rem;color:var(--ink-2)">Sales and consignment on the Peninsula, and host of our cars and coffee mornings.</p>
+          <p style="font-size:.86rem"><strong style="color:var(--amber)">Member benefit:</strong> <span class="pill-lite">To be confirmed with the sponsor</span></p>
+          <p style="font-size:.85rem"><a href="#">Visit their site</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sect tight">
+    <div class="shell">
+      <div class="sechead" style="margin-bottom:16px"><h2 class="h-sec" style="font-size:1.4rem">Supporting sponsors</h2></div>
+      <div class="grid g3">
+        <div class="card stack" style="gap:10px">
+          <div class="logoframe"><img src="https://mby.pca.org/wp-content/uploads/mohr-imports-logo.png" alt="Mohr Imports" decoding="async" loading="lazy"></div>
+          <h3 class="h-card" style="font-size:1.05rem">Mohr Imports</h3>
+          <p style="font-size:.89rem;color:var(--ink-2)">Independent service and restoration.</p>
+          <p style="font-size:.84rem"><a href="#">Visit their site</a></p>
+        </div>
+        <div class="card stack" style="gap:10px">
+          <div class="logoframe"><img src="https://mby.pca.org/wp-content/uploads/veloce-sponsor-logo.png" alt="Veloce Valuations" decoding="async" loading="lazy"></div>
+          <h3 class="h-card" style="font-size:1.05rem">Veloce Valuations</h3>
+          <p style="font-size:.89rem;color:var(--ink-2)">Appraisals for insurance, sale and estate.</p>
+          <p style="font-size:.84rem"><a href="#">Visit their site</a></p>
+        </div>
+        <div class="card stack" style="gap:10px">
+          <div class="logoframe"><img src="https://mby.pca.org/wp-content/uploads/ABrilliantShine-logo.png" alt="A Brilliant Shine" decoding="async" loading="lazy"></div>
+          <h3 class="h-card" style="font-size:1.05rem">A Brilliant Shine</h3>
+          <p style="font-size:.89rem;color:var(--ink-2)">Detailing, paint correction and ceramic coating.</p>
+          <p style="font-size:.84rem"><a href="#">Visit their site</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sect alt">
+    <div class="shell">
+      <div class="side">
+        <div class="stack" style="gap:16px">
+          <span class="eyebrow">Sponsor the region</span>
+          <h2 class="h-sec">Four hundred Porsche owners, in one county</h2>
+          <p style="color:var(--ink-2);max-width:56ch">Our members spend money on their cars, and they ask each other where to spend it. Sponsorship puts you in front of that conversation for a year: on this website, in the emails that go out before every event, and on the field at Concours in Paradise.</p>
+          <p style="color:var(--ink-2);max-width:56ch">We keep the number of sponsors deliberately small so that each one is actually visible.</p>
+          <div><a href="#" data-goto="contact" class="btn btn-primary">Talk to us about sponsoring</a></div>
+        </div>
+        <div class="card">
+          <h3 class="h-card" style="font-size:1.05rem;margin-bottom:12px">What a year includes</h3>
+          <div class="scrollx">
+            <table class="rate">
+              <thead><tr><th>Level</th><th>Includes</th><th class="tnum">Year</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Principal</strong></td><td>Home page placement, sponsor page feature, named in every event email, banner at Concours</td><td class="tnum"><span class="pill-lite">TBC</span></td></tr>
+                <tr><td><strong>Supporting</strong></td><td>Sponsor page listing, named in event emails, sign at Concours</td><td class="tnum"><span class="pill-lite">TBC</span></td></tr>
+                <tr><td><strong>Event</strong></td><td>One named event, with your logo on that event page and its emails</td><td class="tnum"><span class="pill-lite">TBC</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="font-size:.8rem;color:var(--ink-3);margin-top:12px">The region does not publish a rate card today. These tiers are a suggested structure for the board to price.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= CONTACT ================= -->
+<div class="screen" id="s-contact">
+  <div class="shell"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="#" data-goto="home">Home</a> / Contact</nav></div>
+  <section class="sect tight">
+    <div class="shell">
+      <div class="stack" style="gap:14px">
+        <span class="eyebrow">Get in touch</span>
+        <h1 class="h-hero" style="font-size:2.2rem">Contact the region</h1>
+        <p class="lede">Everyone here is a volunteer, so we answer in evenings rather than in minutes. You will normally hear back within three days.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sect tight">
+    <div class="shell">
+      <div class="side">
+        <form class="card stack" style="gap:18px" onsubmit="return false">
+          <div class="field">
+            <label for="c-topic">What is it about? <span class="req" aria-hidden="true">*</span></label>
+            <select id="c-topic" required>
+              <option value="">Choose one</option>
+              <option>Joining the region</option>
+              <option>An event or a booking</option>
+              <option>Sponsorship and advertising</option>
+              <option>Regalia and name badges</option>
+              <option>Something on this website</option>
+              <option>Something else</option>
+            </select>
+            <span class="hint">This sends your message straight to the right volunteer.</span>
+          </div>
+          <div class="grid g2" style="gap:16px">
+            <div class="field"><label for="c-name">Your name <span class="req" aria-hidden="true">*</span></label><input id="c-name" required autocomplete="name"></div>
+            <div class="field"><label for="c-email">Your email <span class="req" aria-hidden="true">*</span></label><input id="c-email" type="email" required autocomplete="email"></div>
+          </div>
+          <div class="field"><label for="c-msg">Message <span class="req" aria-hidden="true">*</span></label><textarea id="c-msg" required></textarea></div>
+          <label class="checkrow"><input type="checkbox" required> <span>I am happy for the region to hold my details in order to reply. <a href="#">What we do with them</a> <span class="req" aria-hidden="true">*</span></span></label>
+          <button class="btn btn-primary btn-block">Send message</button>
+        </form>
+
+        <aside class="stack">
+          <div class="card">
+            <h2 class="h-card" style="font-size:1.05rem;margin-bottom:14px">Or email the role directly</h2>
+            <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px;font-size:.9rem">
+              <li><strong style="display:block">Joining, renewals, region transfers</strong><a href="#">membership@mby.pca.org</a></li>
+              <li><strong style="display:block">Events and bookings</strong><a href="#">events@mby.pca.org</a></li>
+              <li><strong style="display:block">Sponsorship</strong><a href="#">sponsors@mby.pca.org</a></li>
+              <li><strong style="display:block">Regalia and name badges</strong><a href="#">regalia@mby.pca.org</a></li>
+              <li><strong style="display:block">This website</strong><a href="#">webmaster@mby.pca.org</a></li>
+              <li><strong style="display:block">Anything else</strong><a href="#">president@mby.pca.org</a></li>
+            </ul>
+          </div>
+          <div class="card">
+            <h2 class="h-card" style="font-size:1.05rem;margin-bottom:8px">By post</h2>
+            <p style="font-size:.9rem;color:var(--ink-2)">Monterey Bay Region, PCA<br>PO Box 524<br>Monterey, CA 93942</p>
+            <hr class="divider" style="margin:16px 0">
+            <h2 class="h-card" style="font-size:1.05rem;margin-bottom:8px">In person</h2>
+            <p style="font-size:.9rem;color:var(--ink-2)">Membership meetings, first Monday of most months. Guests welcome, no need to tell us you are coming.</p>
+            <a href="#" data-goto="events" style="font-size:.86rem;font-weight:600;display:inline-block;margin-top:8px">See the next meeting &rarr;</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</div>
+
+</main>
+
+<footer class="foot">
+  <div class="shell">
+    <div class="foot-grid">
+      <div>
+        <div class="mark" style="margin-bottom:14px">
+          <img class="crest" src="data:image/png;base64,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" alt="" width="40" height="40" decoding="async" loading="lazy">
+          <span class="wm"><b style="color:var(--on-sea)">Monterey Bay Region</b><span>Porsche Club of America</span></span>
+        </div>
+        <p style="font-size:.87rem;max-width:34ch">Monterey and San Benito Counties, California. Chartered 1961.</p>
+        <p style="font-size:.87rem;margin-top:12px">PO Box 524<br>Monterey, CA 93942</p>
+      </div>
+      <div>
+        <h4>The region</h4>
+        <ul>
+          <li><a href="#" data-goto="events">Events</a></li>
+          <li><a href="#" data-goto="news">News</a></li>
+          <li><a href="#" data-goto="about">About and board</a></li>
+          <li><a href="#" data-goto="regalia">Regalia</a></li>
+          <li><a href="#" data-goto="sponsors">Sponsors</a></li>
+          <li><a href="#" data-goto="contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Members</h4>
+        <ul>
+          <li><a href="#" data-goto="join">Join or transfer</a></li>
+          <li><a href="#">Region history</a></li>
+          <li><a href="#">The Montereyan archive</a></li>
+          <li><a href="#">Photo albums</a></li>
+          <li><a href="#">Subscribe to the calendar</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Wider club</h4>
+        <ul>
+          <li><a href="#">Porsche Club of America</a></li>
+          <li><a href="#">Zone 7</a></li>
+          <li><a href="#"><em>Panorama</em></a></li>
+          <li><a href="#">The Mart classifieds</a></li>
+          <li><a href="#">Technical Q&amp;A</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <p>&copy; 2026 Monterey Bay Region, Porsche Club of America. Monterey Bay Region is a chartered region of the Porsche Club of America and is not affiliated with, endorsed by, or connected to Dr. Ing. h.c. F. Porsche AG or Porsche Cars North America. Porsche and the Porsche Crest are trademarks of Dr. Ing. h.c. F. Porsche AG and are not used on this site. The club assumes no liability for the information or opinions published here.</p>
+    </div>
+  </div>
+</footer>
+</div>
+
+<script>
+(function(){
+  var canvas=document.getElementById('canvas');
+  var screens=document.querySelectorAll('.screen');
+  var tabs=document.querySelectorAll('.screens button');
+  function show(id){
+    screens.forEach(function(s){s.classList.toggle('active',s.id==='s-'+id);});
+    tabs.forEach(function(t){t.setAttribute('aria-current',String(t.dataset.screen===id));});
+    document.getElementById('mobnav').classList.remove('open');
+    document.getElementById('navtoggle').setAttribute('aria-expanded','false');
+    window.scrollTo({top:0,behavior:'instant'});
+  }
+  tabs.forEach(function(t){t.addEventListener('click',function(){show(t.dataset.screen);});});
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('[data-goto]');
+    if(a){e.preventDefault();show(a.dataset.goto);}
+  });
+  document.querySelectorAll('.widths button').forEach(function(b){
+    b.addEventListener('click',function(){
+      canvas.dataset.w=b.dataset.w;
+      document.querySelectorAll('.widths button').forEach(function(x){x.setAttribute('aria-pressed',String(x===b));});
+    });
+  });
+  var nt=document.getElementById('navtoggle');
+  nt.addEventListener('click',function(){
+    var mn=document.getElementById('mobnav');
+    var open=mn.classList.toggle('open');
+    nt.setAttribute('aria-expanded',String(open));
+  });
+  var vl=document.getElementById('vList'),vc=document.getElementById('vCal');
+  var lv=document.getElementById('listView'),cv=document.getElementById('calView');
+  function setView(cal){
+    lv.hidden=cal; cv.hidden=!cal;
+    vl.setAttribute('aria-pressed',String(!cal));
+    vc.setAttribute('aria-pressed',String(cal));
+  }
+  vl.addEventListener('click',function(){setView(false);});
+  vc.addEventListener('click',function(){setView(true);});
+})();
+</script>
+
+<div class="notes">
+  <div class="shell">
+    <span class="eyebrow q">Behind the prototype</span>
+    <h2>Design rationale</h2>
+    <p style="max-width:66ch;margin-top:10px">Eleven screens, built to be achievable inside the existing WordPress site rather than to win a design award. Every layout decision below traces back to a specific finding in the audit.</p>
+
+    <div class="grid g2" style="margin-top:26px">
+      <div class="card">
+        <h3>The one decision everything else follows from</h3>
+        <p>On the current site a phone user scrolls 3.9 screens before seeing a single event. Measured on this prototype, &ldquo;What&rsquo;s on next&rdquo; sits <strong>0.82 screens down at 390 pixels, 0.96 at 768, and 0.61 at 1440</strong>, so it is on the first screen at every width. The whole home page is 4,420 pixels tall on a phone against the current 6,330. That comes from making the hero a text block, keeping the photograph to a shallow band until there is room to set it beside the words, and putting nothing else in front of the events. Filling events is priority one for this club, so events get the position that matters.</p>
+      </div>
+      <div class="card">
+        <h3>Status is information, not decoration</h3>
+        <p>Every event carries a coloured rail and a status chip: places available, nearly full, sold out, cancelled. This is the direct fix for the audit's most serious content finding, a cancelled event still being advertised as upcoming. Events Manager Pro already holds the booking counts. Once the display reads them, that mistake becomes structurally impossible rather than a thing someone has to remember.</p>
+      </div>
+      <div class="card">
+        <h3>Colour</h3>
+        <p>A deep marine indigo carried over from the club's existing header, a warm sandstone paper rather than plain white, and one accent: a burnt amber taken from Carmel sandstone in late light and from the flag stands at a circuit. Amber is the only accent, used for calls to action, links, and section eyebrows. The four status colours are semantic and deliberately separate from it, so a green chip never reads as brand and an amber button never reads as a warning.</p>
+      </div>
+      <div class="card">
+        <h3>Type</h3>
+        <p>Source Serif 4 for headings, at a wide range of sizes, doing the work that a decorative brand font would otherwise have to do. Public Sans for everything else, including numbers, which are set with tabular figures so that prices, dates and seat counts line up. Two families, not three, because the site should not be downloading fonts it does not need.</p>
+      </div>
+      <div class="card">
+        <h3>Photography</h3>
+        <p>Every photograph is a real one from the region's own media library, credited to the member who took it: Fred Brown on the Big Sur banner, Richard Chew at Taste Morgan and the concours, Vega Roecker at Elkhorn Slough and the membership meeting. No stock imagery anywhere. Three slots stay as labelled placeholders because no real asset exists yet: the four board portraits, the meeting-point map, and a webstore product shot. Those are a shot list, not a design decision.</p>
+      </div>
+      <div class="card">
+        <h3>Trademarks</h3>
+        <p>No Porsche crest, no Porsche wordmark, no shield shape that could be mistaken for either. The mark is the region's own crest, supplied by the board and used as supplied: a headland, the bay, an oak, and a red car on a white road, over the letters PCA. It depends on no licence the region does not already hold. "Porsche Club of America" appears as the name of the organisation, which is what a chartered region is licensed to do. The footer carries an explicit non-affiliation notice modelled on the one BMW CCA chapters use.</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:34px">Accessible and fast by construction</h3>
+    <ul>
+      <li>One <code>h1</code> per screen, headings in order, and no empty headings. The audit found two <code>h1</code> elements on the current home page, one of them blank.</li>
+      <li>Every standalone control clears the 24 pixel WCAG 2.2 minimum: buttons, card links, menu items and footer links included, with primary buttons at 48 pixels. The only targets under 24 pixels are links inside running sentences, which the standard explicitly exempts. The current site misses this on 33 targets.</li>
+      <li>Every link and control has a visible text label. Focus is a solid three-pixel amber outline, never removed.</li>
+      <li>Form fields have real labels, required fields are marked in text as well as colour, and the consent checkbox is explicit.</li>
+      <li>Both light and dark themes are defined at token level and tested in all three states: explicit light, explicit dark, and the system default.</li>
+      <li>No framework, no animation library, no icon font. Two web fonts, a single stylesheet, and about thirty lines of JavaScript that exist only to run the prototype's screen switcher.</li>
+      <li><code>prefers-reduced-motion</code> is respected.</li>
+    </ul>
+
+    <h3 style="margin-top:34px">What this prototype deliberately does not do</h3>
+    <p>No parallax, no scroll animation, no hero video, no member login, no on-site photo galleries, no forum, no app. Each of those was considered and rejected in the audit as either expensive to build, expensive to maintain, or already solved elsewhere. The point of Option A is a site one volunteer can run.</p>
+
+    <hr class="divider" style="margin:38px 0">
+
+    <h2>Build note: what each screen becomes in WordPress</h2>
+    <p style="max-width:66ch;margin-top:10px">Written for the recommended path, which is the existing WordPress install, the existing bootscore theme with a child theme, and Events Manager Pro left exactly where it is.</p>
+
+    <div class="scrollx" style="margin-top:20px">
+      <table class="rate" style="min-width:760px">
+        <thead><tr><th>Screen</th><th>Template</th><th>Content comes from</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Home</strong></td><td><code>front-page.php</code> in the child theme</td><td>Events Manager query for the next three events, plus the latest three posts</td><td>Replaces the current widget-assembled top area. The banner widget goes away.</td></tr>
+          <tr><td><strong>Events, list</strong></td><td>Events Manager events page, with the list template overridden in the child theme</td><td>Events Manager</td><td>Events Manager supports theme template overrides. Put them in the child theme so an update does not wipe them.</td></tr>
+          <tr><td><strong>Events, calendar</strong></td><td>Same page, second view</td><td>WP FullCalendar, already installed</td><td>Merge the current <code>/calendar/</code> and <code>/events/</code> into one page with a view toggle, and put that one page in the menu.</td></tr>
+          <tr><td><strong>Event detail</strong></td><td>Events Manager single event template override</td><td>Events Manager Pro, including the existing booking form and Stripe and PayPal gateways</td><td>Do not rebuild the booking form. Wrap it. The facts panel reads the existing placeholders for spaces, price and booking cut-off.</td></tr>
+          <tr><td><strong>Join</strong></td><td><code>page-join.php</code></td><td>Static page content</td><td>Add "Join" to the main menu. Use one national join URL everywhere.</td></tr>
+          <tr><td><strong>Regalia</strong></td><td><code>page-regalia.php</code></td><td>Static, with two outbound links</td><td>Replaces the WooCommerce shop page. One link to the PCA region webstore, one to the badge page.</td></tr>
+          <tr><td><strong>Badge order</strong></td><td><code>page-badge.php</code></td><td>A Stripe payment link with custom fields for the badge name</td><td>No WooCommerce, no cart, no checkout on the club's server. Stripe hosts the payment page.</td></tr>
+          <tr><td><strong>About and board</strong></td><td><code>page-about.php</code></td><td>Static, with the board grid as a reusable block</td><td>Board members become a reusable block or a small custom post type so the page is editable without touching layout.</td></tr>
+          <tr><td><strong>News index</strong></td><td><code>home.php</code></td><td>Standard posts</td><td>Category filters map to existing post categories. Pagination is already working.</td></tr>
+          <tr><td><strong>Article</strong></td><td><code>single.php</code></td><td>Standard post</td><td>Add the byline, the read-next block, and a photo album link field.</td></tr>
+          <tr><td><strong>Sponsors</strong></td><td><code>page-sponsors.php</code></td><td>A "sponsor" custom post type with tier, logo, blurb, member benefit and URL</td><td>The same records then feed the home page strip and the footer, so a sponsor is added in one place.</td></tr>
+          <tr><td><strong>Contact</strong></td><td><code>page-contact.php</code></td><td>Contact Form 7, already installed</td><td>The topic dropdown routes to role addresses using a mail tag in the recipient field. Add spam protection to this form, which it currently lacks.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="margin-top:30px">Three things to change when porting this to WordPress</h3>
+    <ol>
+      <li><strong>Swap container queries for media queries.</strong> The prototype uses <code>@container</code> so the width buttons in the grey bar actually work. On the real site the page is the viewport, so the same breakpoints become ordinary <code>@media</code> rules. The breakpoint values do not change.</li>
+      <li><strong>Self-host the two fonts, or drop to system fonts.</strong> PCA hosting allows the files. Two self-hosted variable fonts will beat two Google Fonts requests, and a system font stack beats both if the board would rather not think about it.</li>
+      <li><strong>Wire the status rail to real data.</strong> Available places, sold out, and registration-not-yet-open all come from Events Manager fields. Cancelled is best handled as a dedicated event category or a checkbox field, so that marking one event cancelled updates the list, the calendar, and the home page at once.</li>
+    </ol>
+
+    <div class="card" style="margin-top:26px;border-left:3px solid var(--amber)">
+      <h3 style="margin-top:0">Real content, and what is not</h3>
+      <p>Event names, dates, prices, venues, capacity figures, news headlines, authors, board names, sponsor names and the club's own description are all taken from the live site as it stood on 25 and 26 August 2026. Anything invented is marked in the interface with a <span class="pill-lite">placeholder</span> label: the September membership meeting, the badge batch date, the cancellation policy, sponsorship prices, committee chair names, and the body copy of the sample article.</p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

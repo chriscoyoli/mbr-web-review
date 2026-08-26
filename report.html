@@ -1,0 +1,1119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="An independent review of mby.pca.org for the Monterey Bay Region PCA board.">
+<meta name="robots" content="noindex, nofollow">
+
+<title>Monterey Bay Region Web Review</title>
+<link rel="icon" type="image/png" href="assets/mbr-crest-96.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* ---------- tokens: light (default, un-stamped) ---------- */
+:root{
+  --kelp:#12594B;          /* accent: Monterey kelp */
+  --kelp-deep:#0B3D33;
+  --kelp-tint:#E4EFEB;
+  --ground:#FBFAF7;        /* warm-cool sandstone paper */
+  --surface:#FFFFFF;
+  --surface-2:#F3F4F1;
+  --ink:#151A18;           /* near-black, green bias */
+  --ink-2:#414A46;
+  --ink-3:#6C7772;
+  --rule:#DFE2DD;
+  --rule-strong:#C3C9C3;
+  --crit:#A32319;
+  --crit-bg:#FBE9E7;
+  --high:#8A5200;
+  --high-bg:#FBF0DE;
+  --med:#2C4E77;
+  --med-bg:#E7EEF7;
+  --low:#4A5A53;
+  --low-bg:#EDF0EE;
+  --good:#1F6B4E;
+  --good-bg:#E3F1EA;
+  --shadow:0 1px 2px rgba(21,26,24,.05), 0 8px 24px -12px rgba(21,26,24,.14);
+  --maxw:70ch;
+}
+/* ---------- tokens: dark via system preference ---------- */
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --kelp:#5FC0A5;
+    --kelp-deep:#8FD8C2;
+    --kelp-tint:#12312A;
+    --ground:#0E1211;
+    --surface:#161B19;
+    --surface-2:#1D2422;
+    --ink:#EDF1EE;
+    --ink-2:#BEC7C2;
+    --ink-3:#8C9891;
+    --rule:#2A322F;
+    --rule-strong:#3C4642;
+    --crit:#F49489;
+    --crit-bg:#3A1815;
+    --high:#E5B571;
+    --high-bg:#33240F;
+    --med:#9DBEE2;
+    --med-bg:#16232F;
+    --low:#A3B1AA;
+    --low-bg:#1E2523;
+    --good:#7FCFAC;
+    --good-bg:#12291F;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+  }
+}
+/* ---------- tokens: dark via explicit stamp ---------- */
+:root[data-theme="dark"]{
+  --kelp:#5FC0A5;
+  --kelp-deep:#8FD8C2;
+  --kelp-tint:#12312A;
+  --ground:#0E1211;
+  --surface:#161B19;
+  --surface-2:#1D2422;
+  --ink:#EDF1EE;
+  --ink-2:#BEC7C2;
+  --ink-3:#8C9891;
+  --rule:#2A322F;
+  --rule-strong:#3C4642;
+  --crit:#F49489;
+  --crit-bg:#3A1815;
+  --high:#E5B571;
+  --high-bg:#33240F;
+  --med:#9DBEE2;
+  --med-bg:#16232F;
+  --low:#A3B1AA;
+  --low-bg:#1E2523;
+  --good:#7FCFAC;
+  --good-bg:#12291F;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--ground);
+  color:var(--ink);
+  font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:17px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+.col{max-width:var(--maxw)}
+
+h1,h2,h3,h4{font-family:Newsreader,Georgia,"Times New Roman",serif;font-weight:500;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.1rem,5.2vw,3.4rem);line-height:1.08;letter-spacing:-.015em}
+h2{font-size:clamp(1.55rem,3.4vw,2.15rem);line-height:1.16;letter-spacing:-.01em}
+h3{font-size:1.24rem;line-height:1.28;font-weight:600}
+h4{font-size:1.04rem;line-height:1.3;font-weight:600;font-family:"IBM Plex Sans",sans-serif}
+p{margin:0}
+a{color:var(--kelp);text-underline-offset:2px;text-decoration-thickness:1px}
+a:hover{color:var(--kelp-deep)}
+a:focus-visible,button:focus-visible{outline:2.5px solid var(--kelp);outline-offset:3px;border-radius:2px}
+strong{font-weight:600}
+code,.mono{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:.86em}
+.num{font-variant-numeric:tabular-nums}
+
+.eyebrow{
+  font-family:"IBM Plex Mono",monospace;font-size:.7rem;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);
+}
+
+/* ---------- masthead ---------- */
+.masthead{
+  border-bottom:1px solid var(--rule);
+  background:linear-gradient(180deg,var(--kelp-tint),var(--ground) 78%);
+}
+.masthead .wrap{padding-top:56px;padding-bottom:44px}
+.masthead h1{margin:14px 0 18px}
+.dek{font-size:1.16rem;color:var(--ink-2);max-width:62ch}
+.stamp{
+  margin-top:26px;display:flex;flex-wrap:wrap;gap:10px 26px;
+  font-family:"IBM Plex Mono",monospace;font-size:.76rem;color:var(--ink-3);
+}
+.stamp b{color:var(--ink-2);font-weight:500}
+
+/* ---------- layout ---------- */
+.layout{display:block}
+@media(min-width:1000px){
+  .layout{display:grid;grid-template-columns:212px minmax(0,1fr);gap:56px;align-items:start}
+  .toc{position:sticky;top:24px;max-height:calc(100vh - 48px);overflow-y:auto}
+}
+.toc{padding:32px 0 8px}
+.toc ol{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:2px}
+.toc a{
+  display:block;padding:5px 10px;border-radius:4px;font-size:.83rem;
+  color:var(--ink-2);text-decoration:none;border-left:2px solid transparent;
+}
+.toc a:hover{background:var(--surface-2);color:var(--ink);border-left-color:var(--kelp)}
+section{padding:52px 0;border-top:1px solid var(--rule)}
+section:first-of-type{border-top:0}
+.sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:8px}
+.sec-head .n{font-family:"IBM Plex Mono",monospace;font-size:.78rem;color:var(--kelp);font-weight:600}
+.lede{font-size:1.06rem;color:var(--ink-2);margin-top:14px;max-width:66ch}
+.stack{display:flex;flex-direction:column;gap:16px;margin-top:22px}
+.stack-lg{display:flex;flex-direction:column;gap:30px;margin-top:26px}
+
+/* ---------- callouts ---------- */
+.call{
+  border:1px solid var(--rule);border-left:3px solid var(--kelp);
+  background:var(--surface);border-radius:5px;padding:18px 20px;box-shadow:var(--shadow);
+}
+.call.crit{border-left-color:var(--crit);background:var(--crit-bg);border-color:var(--rule)}
+.call.warn{border-left-color:var(--high);background:var(--high-bg);border-color:var(--rule)}
+.call.good{border-left-color:var(--good);background:var(--good-bg);border-color:var(--rule)}
+.call h4{margin-bottom:6px}
+.call p+p{margin-top:10px}
+
+/* ---------- pills ---------- */
+.pill{
+  display:inline-block;padding:2px 9px;border-radius:100px;
+  font-family:"IBM Plex Mono",monospace;font-size:.66rem;font-weight:600;
+  letter-spacing:.07em;text-transform:uppercase;white-space:nowrap;
+}
+.p-crit{background:var(--crit-bg);color:var(--crit)}
+.p-high{background:var(--high-bg);color:var(--high)}
+.p-med{background:var(--med-bg);color:var(--med)}
+.p-low{background:var(--low-bg);color:var(--low)}
+.p-good{background:var(--good-bg);color:var(--good)}
+.p-plain{background:var(--surface-2);color:var(--ink-2)}
+
+/* ---------- score cards ---------- */
+.finding{
+  background:var(--surface);border:1px solid var(--rule);border-radius:6px;
+  overflow:hidden;box-shadow:var(--shadow);
+}
+.finding>.bar{height:3px;background:var(--rule-strong)}
+.finding.s-crit>.bar{background:var(--crit)}
+.finding.s-high>.bar{background:var(--high)}
+.finding.s-med>.bar{background:var(--med)}
+.finding.s-low>.bar{background:var(--low)}
+.finding .body{padding:20px 22px 22px}
+.f-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 14px;margin-bottom:4px}
+.f-head .idx{font-family:"IBM Plex Mono",monospace;font-size:.78rem;color:var(--ink-3);font-weight:600}
+.f-meta{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 14px;align-items:center}
+.score{
+  font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:.78rem;
+  padding:2px 9px;border-radius:100px;background:var(--surface-2);color:var(--ink);
+  border:1px solid var(--rule-strong);font-variant-numeric:tabular-nums;
+}
+.finding ul{margin:12px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:7px}
+.finding li{font-size:.955rem;color:var(--ink-2)}
+.finding li strong{color:var(--ink)}
+.verdict{
+  margin-top:16px;padding-top:14px;border-top:1px dashed var(--rule-strong);
+  font-size:.955rem;color:var(--ink);
+}
+.verdict b{font-family:"IBM Plex Mono",monospace;font-size:.7rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:4px;font-weight:600}
+
+/* ---------- tables ---------- */
+.scroller{overflow-x:auto;margin-top:24px;border:1px solid var(--rule);border-radius:6px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.86rem;min-width:640px}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--rule);vertical-align:top}
+thead th{
+  background:var(--surface-2);font-family:"IBM Plex Mono",monospace;font-size:.68rem;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);font-weight:600;
+  position:sticky;top:0;white-space:nowrap;
+}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:var(--surface-2)}
+td.num,th.num{font-variant-numeric:tabular-nums;font-family:"IBM Plex Mono",monospace}
+.matrix td:first-child{font-weight:600;color:var(--ink);white-space:nowrap}
+caption{caption-side:bottom;padding:12px 14px;font-size:.79rem;color:var(--ink-3);text-align:left}
+
+/* ---------- misc ---------- */
+.grid2{display:grid;gap:16px;margin-top:24px}
+@media(min-width:760px){.grid2{grid-template-columns:1fr 1fr}}
+.grid3{display:grid;gap:14px;margin-top:22px}
+@media(min-width:700px){.grid3{grid-template-columns:repeat(3,1fr)}}
+.stat{background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:16px 18px}
+.stat .k{font-family:"IBM Plex Mono",monospace;font-size:1.7rem;font-weight:600;color:var(--kelp);
+  font-variant-numeric:tabular-nums;line-height:1.1;display:block}
+.stat .l{font-size:.83rem;color:var(--ink-2);margin-top:6px;display:block}
+.stat .s{font-size:.74rem;color:var(--ink-3);margin-top:5px;display:block}
+
+ul.plain{margin:14px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:8px}
+ul.plain li{color:var(--ink-2)}
+ul.plain li strong{color:var(--ink)}
+ol.plain{margin:14px 0 0;padding-left:22px;display:flex;flex-direction:column;gap:10px}
+ol.plain li{color:var(--ink-2)}
+ol.plain li strong{color:var(--ink)}
+
+.opt{background:var(--surface);border:1px solid var(--rule);border-radius:7px;overflow:hidden;box-shadow:var(--shadow)}
+.opt.pick{border-color:var(--kelp);border-width:2px}
+.opt .hd{padding:18px 22px;border-bottom:1px solid var(--rule);background:var(--surface-2);
+  display:flex;flex-wrap:wrap;gap:10px;align-items:baseline;justify-content:space-between}
+.opt .bd{padding:20px 22px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:7px 16px;font-size:.9rem;margin-top:4px}
+.kv dt{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:600;padding-top:4px;white-space:nowrap}
+.kv dd{margin:0;color:var(--ink-2)}
+
+.foot{border-top:1px solid var(--rule);padding:34px 0 60px;color:var(--ink-3);font-size:.83rem}
+.srcs{columns:1;font-size:.8rem;line-height:1.55}
+@media(min-width:820px){.srcs{columns:2;column-gap:40px}}
+.srcs p{break-inside:avoid;margin-bottom:9px;color:var(--ink-2)}
+.srcs .mono{color:var(--ink-3)}
+hr.soft{border:0;border-top:1px solid var(--rule);margin:26px 0}
+.tag{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--ink-3);border:1px solid var(--rule-strong);border-radius:3px;padding:1px 6px;white-space:nowrap}
+</style>
+</head>
+<body>
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Website review &middot; prepared for the board &middot; public edition</div>
+    <h1>Monterey Bay Region<br>Web Review</h1>
+    <p class="dek">An independent look at mby.pca.org: what is working, what is broken, what it costs, and what to do about it over the next ninety days. Written for a volunteer board, not for a web developer.</p>
+    <p class="dek" style="margin-top:18px;font-size:.93rem;padding:14px 16px;background:var(--surface);border-left:3px solid var(--crit);border-radius:4px"><strong>About this edition.</strong> This page is public, so three findings that named specific unpatched software on a live site taking card payments have been generalised. Every score, figure, cost and recommendation is unchanged. The board holds the full version. Once the first 30 days of updates are applied, the distinction stops mattering.</p>
+    <div class="stamp">
+      <span><b>Site</b> mby.pca.org</span>
+      <span><b>Checked</b> 25&ndash;26 August 2026</span>
+      <span><b>Members</b> 400+ (site&#8209;stated)</span>
+      <span><b>Maintainers</b> 1</span>
+      <span><a href="index.html">Overview</a> &middot; <a href="prototype.html">Prototype</a></span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap layout">
+  <nav class="toc" aria-label="Contents">
+    <div class="eyebrow">Contents</div>
+    <ol>
+      <li><a href="#summary">Summary for the board</a></li>
+      <li><a href="#corrections">Where the brief was wrong</a></li>
+      <li><a href="#audit">The audit, 11 areas</a></li>
+      <li><a href="#bench">How peers compare</a></li>
+      <li><a href="#patterns">Patterns worth stealing</a></li>
+      <li><a href="#options">Three options</a></li>
+      <li><a href="#rec">Recommendation</a></li>
+      <li><a href="#store">The store decision</a></li>
+      <li><a href="#roadmap">30 / 60 / 90 plan</a></li>
+      <li><a href="#appendix">Sources &amp; open questions</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+<section id="summary">
+  <div class="sec-head"><span class="n">01</span><h2>Summary for the board</h2></div>
+  <p class="lede">The short version: the website does not need to be rebuilt or moved. It needs three urgent repairs, one honest retirement, and a change in how it is looked after. Almost everything wrong with it is a settings-and-habits problem, not a technology problem.</p>
+
+  <div class="stack">
+    <div class="call good">
+      <h4>Start with the good news, because it is genuinely unusual</h4>
+      <p>Monterey Bay takes event bookings and card payments on its own website, with a real headcount limit and a closing date. On the Elkhorn Slough tour, the page shows 27 of 32 seats taken and closes bookings at noon on 19 September. Members pay by card, PayPal, or check, and never leave mby.pca.org until the payment screen.</p>
+      <p>Every single one of the eight comparable clubs we examined sends its members to somebody else's website to register, usually MotorsportReg or ClubRegistration.net. Golden Gate does not even link its registration system from its own calendar page. <strong>This is the one thing Monterey Bay does better than the entire peer group, and the whole plan below is built around not breaking it.</strong></p>
+    </div>
+
+    <div class="call crit">
+      <h4>Three things need fixing this month</h4>
+      <p><strong>1. A cancelled event is still being advertised.</strong> The 28 August Night at the Races has been cancelled. The cancellation is written in the middle of the event page, but the event still appears as a normal upcoming event on the home page, in the events list, and on the August calendar grid. Anyone who does not open and read the page will believe it is happening. Nothing damages a calendar's credibility faster.</p>
+      <p><strong>2. The software that takes your members' money is behind on a security update.</strong> The plugin that runs event bookings and card payments has a security release outstanding, and it has not been applied. There are 15 updates waiting in total.</p>
+      <p><strong>3. Only one person can update the website.</strong> If Richard Chew is unavailable, nobody publishes an event. This is the single largest risk on this list and the cheapest one to fix. It takes an afternoon.</p>
+    </div>
+  </div>
+
+  <div class="grid3">
+    <div class="stat">
+      <span class="k num">3.9</span>
+      <span class="l">screens of scrolling on a phone before a visitor sees a single upcoming event</span>
+      <span class="s">Measured at 390&nbsp;pixels wide. The heading sits 2,888&nbsp;pixels down a 6,330&nbsp;pixel page.</span>
+    </div>
+    <div class="stat">
+      <span class="k num">39</span>
+      <span class="l">store orders in the eight months since the shop opened</span>
+      <span class="s">$1,926 total. Eleven of those orders have still not been marked fulfilled.</span>
+    </div>
+    <div class="stat">
+      <span class="k num">28</span>
+      <span class="l">add-on programs ("plugins") running on the site, all switched on</span>
+      <span class="s">Including three that overlap on security and one diagnostic tool that should not be live.</span>
+    </div>
+  </div>
+
+  <div class="stack" style="margin-top:26px">
+    <div class="call">
+      <h4>What is actually wrong, in one paragraph</h4>
+      <p>The home page leads with a photograph and a paragraph of welcome text. Events, which are the club's product, come nearly four phone screens later. There is no "Join" link anywhere in the menu. There is no sponsor page at all, so a business that wants to support the club has nowhere to go. The shop's terms and conditions page still says "Add your terms &amp; conditions here," which is the wording the software ships with, on a site that takes credit cards. The site loads 148 separate files and roughly 7 megabytes of uncompressed material on the home page, including a full copy of the Stripe payment library on a page where nobody is paying for anything. None of this requires new software to fix.</p>
+    </div>
+
+    <div class="call">
+      <h4>What we recommend</h4>
+      <p><strong>Keep WordPress. Keep the pca.org address. Keep the booking system. Fix what you have.</strong> PCA National hosts the site at no charge, so there is no annual bill to reduce by moving, only a new one to create. A rebuild would put the best part of the site at risk for six months and would not touch the two problems that actually matter, which are the cancelled-event kind of mistake and the one-person dependency.</p>
+      <p><strong>Retire the online shop.</strong> Move club clothing to the PCA National region webstore, which prints and ships on demand at no cost or risk to the region and which 77 other regions already use. Sell the name badge through a single Stripe payment link. This removes four programs from the site and all of the card-security responsibility, and at current volumes it costs the club nothing in sales.</p>
+      <p>Total expected cost: <strong>$0 to $1,500 one time</strong>, and <strong>$100 to $250 a year</strong>, most of which the club already spends.</p>
+    </div>
+  </div>
+</section>
+
+<section id="corrections">
+  <div class="sec-head"><span class="n">02</span><h2>Where the brief was wrong</h2></div>
+  <p class="lede">Five assumptions in the brief do not survive contact with the live site. Each one changes the plan.</p>
+
+  <div class="stack">
+    <div class="call">
+      <h4>1. Event registration is not outsourced. It is the site's best feature.</h4>
+      <p>The brief asked which third-party tool is in use. None is. The site runs Events Manager Pro with Stripe and PayPal built in. That is better than every club we benchmarked, and it inverts the usual advice: do not go shopping for a registration vendor, protect the one you have.</p>
+    </div>
+    <div class="call">
+      <h4>2. There are no track events on this calendar.</h4>
+      <p>The brief lists "autocross, DE at Laguna Seca" among the events to promote. Looking at everything published on the site, we found no Driver Education, HPDE, or track day run by Monterey Bay. The About page describes autocross as happening "through Zone 7 series at Salinas Municipal Airport," which is a different organisation's event. The published calendar is tours, concours, dinners, tech sessions, and membership meetings. This matters, because track registration is the complicated part of club websites and Monterey Bay does not have that problem. If the region does run track events off-site, tell us and we will revisit.</p>
+    </div>
+    <div class="call">
+      <h4>3. Annual cost is not the lever the brief assumes.</h4>
+      <p>The brief says "cost per year matters more than one-time polish." True in principle, but PCA National already hosts the site free of charge, so the annual cash cost is close to zero. The scarce resource here is volunteer hours, not dollars. Every recommendation below is priced in hours first.</p>
+    </div>
+    <div class="call">
+      <h4>4. The domain question has an answer, and it is "stay."</h4>
+      <p>PCA National's hosting page confirms regions may use their own domain name at no extra cost. So moving is permitted. It is still the wrong move: it trades free, supported hosting and inherited search authority for a bill and a migration, in exchange for a nicer address. Several good names are unregistered today (montereypca.com, montereybaypca.com, mbrpca.com, mbypca.com, all checked 25 August 2026). If the board wants one, register it defensively for about $12 a year and point it at the existing site. Do not move the site to it.</p>
+    </div>
+    <div class="call">
+      <h4>5. The store is not priority six of seven. It is the thing to remove.</h4>
+      <p>The brief ranks merchandise sixth. The order data says it should not be on the list at all. Details in section 08.</p>
+    </div>
+  </div>
+
+  <div class="call warn" style="margin-top:22px">
+    <h4>One thing we could not measure, and will not guess</h4>
+    <p>We were unable to obtain Core Web Vitals scores, which are Google's standard speed measurements. Google's public testing service rate-limited every attempt across two days, and running the test from our own environment was blocked by a network proxy. Everything reported under Performance below is a direct measurement of what the page actually loads, taken in a real browser, not a score. <strong>Where a number is not verified, this report says so rather than inventing one.</strong></p>
+  </div>
+</section>
+
+<section id="audit">
+  <div class="sec-head"><span class="n">03</span><h2>The audit, 11 areas</h2></div>
+  <p class="lede">Each area is scored out of five, with the evidence behind the score, how urgent it is, and how much work the fix is. Effort is <span class="tag">S</span> under a day, <span class="tag">M</span> one to two weeks of evenings, <span class="tag">L</span> a month or more. Everything below was checked on 25 and 26 August 2026.</p>
+
+  <div class="stack-lg">
+
+  <!-- 1 -->
+  <article class="finding s-high">
+    <div class="bar"></div>
+    <div class="body">
+      <div class="f-head"><span class="idx">01</span><h3>Information architecture and navigation</h3></div>
+      <div class="f-meta"><span class="score">3 / 5</span><span class="pill p-high">High</span><span class="tag">Effort M</span></div>
+      <p>The menu is short and the structure is sane. The problems are that it is organised around the club's org chart rather than what a visitor came to do, and that two of the most valuable destinations are missing or unreachable.</p>
+      <ul>
+        <li><strong>There is no "Join" or "Membership" item in the menu at all.</strong> The menu is Home, News, Calendar, Photos, Our Club, Zone 7/PCA, Store. Turning Porsche owners into members is priority three in the brief and it has zero navigation surface.</li>
+        <li><strong>The events list page is an orphan.</strong> <span class="mono">mby.pca.org/events/</span> is not in the menu. The only way to reach it is a text link partway down the home page. The menu sends you to <span class="mono">/calendar/</span> instead, which is a different page showing the same events in a month grid.</li>
+        <li><strong>Two competing calendar surfaces.</strong> <span class="mono">/calendar/</span> is a month grid powered by WP FullCalendar. <span class="mono">/events/</span> is a list powered by Events Manager. They show the same events differently, and neither links to the other.</li>
+        <li><strong>"Zone 7/PCA" is a whole top-level menu that sends people away.</strong> Three of its items lead off-site or to pages about other organisations. A visitor's second most prominent choice is "go somewhere else."</li>
+        <li><strong>"Cart" and "Terms &amp; Conditions" are navigation items.</strong> These are checkout plumbing sitting in the main menu of a car club, under Store, alongside Shop.</li>
+        <li><strong>The Montereyan sits under Our Club as though it were current.</strong> It is a PDF archive that ended in 1997, with two revival issues in 2009. <span class="mono">mby.pca.org/montereyan/</span></li>
+      </ul>
+      <div class="verdict"><b>Verdict</b>Nothing here is broken, but the menu answers "who are we" when visitors are asking "what is on, and how do I get in." Rewriting it is a one-evening job.</div>
+    </div>
+  </article>
+
+  <!-- 2 -->
+  <article class="finding s-crit">
+    <div class="bar"></div>
+    <div class="body">
+      <div class="f-head"><span class="idx">02</span><h3>Content quality and freshness</h3></div>
+      <div class="f-meta"><span class="score">2 / 5</span><span class="pill p-crit">Critical</span><span class="tag">Effort S</span></div>
+      <p>The publishing rhythm is genuinely good. The accuracy is not. That combination is worse than a quiet site, because members learn that a current-looking page can still be wrong.</p>
+      <ul>
+        <li><strong>A cancelled event is presented as upcoming.</strong> The 28 August Night at the Races page opens with "It is with great disappointment that I have to announce our Night at the Races event is cancelled," yet the event appears normally on the home page, in the events list, and on the August calendar grid, with no cancelled marking anywhere. <span class="mono">mby.pca.org/events/2026-night-at-the-races/</span></li>
+        <li><strong>The shop's terms page is still the factory placeholder.</strong> It reads, in full, "Add your terms &amp; conditions here." This is on a site that accepts credit cards. <span class="mono">mby.pca.org/terms-conditions/</span></li>
+        <li><strong>A product name is misspelled on the live store.</strong> The name badge is listed as "Moneterey Bay - Name Badge."</li>
+        <li><strong>Events are inconsistently complete.</strong> Elkhorn Slough on 19 September has a price, a headcount, a deadline, and a booking form. Oktoberfest on 11 October has a date, a venue, and the words "Save the Date," with no price and no way to register.</li>
+        <li><strong>Personal contact details are published in plain text.</strong> The president's personal Gmail address and personal mobile number appear on event pages. That is a spam magnet and it makes the role impossible to hand over.</li>
+        <li><strong>The board page carries no way to contact the board.</strong> Four officers are named, with no email, no photographs, and no committee chairs. Below them is a list of past presidents back to 1961. <span class="mono">mby.pca.org/club-leadership/</span></li>
+      </ul>
+      <p style="margin-top:14px"><strong>Credit where it is due:</strong> the news stream is genuinely active, with posts on 19 August, 15 August, and 24 July 2026 across 22 pages of archive, authored by Richard Chew and Vega Roecker. Photo albums are current to 12 August 2026. Very few volunteer sites keep that cadence.</p>
+      <div class="verdict"><b>Verdict</b>Score held at 2 despite the good cadence, because a calendar that advertises a cancelled event is not a calendar anyone can rely on. Every item above is fixable in under a day.</div>
+    </div>
+  </article>
+
+  <!-- 3 -->
+  <article class="finding s-crit">
+    <div class="bar"></div>
+    <div class="body">
+      <div class="f-head"><span class="idx">03</span><h3>Conversion paths</h3></div>
+      <div class="f-meta"><span class="score">2 / 5</span><span class="pill p-crit">Critical</span><span class="tag">Effort M</span></div>
+      <p>We traced all four end to end. One is excellent once you find it, one is thin, one is broken, one does not exist.</p>
+
+      <div class="scroller" style="margin-top:18px">
+        <table>
+          <thead><tr><th>Path</th><th>Clicks</th><th>Where it hands off</th><th>Where people give up</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>Register for an event</strong><br><span class="pill p-good">Works well</span></td>
+              <td class="num">3</td>
+              <td>Only at the payment sheet (Stripe or PayPal)</td>
+              <td>Finding it. On a phone the first event is 3.9 screens down, and the events list is not in the menu.</td>
+            </tr>
+            <tr>
+              <td><strong>Join the club</strong><br><span class="pill p-high">Thin</span></td>
+              <td class="num">1</td>
+              <td>Immediately, to pca.org</td>
+              <td>No menu entry. No page explaining why this region. Two different national join links are used, one from the home page and a different one from About Us.</td>
+            </tr>
+            <tr>
+              <td><strong>Contact the board</strong><br><span class="pill p-high">Broken</span></td>
+              <td class="num">2</td>
+              <td>None</td>
+              <td>A four-field form with no stated recipient and no reply expectation. No way to reach a specific officer. The board page itself offers no contact method.</td>
+            </tr>
+            <tr>
+              <td><strong>Become a sponsor</strong><br><span class="pill p-crit">Absent</span></td>
+              <td class="num">0</td>
+              <td>n/a</td>
+              <td>There is no sponsor page. The five sponsor logos link straight out to the sponsors' own websites. A business that wants to pay the club has nowhere to land.</td>
+            </tr>
+          </tbody>
+          <caption>Paths traced 25&ndash;26 August 2026. Click counts are from the home page on a phone, excluding scrolling.</caption>
+        </table>
+      </div>
+
+      <div class="verdict"><b>Verdict</b>The registration engine is excellent and almost hidden. The sponsor path is the largest missed revenue opportunity on the site and costs one page to fix.</div>
+    </div>
+  </article>
+
+  <!-- 4 -->
+  <article class="finding s-high">
+    <div class="bar"></div>
+    <div class="body">
+      <div class="f-head"><span class="idx">04</span><h3>Mobile experience at 390&nbsp;pixels</h3></div>
+      <div class="f-meta"><span class="score">2 / 5</span><span class="pill p-high">High</span><span class="tag">Effort M</span></div>
+      <p>Measured in a real browser at a 390&nbsp;pixel viewport, the width of a current iPhone.</p>
+      <ul>
+        <li><strong>The home page is 6,330&nbsp;pixels tall.</strong> That is roughly 8.5 phone screens.</li>
+        <li><strong>"Upcoming Events" begins 2,888&nbsp;pixels down,</strong> which is 3.9 screens of scrolling. "In the News" is at 4,016&nbsp;pixels, or 5.4 screens. The "Join Us" button is at 1,054&nbsp;pixels.</li>
+        <li><strong>The header consumes about 40 percent of the first screen</strong> before any content. A rotating banner photograph is followed by a tall blue band holding the crest and a script wordmark, then the cart and menu buttons.</li>
+        <li><strong>33 tap targets are smaller than 24&nbsp;&times;&nbsp;24&nbsp;pixels.</strong> WCAG 2.2 sets 24&nbsp;pixels as the AA minimum. WCAG is the international accessibility standard.</li>
+        <li><strong>Good news: nothing overflows sideways.</strong> The underlying theme is built on Bootstrap and the responsive grid holds cleanly from 390&nbsp;pixels upward. There is no horizontal scrolling and no broken table reflow.</li>
+      </ul>
+      <div class="verdict"><b>Verdict</b>The technical responsiveness is fine. The editorial priority is wrong. Assume most visitors are on a phone and they are being shown a photograph and a paragraph of history where the next three events should be.</div>
+    </div>
+  </article>
+
+  <!-- 5 -->
+  <article class="finding s-high">
+    <div class="bar"></div>
+    <div class="body">
+      <div class="f-head"><span class="idx">05</span><h3>Performance</h3></div>
+      <div class="f-meta"><span class="score">2 / 5</span><span class="pill p-high">High</span><span class="tag">Effort M</span></div>
+      <p><strong>Core Web Vitals: not verified.</strong> Google's public scoring service rate-limited every attempt and an independent test run was blocked by a network proxy. What follows is measured directly from the page in a browser, which is evidence of what the site does, not a score of how Google grades it.</p>
+      <ul>
+        <li><strong>148 separate files on the home page,</strong> totalling roughly 7.2&nbsp;megabytes uncompressed. That includes 58 JavaScript files and 22 stylesheets.</li>
+        <li><strong>Stripe's payment library loads on the home page,</strong> where nobody is paying for anything. So do the WooCommerce shopping-cart scripts, on every page of the site.</li>
+        <li><strong>jQuery plus thirteen separate jQuery UI modules load site-wide,</strong> along with Moment.js, FullCalendar, Fancybox, Font Awesome, and Bootstrap.</li>
+        <li><strong>React and ReactDOM load on the public home page.</strong> These are part of WordPress's block editor and are heavy for a page that is not an editor.</li>
+        <li><strong>The banner image is 1,200&nbsp;&times;&nbsp;400&nbsp;pixels displayed at 1,470&nbsp;&times;&nbsp;490.</strong> It is being stretched beyond its own resolution on any normal laptop, and much further on a high-resolution display.</li>
+        <li><strong>No caching plugin, no content delivery network, and no modern image formats.</strong> Images are JPEG and PNG only. There is no WebP or AVIF conversion, which typically saves 25 to 50 percent of image weight for free.</li>
+        <li><strong>What is already right:</strong> 22 images use lazy loading and 27 carry responsive image sets, both WordPress defaults working as intended.</li>
+      </ul>
+      <div class="verdict"><b>Verdict</b>Roughly half of what the home page downloads is there because a plugin loads itself everywhere rather than only where it is needed. A caching plugin plus turning off the shopping cart scripts would be the single largest speed win available, and both are configuration, not code.</div>
+    </div>
+  </article>
+
+  <!-- 6 -->
+  <article class="finding s-high">
+    <div class="bar"></div>
+    <div class="body">
+      <div class="f-head"><span class="idx">06</span><h3>Accessibility, WCAG 2.2 AA</h3></div>
+      <div class="f-meta"><span class="score">2 / 5</span><span class="pill p-high">High</span><span class="tag">Effort M</span></div>
+      <p>Measured on the home page and the calendar page. Colour contrast was not machine-tested and is marked unverified.</p>
+      <ul>
+        <li><strong>Two H1 headings on the home page, one of them empty.</strong> A page should have exactly one main heading. Screen readers announce the empty one as a heading with no text.</li>
+        <li><strong>Only five headings on the entire home page.</strong> Event titles, news items, and sponsors are not headings, so a screen reader user cannot jump between sections.</li>
+        <li><strong>22 of 78 links have no accessible name.</strong> That is 28 percent of the links on the page announcing as "link" with nothing after it. This fails WCAG 2.4.4 and 4.1.2.</li>
+        <li><strong>33 tap targets below the 24&nbsp;pixel minimum,</strong> failing WCAG 2.2 criterion 2.5.8.</li>
+        <li><strong>The calendar page has no H1 at all.</strong> Its first heading is an H2 reading "August 2026." <span class="mono">mby.pca.org/calendar/</span></li>
+        <li><strong>One form field with no label.</strong> 21 images carry an empty alt attribute, which is correct for decoration but wrong if any of them are content.</li>
+        <li><strong>What is already right:</strong> the page language is declared correctly, every image has an alt attribute present, and the semantic landmarks (header, nav, main, footer) exist.</li>
+        <li><strong>Not verified:</strong> colour contrast ratios, keyboard tab order, and focus visibility were not systematically tested.</li>
+      </ul>
+      <div class="verdict"><b>Verdict</b>Nothing here needs a rebuild. The empty H1, the unnamed links, and the tap-target sizes are theme and content fixes. Do them while the homepage is being reworked, not as a separate project.</div>
+    </div>
+  </article>
+
+  <!-- 7 -->
+  <article class="finding s-med">
+    <div class="bar"></div>
+    <div class="body">
+      <div class="f-head"><span class="idx">07</span><h3>SEO and local discovery</h3></div>
+      <div class="f-meta"><span class="score">2 / 5</span><span class="pill p-med">Medium</span><span class="tag">Effort M</span></div>
+      <ul>
+        <li><strong>No search optimisation plugin is installed.</strong> The sitemap at <span class="mono">/wp-sitemap.xml</span> is the plain one WordPress generates by itself, and there is no Yoast or Rank Math in the plugin list. That means no control over page titles, no meta descriptions, and no structured data unless a plugin adds it.</li>
+        <li><strong>The calendar page has no meta description.</strong> Google writes its own snippet instead.</li>
+        <li><strong>Event structured data not verified.</strong> Events Manager can publish Event schema, which is what makes an event eligible for Google's rich event results. Whether it is switched on was not confirmed.</li>
+        <li><strong>The robots file is the WooCommerce default,</strong> blocking log and upload folders. Nothing is wrongly blocked.</li>
+        <li><strong>The subdomain question, plainly.</strong> Living at mby.pca.org means the site inherits some of pca.org's search authority for free, which is a real advantage a new domain would take years to earn. The cost is that the region can never build its own brand in search, and it competes for attention with roughly 145 sibling region subdomains. <strong>The advantage outweighs the cost at this club's size.</strong> Keep the address.</li>
+        <li><strong>There is demonstrable organic search traffic.</strong> One store order in the admin is attributed to "Organic: Google," so the site is being found.</li>
+      </ul>
+      <div class="verdict"><b>Verdict</b>Installing one free SEO plugin and writing descriptions for the twelve pages that matter is a weekend of work and the highest-return item in this section.</div>
+    </div>
+  </article>
+
+  <!-- 8 -->
+  <article class="finding s-crit">
+    <div class="bar"></div>
+    <div class="body">
+      <div class="f-head"><span class="idx">08</span><h3>WordPress health</h3></div>
+      <div class="f-meta"><span class="score">2 / 5</span><span class="pill p-crit">Critical</span><span class="tag">Effort M</span></div>
+      <p>Verified directly from the site's own admin screens. The server itself is in good shape: PHP 8.4, WooCommerce 10.9.4, both current. The problem is what has accumulated on top.</p>
+      <ul>
+        <li><strong>The bookings and payments plugin has a security release outstanding.</strong> It has not been applied. Nothing else on this page is more urgent. <em>Specifics are held back in this public edition.</em></li>
+        <li><strong>28 plugins, all active, with 15 updates waiting</strong> across 12 plugins plus core.</li>
+        <li><strong>Three overlapping security plugins are running at once.</strong> Two firewalls on one site is a common cause of odd, hard-to-diagnose breakage.</li>
+        <li><strong>A server diagnostic tool is live in production.</strong> It exists to dump the full server configuration. It sits behind the admin login, but it should not be installed on a live site at all.</li>
+        <li><strong>Three more maintenance and migration tools left switched on.</strong> These are things you turn on for an afternoon, not leave running for months.</li>
+        <li><strong>Two overlapping gallery and lightbox tools:</strong> Envira Gallery and Firelight Lightbox. Envira is active but the site's photo albums are all hosted on Google Photos, so it may be doing nothing at all.</li>
+        <li><strong>Backups run on BackUpWordPress.</strong> Confirm this plugin is still actively maintained before relying on it, and confirm where the backups are actually stored and when one was last restored successfully. A backup nobody has tested is not a backup.</li>
+        <li><strong>The public contact form has no visible spam protection.</strong> The captcha plugin that is installed covers a different form.</li>
+      </ul>
+      <div class="verdict"><b>Verdict</b>This is the section that most argues against a rebuild. None of these problems is caused by the platform. All of them are caused by nobody having a maintenance routine. A new site would accumulate exactly the same list.</div>
+    </div>
+  </article>
+
+  <!-- 9 -->
+  <article class="finding s-high">
+    <div class="bar"></div>
+    <div class="body">
+      <div class="f-head"><span class="idx">09</span><h3>The WooCommerce store</h3></div>
+      <div class="f-meta"><span class="score">2 / 5</span><span class="pill p-high">High</span><span class="tag">Effort S to remove</span></div>
+      <p>Figures below are read directly from the WooCommerce order screen, not estimated.</p>
+      <div class="scroller" style="margin-top:16px">
+        <table>
+          <thead><tr><th>Measure</th><th class="num">Value</th><th>Note</th></tr></thead>
+          <tbody>
+            <tr><td>Orders, all time</td><td class="num">39</td><td>First order 14 Dec 2025, most recent 13 Aug 2026</td></tr>
+            <tr><td>Gross takings, all time</td><td class="num">$1,926</td><td>Order totals including tax and shipping</td></tr>
+            <tr><td>Order status</td><td class="num">27 / 11 / 1</td><td>Completed / still Processing / Refunded</td></tr>
+            <tr><td>Average order, Dec&ndash;early Apr</td><td class="num">~$70</td><td>24 orders, $1,393</td></tr>
+            <tr><td>Average order, Apr&ndash;Aug</td><td class="num">~$28</td><td>15 orders, $533</td></tr>
+            <tr><td>Longest gap with no orders</td><td class="num">70 days</td><td>4 May to 13 July 2026</td></tr>
+            <tr><td>Products currently listed</td><td class="num">2</td><td>Name Badge $15 (on backorder), Umbrella $25</td></tr>
+          </tbody>
+          <caption>Read from the WooCommerce orders screen on 26 August 2026.</caption>
+        </table>
+      </div>
+      <ul>
+        <li><strong>The catalogue has shrunk and takings fell with it.</strong> Early orders of $113 to $143 indicate apparel was on sale over the winter. What remains is a badge and an umbrella, and the average order has dropped by 60 percent.</li>
+        <li><strong>Eleven orders are still marked Processing.</strong> Some date from 20 July. The product page explains why: badges are "produced in batches once sufficient orders accumulate." That is a reasonable club practice and a poor e-commerce promise, because the buyer's order sits open for weeks with no status update.</li>
+        <li><strong>Personalisation is collected as free text.</strong> Buyers are told to type the name they want into the general "Add a note to your order" box at checkout. There is no name field, so it is easy to miss and easy to mistype.</li>
+        <li><strong>No shipping policy, no refund policy, no stated payment methods.</strong> The terms page is the factory placeholder.</li>
+        <li><strong>No member pricing, no local pickup option configured,</strong> despite pickup at meetings being the actual fulfilment method.</li>
+        <li><strong>Running the store costs the site something on every page.</strong> WooCommerce's cart scripts and Stripe's library load site-wide, including for the many more visitors who came to read about a tour.</li>
+      </ul>
+      <div class="verdict"><b>Verdict</b>Answering the brief's question directly: <strong>no, a self-hosted store is not worth the overhead for a club this size.</strong> The full argument and the break-even arithmetic are in section 08.</div>
+    </div>
+  </article>
+
+  <!-- 10 -->
+  <article class="finding s-med">
+    <div class="bar"></div>
+    <div class="body">
+      <div class="f-head"><span class="idx">10</span><h3>Engagement surface</h3></div>
+      <div class="f-meta"><span class="score">3 / 5</span><span class="pill p-med">Medium</span><span class="tag">Effort M</span></div>
+      <ul>
+        <li><strong>Email is handled well and off-site.</strong> The region uses PCA National's Emailer, which is free with the charter and means the club does not hold its own copy of members' email addresses. That is the right call for privacy and the right call for effort. Keep it.</li>
+        <li><strong>There is no current newsletter.</strong> The Montereyan ended in 1997. What exists today is a news stream on the website plus emails through the Emailer. That is a defensible modern setup, but the site presents a dead 1997 archive as though it were a club feature.</li>
+        <li><strong>Photo albums are entirely on Google Photos.</strong> Ten albums for 2026, most recent 12 August. Zero maintenance burden, which is good, but the photos do nothing for search visibility and visitors leave the site to see them. Meanwhile Envira Gallery is installed and active on the site, apparently unused.</li>
+        <li><strong>No member directory and no classifieds, correctly.</strong> Membership records live with PCA National and PCA's own Mart handles classifieds. Both are linked. Do not rebuild either.</li>
+        <li><strong>Privacy is mixed.</strong> Event booking forms include a data-consent checkbox, which is good practice. Against that, an officer's personal email and mobile number are published in plain text.</li>
+        <li><strong>Sponsors get logo placement and nothing else.</strong> Five sponsors, sidebar and footer logos, links straight out. No tiers, no descriptions, no member discounts, no page of their own.</li>
+      </ul>
+      <div class="verdict"><b>Verdict</b>Scored 3 because what exists is active and the outsourcing decisions are mostly correct. The gap is that none of it is being used to give members a reason to come back to the site.</div>
+    </div>
+  </article>
+
+  <!-- 11 -->
+  <article class="finding s-crit">
+    <div class="bar"></div>
+    <div class="body">
+      <div class="f-head"><span class="idx">11</span><h3>Governance and cost of ownership</h3></div>
+      <div class="f-meta"><span class="score">1 / 5</span><span class="pill p-crit">Critical</span><span class="tag">Effort S</span></div>
+      <p>This is the lowest score in the report and the cheapest thing to fix.</p>
+      <ul>
+        <li><strong>One person can maintain this website.</strong> Confirmed by the board. Richard Chew and Vega Roecker both appear as post authors, so at least two people can publish news, but effectively one person owns the site. If that person is unavailable for a month, events do not get published and the security update does not get applied.</li>
+        <li><strong>Cash cost is close to zero and that is the point.</strong> Hosting is provided free by PCA National. The only recurring cash costs we can identify are card processing fees, roughly $100 a year at current volume, and any paid plugin licences, chiefly Events Manager Pro and possibly Envira Gallery, both unverified.</li>
+        <li><strong>The real cost is volunteer attention, and it is being spent badly.</strong> Every event currently touches up to four systems: an Events Manager entry, a separate news post, a Google Photos album afterwards, and the PCA Emailer. Nothing is wrong with that, but nobody has written it down.</li>
+        <li><strong>Time to publish a new event: not verified.</strong> We could not measure this without watching someone do it. It is worth timing once, because it is the number that determines whether a second volunteer will stick.</li>
+        <li><strong>PCA National's support is thinner than it looks.</strong> National's hosting page states plainly that PCA "provides support for hosting and related issues, but not website programming or design," and the entire PCA Website Committee is one person serving roughly 145 regions. Do not plan around National rescuing the site.</li>
+      </ul>
+      <div class="verdict"><b>Verdict</b>Add a second administrator and write a one-page "how to publish an event" note. That single afternoon does more for the club's long-term web position than any redesign in this report.</div>
+    </div>
+  </article>
+
+  </div>
+
+  <div class="scroller" style="margin-top:34px">
+    <table>
+      <thead><tr><th>Area</th><th class="num">Score</th><th>Severity</th><th>Effort</th><th>The one sentence</th></tr></thead>
+      <tbody>
+        <tr><td>01 Information architecture</td><td class="num">3/5</td><td><span class="pill p-high">High</span></td><td>M</td><td>No Join link, orphaned events page, two rival calendars.</td></tr>
+        <tr><td>02 Content quality</td><td class="num">2/5</td><td><span class="pill p-crit">Critical</span></td><td>S</td><td>Good cadence, broken accuracy. A cancelled event is still advertised.</td></tr>
+        <tr><td>03 Conversion paths</td><td class="num">2/5</td><td><span class="pill p-crit">Critical</span></td><td>M</td><td>Registration is excellent and hidden. Sponsorship has no page at all.</td></tr>
+        <tr><td>04 Mobile at 390px</td><td class="num">2/5</td><td><span class="pill p-high">High</span></td><td>M</td><td>Technically fine, editorially upside down. Events 3.9 screens down.</td></tr>
+        <tr><td>05 Performance</td><td class="num">2/5</td><td><span class="pill p-high">High</span></td><td>M</td><td>148 files, ~7.2MB, no caching. Stripe loads on the home page.</td></tr>
+        <tr><td>06 Accessibility</td><td class="num">2/5</td><td><span class="pill p-high">High</span></td><td>M</td><td>Empty H1, 22 unnamed links, 33 undersized tap targets.</td></tr>
+        <tr><td>07 SEO and discovery</td><td class="num">2/5</td><td><span class="pill p-med">Medium</span></td><td>M</td><td>No SEO plugin at all. Keep the pca.org subdomain regardless.</td></tr>
+        <tr><td>08 WordPress health</td><td class="num">2/5</td><td><span class="pill p-crit">Critical</span></td><td>M</td><td>Security update pending on the payments plugin. 28 plugins, 15 updates.</td></tr>
+        <tr><td>09 WooCommerce store</td><td class="num">2/5</td><td><span class="pill p-high">High</span></td><td>S</td><td>39 orders in 8 months, 2 products left. Retire it.</td></tr>
+        <tr><td>10 Engagement surface</td><td class="num">3/5</td><td><span class="pill p-med">Medium</span></td><td>M</td><td>Active but off-site. Sponsors get a logo and nothing else.</td></tr>
+        <tr><td>11 Governance and cost</td><td class="num">1/5</td><td><span class="pill p-crit">Critical</span></td><td>S</td><td>One maintainer. Near-zero cash cost. Nothing written down.</td></tr>
+      </tbody>
+      <caption>Overall: 2.1 out of 5. Weighted toward the two Critical items that can be resolved in a single afternoon each.</caption>
+    </table>
+  </div>
+</section>
+
+<section id="bench">
+  <div class="sec-head"><span class="n">04</span><h2>How eight peers compare</h2></div>
+  <p class="lede">Eight comparators, all checked 25 August 2026. Selected to cover the three groups that matter: the regional flagship, the Zone 7 neighbours competing for the same members, large regions that have solved problems at scale, and one club outside PCA chosen purely for design quality.</p>
+
+  <div class="grid2">
+    <div class="call">
+      <h4>Why these eight</h4>
+      <ul class="plain">
+        <li><strong>Golden Gate</strong> is the flagship Northern California region and the obvious quality benchmark.</li>
+        <li><strong>Loma Prieta</strong> and <strong>Diablo</strong> are Zone 7 neighbours. Members and event attendance move between these clubs and Monterey Bay.</li>
+        <li><strong>Potomac</strong> is the largest PCA region, <strong>Maverick</strong> the largest in Texas, and <strong>Rocky Mountain</strong> runs one of the densest event calendars in the club. All three have already hit problems Monterey Bay has not yet reached.</li>
+        <li><strong>Pacific Northwest</strong> is the only one running a managed club platform end to end, which is exactly the Option C question made concrete.</li>
+        <li><strong>BMW CCA Puget Sound</strong> is the non-PCA reference. It has the best-designed and best-built site in the whole set, and it is instructive precisely because Monterey Bay should not copy its architecture.</li>
+      </ul>
+    </div>
+    <div class="call warn">
+      <h4>A cautionary ninth, worth thirty seconds</h4>
+      <p>Chicago Region (pca-chicago.org) is a perfectly reasonable WordPress site whose home page, as served today, still advertises its next events as the Annual Awards Dinner on <strong>10 December 2022</strong> and a Chili Tasting in <strong>February 2023</strong>. The region is demonstrably active; the home page simply stopped being maintained. This is what a good site looks like three years after a redesign with no maintenance routine attached. It is the single strongest argument in this report against spending money on a rebuild.</p>
+    </div>
+  </div>
+
+  <div class="scroller matrix">
+    <table>
+      <thead>
+        <tr>
+          <th>Club</th><th>Platform</th><th>Event registration</th><th>Store</th><th>Newsletter</th><th>Most recent content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background:var(--kelp-tint)">
+          <td><strong>Monterey Bay</strong><br><span class="mono">mby.pca.org</span></td>
+          <td>WordPress, bootscore theme, 28 plugins</td>
+          <td><strong>On-site.</strong> Events Manager Pro with Stripe, PayPal, and cheque. Capacity limits and closing dates.</td>
+          <td>Self-hosted WooCommerce, 2 products</td>
+          <td>None current. 1997 PDF archive.</td>
+          <td>News 19 Aug 2026, photos 12 Aug 2026</td>
+        </tr>
+        <tr>
+          <td>Golden Gate<br><span class="mono">pca-ggr.org</span></td>
+          <td>Squarespace</td>
+          <td>MotorsportReg, off-site. Not linked from the club's own calendar or track pages.</td>
+          <td>AccessInk, third-party apparel shop</td>
+          <td><em>The Nugget</em> as web posts. Archive link broken.</td>
+          <td>25&ndash;28 Jul 2026</td>
+        </tr>
+        <tr>
+          <td>Loma Prieta<br><span class="mono">lprpca.org</span></td>
+          <td>WordPress, Astra + Elementor</td>
+          <td>MotorsportReg for autocross, Google Forms and email for everything else</td>
+          <td>PCA webstore plus a Lands' End business store</td>
+          <td><em>Prieta POST</em>, flipbook, Jul/Aug 2026 current, PDFs back to 2004</td>
+          <td>Home page updated 24 Aug 2026</td>
+        </tr>
+        <tr>
+          <td>Diablo<br><span class="mono">diablo-pca.org</span></td>
+          <td>Squarespace</td>
+          <td>MotorsportReg for track, Eventbrite for social. Links live inside the weekly email.</td>
+          <td>PCA webstore only</td>
+          <td>Weekly Blast, every week without a gap, is also the news archive</td>
+          <td>19 Aug 2026</td>
+        </tr>
+        <tr>
+          <td>Potomac<br><span class="mono">pcapotomac.org</span></td>
+          <td>Joomla, DPCalendar, Community Builder</td>
+          <td>MotorsportReg on a club-branded subdomain. Published registration open time.</td>
+          <td>PCA webstore only</td>
+          <td><em>Der Vorg&auml;nger</em>, PDF, July 2026, 4,000+ circulation</td>
+          <td>Events current; footer still reads &copy; 2024</td>
+        </tr>
+        <tr>
+          <td>Maverick<br><span class="mono">mavpca.org</span></td>
+          <td>Wix</td>
+          <td>ClubRegistration.net, plus some MotorsportReg. Split across two systems.</td>
+          <td>Own Shopify store plus PCA webstore</td>
+          <td><em>Slipstream</em>, Jul/Aug 2026, full volunteer masthead</td>
+          <td>Track dates current; blog dormant since Sep 2025</td>
+        </tr>
+        <tr>
+          <td>Rocky Mountain<br><span class="mono">rmr.pca.org</span></td>
+          <td>WordPress, WPAdverts classifieds</td>
+          <td>MotorsportReg, including membership signup. Payment deferred until days before.</td>
+          <td>PCA webstore only</td>
+          <td><em>HighGear</em>, printed and mailed to 1,800+ households</td>
+          <td>News posts show no dates at all</td>
+        </tr>
+        <tr>
+          <td>Pacific Northwest<br><span class="mono">pnwr.org</span></td>
+          <td>ClubExpress, managed club platform</td>
+          <td>Three systems: native for social, MotorsportReg for track, Scorekeeper for autocross</td>
+          <td>ClubExpress inventory, PCA webstore, and email orders</td>
+          <td><em>Spiel</em>, PDF only, Issue 3 2026</td>
+          <td>Calendar current and dense</td>
+        </tr>
+        <tr>
+          <td>BMW CCA Puget Sound<br><span class="mono">bmw-club-psr.org</span></td>
+          <td>Gatsby and Sanity, a developer-built static site</td>
+          <td>MotorsportReg for everything, with a full club-written event page in front of it</td>
+          <td>Square Online</td>
+          <td><em>Z&uuml;ndfolge</em> as individual web articles with bylines and categories</td>
+          <td>13 Aug 2026</td>
+        </tr>
+      </tbody>
+      <caption>All sites checked 25 August 2026. Performance and accessibility scores for comparators are <strong>not verified</strong>: Google's public testing service rate-limited every request across all nine sites.</caption>
+    </table>
+  </div>
+
+  <h3 style="margin-top:38px">What each does better, and what Monterey Bay already does better</h3>
+  <div class="stack">
+    <div class="call">
+      <h4>Golden Gate</h4>
+      <p><strong>Better:</strong> a genuine brand system carried consistently across every page; a tiered sponsor showcase on the home page rather than a logo strip in the footer; live autocross timing pushed to competitors' phones during the event.</p>
+      <p><strong>Monterey Bay does better:</strong> a member can actually register and pay on the club's own website. Golden Gate's registration system is not linked from its calendar, its track page, or its autocross page.</p>
+    </div>
+    <div class="call">
+      <h4>Loma Prieta</h4>
+      <p><strong>Better:</strong> the home page news list marks events <strong>SOLD OUT</strong>, which is the only capacity signal anywhere in the peer set; the newsletter is current and readable in the browser with archives to 2004; a Lands' End store lets members put the club logo on anything with no inventory risk to the club.</p>
+      <p><strong>Monterey Bay does better:</strong> one events system instead of three. Loma Prieta runs a Google Calendar embed, a curated home page list, and an abandoned blog last updated April 2024, all at once.</p>
+    </div>
+    <div class="call">
+      <h4>Diablo</h4>
+      <p><strong>Better:</strong> a weekly dated post that is simultaneously the email, the news archive, and the place every registration link lives; an email signup form on the site; the clearest explanation of track-day onboarding in the group.</p>
+      <p><strong>Monterey Bay does better:</strong> Diablo's own event pages are calendar embeds with no way to sign up. Monterey Bay's event pages take the booking.</p>
+    </div>
+    <div class="call">
+      <h4>Potomac</h4>
+      <p><strong>Better:</strong> events sit above the fold on the home page, before any welcome copy; members can subscribe to a calendar feed for just the event types they care about; a four-item quick-links strip puts the most common member tasks one click from the home page.</p>
+      <p><strong>Monterey Bay does better:</strong> Potomac's sponsor page is an alphabetical list of plain text links with an explicit non-endorsement disclaimer. Monterey Bay's five sponsors at least get logos and prominence, which is a better foundation to build a real programme on.</p>
+    </div>
+    <div class="call">
+      <h4>Maverick</h4>
+      <p><strong>Better:</strong> by far the best sponsor programme in the set, with three named tiers, logos, full contact details and social links for each sponsor, and home page placement for the top tier; dedicated volunteer signup pages instead of a mailto link; named specialist volunteer roles published so people know what they are signing up for.</p>
+      <p><strong>Monterey Bay does better:</strong> Maverick's blog has been dormant since September 2025 and its headline membership figure is dated March 2024. Monterey Bay publishes news most months.</p>
+    </div>
+    <div class="call">
+      <h4>Rocky Mountain</h4>
+      <p><strong>Better:</strong> a downloadable library for event organisers, with an event chair manual, budget spreadsheets, and a timeline checklist, so knowledge survives volunteer turnover; plain-English explainers for every event type; payment deferred until shortly before the event, which lowers the commitment barrier at signup.</p>
+      <p><strong>Monterey Bay does better:</strong> Rocky Mountain's news posts display no dates at all, and its newsletter index is out of step with the PDFs actually published. Monterey Bay dates everything.</p>
+    </div>
+    <div class="call">
+      <h4>Pacific Northwest</h4>
+      <p><strong>Better:</strong> the best calendar in the set, with month, week, day and list views, keyword search, roughly thirty category filters, and a toggle for "only show events with spaces left"; native member login and member-only pricing with no plugins to maintain; menu labels written in club language, "At the Track" and "In the Garage" rather than CMS page names.</p>
+      <p><strong>Monterey Bay does better:</strong> one registration system rather than three. A Pacific Northwest member has to learn a different signup process depending on whether the event is social, track, or autocross.</p>
+    </div>
+    <div class="call">
+      <h4>BMW CCA Puget Sound</h4>
+      <p><strong>Better:</strong> the event page sells the event before it transacts, with a proper hero image, a narrative, a scannable facts box, a track map, and related events, and only then hands off to register; the newsletter is individual web articles with bylines and categories rather than a PDF, so fifty years of club writing works as searchable content; sponsorship is expressed as a member benefit, with each partner's actual discount printed next to their name.</p>
+      <p><strong>Monterey Bay does better:</strong> a volunteer can update it. Puget Sound's site is a developer-built static site on an ageing framework. If their one technical volunteer leaves, that site cannot be edited by anyone on the board.</p>
+    </div>
+  </div>
+</section>
+
+<section id="patterns">
+  <div class="sec-head"><span class="n">05</span><h2>Patterns worth stealing</h2></div>
+  <p class="lede">Ten moves the strongest sites share, sorted honestly into the ones that are genuinely valuable and the ones that are just expensive.</p>
+
+  <h3 style="margin-top:26px">Worth doing</h3>
+  <ol class="plain">
+    <li><strong>Put the next three events above the fold.</strong> (Potomac) A visitor should see what is happening next before they see a welcome paragraph. This is the single highest-value change on the list and it costs nothing but a decision.</li>
+    <li><strong>Show capacity state on every event.</strong> (Loma Prieta) "5 spaces left" and "SOLD OUT" both create urgency and prevent disappointment. Monterey Bay already stores this data in Events Manager Pro and simply does not display it in the listings.</li>
+    <li><strong>Mark cancelled events as cancelled, visibly, everywhere they appear.</strong> (nobody does this well, which is the opportunity) A struck-through title and a red "Cancelled" badge in the list, the grid, and the home page.</li>
+    <li><strong>One dated weekly or fortnightly post that carries every link.</strong> (Diablo) It becomes the email, the news archive, and the registration hub at the same time. One piece of work, three outputs. This is the highest-leverage editorial habit in the entire peer set.</li>
+    <li><strong>Give sponsors a page with tiers and member discounts.</strong> (Maverick, BMW Puget Sound) Printing each sponsor's actual member discount turns a logo wall into both a retention benefit and a sellable sponsorship product. Monterey Bay currently has no sponsor page at all.</li>
+    <li><strong>Calendar subscription feeds by event type.</strong> (Potomac) A member subscribes once and every tour appears in their own phone calendar forever. Cheap, and it makes the site useful without anyone visiting it.</li>
+    <li><strong>Answer "what do you actually do" before "what is on Tuesday."</strong> (BMW CCA National Capital) A short row of activity tiles, tours, concours, socials, tech sessions, converts a curious Porsche owner far better than a paragraph of history.</li>
+    <li><strong>Write the event page so it sells before it transacts.</strong> (BMW Puget Sound) Photograph, a paragraph of what the day is actually like, a facts box with price and deadline, a map, then the booking form. Monterey Bay has the booking form already and needs the rest.</li>
+    <li><strong>Keep an organiser document library.</strong> (Rocky Mountain) Event chair checklist, budget template, timeline. This is how a volunteer club survives turnover, and it is a folder of documents.</li>
+    <li><strong>Publish role email addresses, not personal ones.</strong> (most of the set) president@, membership@, sponsors@, webmaster@. It protects individuals from spam and makes every handover trivial.</li>
+  </ol>
+
+  <h3 style="margin-top:32px">Expensive, and not worth it here</h3>
+  <ul class="plain">
+    <li><strong>A native mobile app.</strong> (Maverick) It duplicates the website, needs two app store accounts, and needs a developer forever. A well-built mobile web page does the same job.</li>
+    <li><strong>A gated members' forum.</strong> (Maverick) Club forums almost always go quiet, and the club already has a Facebook presence doing this work for free.</li>
+    <li><strong>A developer-built static site.</strong> (BMW Puget Sound) Beautiful, fast, and unmaintainable by a board. For a club with one technical volunteer this is a serious risk dressed as an upgrade.</li>
+    <li><strong>Live event timing.</strong> (Golden Gate, Loma Prieta) Only pays off if the club runs its own autocross programme. Monterey Bay's autocross runs through the Zone 7 series.</li>
+    <li><strong>A printed newsletter.</strong> (Rocky Mountain, 1,800 households) Real money, real deadlines, real volunteer burnout.</li>
+    <li><strong>Custom classifieds.</strong> (Rocky Mountain) PCA's national Mart already exists and is already linked.</li>
+  </ul>
+</section>
+
+<section id="options">
+  <div class="sec-head"><span class="n">06</span><h2>Three options, honestly costed</h2></div>
+  <p class="lede">All figures are USD ranges. One-time costs assume paid help where a volunteer cannot reasonably do the work; where the club has a capable volunteer, that line goes to zero and the cost becomes hours. Annual figures exclude hosting, which PCA National provides free in every option except C.</p>
+
+  <div class="stack-lg">
+
+    <div class="opt pick">
+      <div class="hd">
+        <div><span class="eyebrow">Option A</span><h3 style="margin-top:4px">Optimise in place</h3></div>
+        <span class="pill p-good">Recommended</span>
+      </div>
+      <div class="bd">
+        <p>Keep WordPress, the bootscore theme, the pca.org address, and the Events Manager Pro booking system. Rebuild the home page layout inside the existing theme, cut the plugin count roughly in half, fix the content defects, add caching and search optimisation, retire the shop, and put a maintenance routine in place.</p>
+        <dl class="kv">
+          <dt>One-time</dt><dd><strong>$0 to $1,500.</strong> Zero if volunteers do it. The paid portion, if any, is a designer or developer for the home page template, the accessibility pass, and dequeuing the site-wide scripts, roughly 12 to 20 hours.</dd>
+          <dt>Annual</dt><dd><strong>$100 to $250.</strong> Card processing fees around $100, plus Events Manager Pro licence renewal and one optional caching or image plugin. Hosting stays $0.</dd>
+          <dt>Volunteer skill</dt><dd>Unchanged. Anyone who can already publish a WordPress post can keep running it. No new tool to learn.</dd>
+          <dt>Migration risk</dt><dd><strong>Very low.</strong> Nothing moves. No content migration, no URL changes, no downtime, no re-testing of payments.</dd>
+          <dt>Fixes</dt><dd>Every Critical and High finding in this report except the theme's design ceiling.</dd>
+          <dt>Does not fix</dt><dd>The site will still look like a competent Bootstrap theme, not like a designed brand. No design system, ordinary typography. See the recommendation for why we accept that.</dd>
+          <dt>Time to launch</dt><dd><strong>30 to 90 days, incrementally.</strong> Nothing waits for a launch date, and the urgent items land in week one.</dd>
+        </dl>
+      </div>
+    </div>
+
+    <div class="opt">
+      <div class="hd">
+        <div><span class="eyebrow">Option B</span><h3 style="margin-top:4px">Rebuild on modern WordPress</h3></div>
+        <span class="pill p-plain">Viable, premature</span>
+      </div>
+      <div class="bd">
+        <p>Stay on WordPress and stay on PCA hosting, but replace the theme with either a block theme or one well-supported lightweight theme, rebuild the page templates and navigation from scratch, curate the plugin set down to essentials, and carry Events Manager Pro across.</p>
+        <dl class="kv">
+          <dt>One-time</dt><dd><strong>$3,500 to $9,000</strong> contracted, or roughly 80 to 150 volunteer hours. The range depends on whether the club buys a design or adapts a commercial theme.</dd>
+          <dt>Annual</dt><dd><strong>$200 to $350.</strong> Card fees, theme licence, plugin licences. Hosting stays $0.</dd>
+          <dt>Volunteer skill</dt><dd>Higher during the build, and different afterwards. If the new theme uses the block editor, the one person who currently maintains the site has to relearn how to lay out a page. That is a real cost for a club with a single maintainer.</dd>
+          <dt>Migration risk</dt><dd><strong>Medium to high.</strong> The risky part is not the 215 news posts, it is Events Manager Pro's booking templates and payment configuration. That is the one thing on this site that works better than every peer, and a rebuild puts it on the table.</dd>
+          <dt>Fixes</dt><dd>Everything A fixes, plus a proper design system and full template control.</dd>
+          <dt>Does not fix</dt><dd>The single-maintainer problem, which gets worse for three to six months. PCA's hosting constraints, which are FTP access only with no command line. And the underlying issue, which is that nobody has a maintenance habit.</dd>
+          <dt>Time to launch</dt><dd><strong>3 to 6 months</strong>, with a cutover date and a testing window.</dd>
+        </dl>
+      </div>
+    </div>
+
+    <div class="opt">
+      <div class="hd">
+        <div><span class="eyebrow">Option C</span><h3 style="margin-top:4px">Replatform</h3></div>
+        <span class="pill p-plain">Not advised</span>
+      </div>
+      <div class="bd">
+        <p>Three real variants, all of which mean leaving WordPress.</p>
+        <ul class="plain" style="margin-bottom:16px">
+          <li><strong>C1, a managed club platform</strong> such as ClubExpress, the way Pacific Northwest runs. Membership, calendar, registration, store, and member login all in one subscription.</li>
+          <li><strong>C2, Squarespace plus hosted services</strong>, the way Golden Gate and Diablo run. Squarespace for pages, MotorsportReg or Eventbrite for registration, the PCA webstore for merchandise.</li>
+          <li><strong>C3, a modern static or hybrid build</strong> with hosted services, the way BMW Puget Sound runs.</li>
+        </ul>
+        <dl class="kv">
+          <dt>One-time</dt><dd><strong>$2,000 to $12,000.</strong> C1 is cheapest to stand up, C3 the most expensive.</dd>
+          <dt>Annual</dt><dd><strong>$0 to $1,200+.</strong> C1 and C2 both carry a subscription and both mean giving up PCA National's free hosting. ClubExpress and Squarespace pricing were <strong>not verified</strong> for this report and must be quoted directly before any decision. C3 can host for $0 on Cloudflare Pages.</dd>
+          <dt>Volunteer skill</dt><dd>C1 low, which is its entire selling point. C2 low. C3 developer only, permanently.</dd>
+          <dt>Migration risk</dt><dd><strong>High in all three.</strong> C2 and C3 both destroy the on-site booking system and force a move to MotorsportReg or Eventbrite, which means every registration leaves the club's website. C1 replaces it with ClubExpress's own system, which is capable but is a full re-training exercise for members as well as volunteers.</dd>
+          <dt>Fixes</dt><dd>C1 genuinely does fix the maintenance problem, because the vendor maintains the platform. That is not nothing.</dd>
+          <dt>Does not fix</dt><dd>It creates a bill where there was none, gives up inherited search authority, and trades a known system for vendor dependence.</dd>
+          <dt>Time to launch</dt><dd><strong>4 to 9 months.</strong></dd>
+        </dl>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="rec">
+  <div class="sec-head"><span class="n">07</span><h2>Recommendation</h2></div>
+
+  <div class="call good" style="margin-top:22px">
+    <h4>Take Option A. Do not rebuild and do not move.</h4>
+    <p>Spend nothing to a few hundred dollars, work through the ninety-day list, and put a maintenance routine in place. Revisit Option B in two years <em>only if</em> the club has by then proved it can keep three people publishing to the site. If it cannot, a rebuild will decay exactly the way Chicago Region's did.</p>
+  </div>
+
+  <h3 style="margin-top:32px">Why, in five arguments</h3>
+  <ol class="plain">
+    <li><strong>There is no annual bill to reduce, only one to create.</strong> PCA National hosts the site free. Options B and C cannot save money because the money is not being spent. Every replatforming case study that starts with "we cut hosting costs" does not apply here.</li>
+    <li><strong>Monterey Bay already has the best event registration in the peer group and both alternatives put it at risk.</strong> Eight comparable clubs, including the flagship, all send members off-site to register. This club does not. That is a competitive advantage in filling events, which is priority one in the brief. Rebuilding risks it. Replatforming to Squarespace or a static site destroys it outright.</li>
+    <li><strong>Nine of the eleven audit failures are configuration and editorial, not architecture.</strong> A cancelled event still showing as upcoming, a placeholder terms page, a missing sponsor page, three security plugins fighting each other, no caching. New paint does not change any of that. Chicago Region proves the point: a perfectly good WordPress site advertising December 2022 events three and a half years later.</li>
+    <li><strong>The real risk is a single maintainer, and a rebuild makes it worse before it makes it better.</strong> For three to six months during a rebuild, the number of people who understand the site goes down, not up. Adding a second administrator and writing a one-page runbook fixes the actual risk this week, for nothing.</li>
+    <li><strong>The club's constraint is volunteer attention, and Option A is the only one that spends it on outcomes.</strong> Every hour spent choosing a theme is an hour not spent writing the weekly post that fills the next tour.</li>
+  </ol>
+
+  <div class="call warn" style="margin-top:26px">
+    <h4>Where we are trading polish for sustainability, said plainly</h4>
+    <p>Option A will not produce a site that looks like BMW Puget Sound's. The typography will stay ordinary. There will be no considered brand system, no bespoke event page layout, no beautiful photography treatment. A designer looking at the result in six months will call it a tidy Bootstrap site, and they will be right.</p>
+    <p>We are choosing that deliberately. A striking site that one person can maintain is worth less to this club than a plain site that three people can.</p>
+    <p><a href="prototype.html"><strong>The working prototype</strong></a> shows how far the presentation can be pushed <em>within</em> Option A, using the theme and tools already installed. Eleven screens, real content from this site, and a build note mapping each screen to a WordPress template. It is deliberately built to be achievable, not to be impressive. On it, the next event sits on the first screen at 390, 768 and 1440 pixels wide, against 3.9 screens of scrolling today.</p>
+  </div>
+
+  <div class="call" style="margin-top:16px">
+    <h4>On the domain name</h4>
+    <p>PCA National permits regions to use their own domain. Four good names were unregistered when checked on 25 August 2026: <span class="mono">montereypca.com</span>, <span class="mono">montereybaypca.com</span>, <span class="mono">mbrpca.com</span>, and <span class="mono">mbypca.com</span>. If the board wants one, <strong>montereypca.com</strong> is the strongest: short, sayable on a phone call, and unambiguous.</p>
+    <p>Register it for roughly $12 a year and point it at the existing site so it works in print and on flyers. <strong>Do not migrate the site to it.</strong> Moving away from mby.pca.org gives up inherited search authority and free hosting in exchange for a nicer address, which is a bad trade at this club's size. Confirm any redirect arrangement with the PCA Region Website Chair first, since PCA controls the DNS for the current address.</p>
+  </div>
+</section>
+
+<section id="store">
+  <div class="sec-head"><span class="n">08</span><h2>The store decision</h2></div>
+  <p class="lede">This is a standalone recommendation, separable from everything else in the report.</p>
+
+  <div class="call crit" style="margin-top:22px">
+    <h4>Recommendation: retire WooCommerce. Split the store in two.</h4>
+    <p><strong>Clothing and general merchandise</strong> move to a PCA National region webstore at pcawebstore.org. National prints on demand in Columbia, Maryland, ships direct, and carries all the inventory. The region holds no stock, fronts no money, and does no fulfilment. Seventy-seven regions already have one, including Golden Gate, Loma Prieta, Diablo, Potomac, Maverick, and Rocky Mountain. <strong>Monterey Bay does not.</strong> Email <span class="mono">webstore@national.pca.org</span> to open one.</p>
+    <p><strong>The name badge</strong>, which is club-specific and nobody else can make, moves to a single Stripe payment link with a "Name as it should appear" field built in. Stripe hosts the page, takes the same fee it takes today, and no plugin is required.</p>
+    <p><strong>The umbrella</strong> is discontinued, or moved to the webstore if National carries an equivalent.</p>
+  </div>
+
+  <h3 style="margin-top:30px">The break-even, and why there is not one</h3>
+  <p class="lede" style="margin-top:10px">The usual question is "how many units a year justify a store." That question does not apply here, and it is worth being precise about why.</p>
+
+  <div class="scroller">
+    <table>
+      <thead><tr><th>Per year</th><th class="num">25 items</th><th class="num">58 items<br>(current rate)</th><th class="num">100 items</th><th class="num">250 items</th></tr></thead>
+      <tbody>
+        <tr><td>Gross margin captured, WooCommerce</td><td class="num">$175</td><td class="num">$406</td><td class="num">$700</td><td class="num">$1,750</td></tr>
+        <tr><td>Gross margin captured, Stripe link + PCA webstore</td><td class="num">$175</td><td class="num">$406</td><td class="num">$700</td><td class="num">$1,750</td></tr>
+        <tr><td>Card processing fees, either way</td><td class="num">&minus;$44</td><td class="num">&minus;$101</td><td class="num">&minus;$174</td><td class="num">&minus;$435</td></tr>
+        <tr><td>Volunteer hours, WooCommerce</td><td class="num">~24 hrs</td><td class="num">~24 hrs</td><td class="num">~30 hrs</td><td class="num">~45 hrs</td></tr>
+        <tr><td>Volunteer hours, Stripe link + webstore</td><td class="num">~3 hrs</td><td class="num">~3 hrs</td><td class="num">~4 hrs</td><td class="num">~6 hrs</td></tr>
+        <tr style="background:var(--kelp-tint)"><td><strong>Net advantage of keeping WooCommerce</strong></td><td class="num"><strong>&minus;21 hrs</strong></td><td class="num"><strong>&minus;21 hrs</strong></td><td class="num"><strong>&minus;26 hrs</strong></td><td class="num"><strong>&minus;39 hrs</strong></td></tr>
+      </tbody>
+      <caption>Margin assumes $7 net per item, which is <strong>unverified</strong>: the club's actual cost per badge and umbrella was not available. The point of the table does not depend on that figure, because the same margin appears in both rows. Card fees are Stripe's published 2.9% + $0.30, identical on both paths.</caption>
+    </table>
+  </div>
+
+  <div class="stack" style="margin-top:24px">
+    <div class="call">
+      <h4>Read the bottom row, not the top</h4>
+      <p>The margin line is identical on both paths, because a Stripe payment link charges the same fee and the PCA webstore does the printing either way. So there is no volume at which WooCommerce starts to pay for itself, because <strong>WooCommerce is not producing any revenue the alternative does not also produce.</strong> It is producing about 21 extra volunteer hours a year, a checkout page the club is responsible for securing, and a set of shopping-cart scripts that load on every page of the site for every visitor.</p>
+      <p>WooCommerce would begin to earn its keep at roughly <strong>8 to 10 products with sizes and colours, plus about 250 orders a year</strong>, which is around five orders a week, because that is the point at which a real cart, stock levels, and member pricing save more time than they cost. Monterey Bay is running about one order a week, with two products, one of which is on backorder.</p>
+    </div>
+
+    <div class="call warn">
+      <h4>Why not print-on-demand, which is otherwise the obvious answer</h4>
+      <p>Printful, Bonfire, and similar services are cheap, good, and would work well for most clubs. They are the wrong answer here for a trademark reason rather than a commercial one.</p>
+      <p>PCA's Intellectual Property Policy grants each region a licence to use PCA marks "in conjunction with its operation and activities and for no other purpose whatsoever," and states a region may not "assign or sublicense any of the Trademarks... unless such permission is granted by PCA in writing." Separately, the Porsche crest and the word Porsche are registered trademarks of Dr. Ing. h.c. F. Porsche AG, <strong>not</strong> of PCA, so PCA is not even the ultimate owner of the most valuable mark on the merchandise.</p>
+      <p>Sending club artwork to a commercial print-on-demand vendor is, on the face of it, exactly the sublicensing the policy restricts. <strong>The PCA webstore sidesteps the entire question, because PCA is the printer.</strong> That is a better argument for the webstore than any margin comparison, and it holds regardless of what National's revenue share turns out to be.</p>
+    </div>
+
+    <div class="call">
+      <h4>The one number to go and get</h4>
+      <p>What a region actually earns from a PCA webstore is <strong>not published anywhere</strong>. We checked the webstore, six region pages that link to it, and PCA's own documents. Email <span class="mono">webstore@national.pca.org</span> and ask three questions: what does the region earn per item, is there any setup cost or minimum, and how are region logos supplied and approved. If the answer is "nothing," the apparel decision is still right, because the alternative today is no apparel at all.</p>
+    </div>
+  </div>
+</section>
+
+<section id="roadmap">
+  <div class="sec-head"><span class="n">09</span><h2>The 30 / 60 / 90 plan</h2></div>
+  <p class="lede">Ordered by return on volunteer hour, not by how impressive it looks. Owner tags: <span class="tag">Volunteer</span> anyone comfortable in WordPress, <span class="tag">Designer</span> someone with layout judgement, <span class="tag">Developer</span> someone who can edit theme files.</p>
+
+  <h3 style="margin-top:30px">First 30 days: stop the bleeding</h3>
+  <p style="margin-top:8px;color:var(--ink-2)">Nothing here needs a budget, a meeting, or a designer. Most of it is one evening in total.</p>
+  <div class="scroller">
+    <table>
+      <thead><tr><th class="num">#</th><th>Action</th><th>Owner</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td class="num">1</td><td><strong>Apply the security update on the bookings and payments plugin first, then the other 14 pending updates.</strong> Take a backup before starting.</td><td><span class="tag">Volunteer</span></td><td>It is the software handling members' card payments and it has a security fix waiting.</td></tr>
+        <tr><td class="num">2</td><td><strong>Mark Night at the Races cancelled everywhere it appears</strong>, or unpublish it. Strike the title, add a Cancelled badge, keep the page live with the explanation.</td><td><span class="tag">Volunteer</span></td><td>Right now three surfaces advertise an event that is not happening.</td></tr>
+        <tr><td class="num">3</td><td><strong>Give a second person full administrator access</strong>, and write a one-page note on how to publish an event.</td><td><span class="tag">Volunteer</span></td><td>Single biggest risk on the whole list. Costs an afternoon.</td></tr>
+        <tr><td class="num">4</td><td><strong>Deactivate and delete the three diagnostic and migration tools left running.</strong></td><td><span class="tag">Volunteer</span></td><td>Diagnostic tools left running on a live site. Three fewer things to keep updated.</td></tr>
+        <tr><td class="num">5</td><td><strong>Choose one security plugin and turn the others off.</strong></td><td><span class="tag">Volunteer</span></td><td>Two firewalls on one site cause intermittent faults nobody can diagnose.</td></tr>
+        <tr><td class="num">6</td><td><strong>Write the terms page.</strong> Shipping or pickup, refunds, payment methods, who to contact. Six sentences is enough.</td><td><span class="tag">Volunteer</span></td><td>It currently reads "Add your terms &amp; conditions here" on a site taking cards.</td></tr>
+        <tr><td class="num">7</td><td><strong>Replace personal contact details with role addresses.</strong> president@, membership@, sponsors@, webmaster@.</td><td><span class="tag">Volunteer</span></td><td>Protects the individual and makes every future handover trivial.</td></tr>
+        <tr><td class="num">8</td><td><strong>Fulfil the 11 open orders,</strong> or email those members with a realistic date.</td><td><span class="tag">Volunteer</span></td><td>Some have been open since 20 July.</td></tr>
+        <tr><td class="num">9</td><td><strong>Fix the "Moneterey" typo</strong> on the name badge product.</td><td><span class="tag">Volunteer</span></td><td>Thirty seconds.</td></tr>
+        <tr><td class="num">10</td><td><strong>Install one caching plugin</strong> and confirm the backup plugin is actually producing restorable backups somewhere off the server.</td><td><span class="tag">Volunteer</span></td><td>Largest single speed win available, and an untested backup is not a backup.</td></tr>
+        <tr><td class="num">11</td><td><strong>Email the PCA Region Website Chair</strong> and confirm what the hosting actually provides, what the current server stack is, and what happens if the site breaks.</td><td><span class="tag">Volunteer</span></td><td>National's published page describes a stack that is years out of date. Know what you are actually standing on.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="margin-top:34px">By 60 days: fix what visitors see</h3>
+  <div class="scroller">
+    <table>
+      <thead><tr><th class="num">#</th><th>Action</th><th>Owner</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td class="num">12</td><td><strong>Rebuild the top of the home page.</strong> Next three events first, with dates, prices, and spaces remaining. Then a short activity row. Welcome copy moves down or into About.</td><td><span class="tag">Designer</span> <span class="tag">Volunteer</span></td><td>Currently 3.9 phone screens of scrolling before an event appears. This is the highest-value change in the report.</td></tr>
+        <tr><td class="num">13</td><td><strong>Add a Join item to the main menu</strong>, pointing at a short "Join the Monterey Bay Region" page that explains what members here actually get, then links to PCA National. Use one join URL, not two.</td><td><span class="tag">Volunteer</span></td><td>Priority three in the brief currently has no navigation surface at all.</td></tr>
+        <tr><td class="num">14</td><td><strong>Build a sponsor page.</strong> Three tiers, each sponsor's logo, a sentence about them, and any member discount they offer. Add a "Support the region" section with a contact address.</td><td><span class="tag">Volunteer</span></td><td>There is no sponsor page today. This is the clearest unclaimed revenue on the site.</td></tr>
+        <tr><td class="num">15</td><td><strong>Merge the two calendar surfaces.</strong> Pick either the month grid or the list as the primary, put it in the menu, and make the other a view toggle on the same page.</td><td><span class="tag">Volunteer</span></td><td>Today the events list is not reachable from the menu at all.</td></tr>
+        <tr><td class="num">16</td><td><strong>Show capacity and status in event listings.</strong> "5 spaces left", "Sold out", "Cancelled". The data is already in Events Manager Pro.</td><td><span class="tag">Developer</span></td><td>Creates urgency, prevents disappointment, and makes a repeat of item 2 impossible.</td></tr>
+        <tr><td class="num">17</td><td><strong>Fix the accessibility basics:</strong> remove the empty H1, give the calendar page an H1, name the 22 unnamed links, raise tap targets to 24 pixels.</td><td><span class="tag">Developer</span></td><td>Do it during the home page work, not as a separate project.</td></tr>
+        <tr><td class="num">18</td><td><strong>Install an SEO plugin</strong> and write page titles and descriptions for the twelve pages that matter. Confirm Events Manager is publishing Event structured data.</td><td><span class="tag">Volunteer</span></td><td>There is no SEO plugin at all today.</td></tr>
+        <tr><td class="num">19</td><td><strong>Replace the banner image</strong> with one at least 2,400 pixels wide, and turn on modern image formats.</td><td><span class="tag">Volunteer</span></td><td>The current banner is 1,200 pixels being stretched to 1,470 and further on high-resolution screens.</td></tr>
+        <tr><td class="num">20</td><td><strong>Rebuild the board page:</strong> role email for every position, committee chairs included, photographs if people are willing. Move the list of past presidents to the History page.</td><td><span class="tag">Volunteer</span></td><td>The board page currently offers no way to contact the board.</td></tr>
+        <tr><td class="num">21</td><td><strong>Open the PCA region webstore.</strong> Email webstore@national.pca.org.</td><td><span class="tag">Volunteer</span></td><td>Zero cost, zero inventory, zero trademark exposure, and 77 other regions already have one.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="margin-top:34px">By 90 days: make it sustainable</h3>
+  <div class="scroller">
+    <table>
+      <thead><tr><th class="num">#</th><th>Action</th><th>Owner</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td class="num">22</td><td><strong>Retire WooCommerce.</strong> Move the badge to a Stripe payment link, discontinue the umbrella, remove WooCommerce, the Stripe gateway, WooCommerce Tax, and Store Vacation.</td><td><span class="tag">Volunteer</span></td><td>Four fewer plugins, no checkout to secure, and the cart scripts stop loading on every page. See section 08.</td></tr>
+        <tr><td class="num">23</td><td><strong>Prune the plugin list from 28 toward 15.</strong> Remove overlaps, remove anything doing nothing, keep the Events Manager family untouched.</td><td><span class="tag">Volunteer</span></td><td>Every plugin is a thing to update, a thing that can break, and weight on every page.</td></tr>
+        <tr><td class="num">24</td><td><strong>Stop loading calendar, gallery, and lightbox scripts on pages that do not use them.</strong></td><td><span class="tag">Developer</span></td><td>The largest remaining speed win after caching. Roughly a day of work.</td></tr>
+        <tr><td class="num">25</td><td><strong>Start a fortnightly dated post</strong> that lists what is coming up with links, and send it through the PCA Emailer. One piece of writing, three uses.</td><td><span class="tag">Volunteer</span></td><td>The single highest-leverage habit in the whole peer set. Diablo has done it weekly without a gap all year.</td></tr>
+        <tr><td class="num">26</td><td><strong>Publish calendar subscription links</strong> so members can add region events to their own phone calendar.</td><td><span class="tag">Volunteer</span></td><td>Makes the site useful to a member who never visits it again.</td></tr>
+        <tr><td class="num">27</td><td><strong>Write the event page template:</strong> photograph, what the day is actually like, facts box with price and deadline, map, then the booking form.</td><td><span class="tag">Designer</span></td><td>The booking form already works. It needs something in front of it that sells the day.</td></tr>
+        <tr><td class="num">28</td><td><strong>Set the maintenance routine in writing:</strong> updates on the first Monday, a content check each quarter, a restore test twice a year, two named administrators.</td><td><span class="tag">Volunteer</span></td><td>This is what prevents the club being back here in three years. See Chicago Region.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="appendix">
+  <div class="sec-head"><span class="n">10</span><h2>Sources, assumptions, open questions</h2></div>
+
+  <h3 style="margin-top:26px">Assumptions</h3>
+  <ul class="plain">
+    <li><strong>Hosting is provided free by PCA National.</strong> Confirmed by the board, consistent with PCA's published hosting page. Every cost figure in this report depends on it.</li>
+    <li><strong>Merchandise volume is 25 to 100 items a year.</strong> Confirmed by the board and corroborated by the order data, which shows 39 orders in eight months.</li>
+    <li><strong>Effectively one person maintains the site.</strong> Confirmed by the board. Two names appear as post authors.</li>
+    <li><strong>No one-time budget has been agreed.</strong> All three options are therefore priced with a volunteer-only path as well as a paid path.</li>
+    <li><strong>Net margin of $7 per item</strong> is assumed in the store table. The club's actual cost per badge was not available. The conclusion does not depend on the figure.</li>
+    <li><strong>Volunteer time valued at nothing in cash</strong>, but treated as the scarcest resource in every recommendation.</li>
+    <li><strong>Traffic and analytics were not reviewed.</strong> MonsterInsights is installed, so Google Analytics data exists, but we did not access it. No traffic figure appears anywhere in this report.</li>
+  </ul>
+
+  <h3 style="margin-top:30px">Explicitly not verified</h3>
+  <ul class="plain">
+    <li><strong>Core Web Vitals and Lighthouse scores</strong>, for mby.pca.org and for all eight comparators. Google's public service rate-limited every attempt over two days and an independent run was blocked by a network proxy. No score is quoted anywhere.</li>
+    <li><strong>Colour contrast ratios, keyboard tab order, and focus visibility.</strong> Not systematically tested.</li>
+    <li><strong>Whether Events Manager is emitting Event structured data.</strong></li>
+    <li><strong>Region economics of the PCA webstore.</strong> Margin, royalty, setup cost, and minimums are published nowhere.</li>
+    <li><strong>Current price of an Events Manager Pro licence,</strong> and of Envira Gallery if licensed.</li>
+    <li><strong>ClubRegistration.net pricing,</strong> which the vendor does not publish, and current ClubExpress and Squarespace pricing.</li>
+    <li><strong>PCA's actual current server stack.</strong> The published hosting page describes Windows Server 2008, CentOS 6, PHP 5.3 and MySQL 5.5, which is contradicted by the site itself running PHP 8.4. The page is stale; the real stack is unknown.</li>
+    <li><strong>Whether BackUpWordPress is still maintained,</strong> and where backups are stored.</li>
+    <li><strong>Time for a volunteer to publish a new event.</strong> Not measurable without observing it.</li>
+    <li><strong>Region Procedures Manual sections 5.2 and 5.3</strong> (Region Website, On-line Event Registration), pages 128 to 133. Repeated extraction attempts on the PDF failed. Someone should read those six pages directly before the board votes.</li>
+  </ul>
+
+  <h3 style="margin-top:30px">Open questions for the board</h3>
+  <ol class="plain">
+    <li>Does the region run any track or Driver Education event? We found none published.</li>
+    <li>Who besides Richard Chew should hold administrator access, and who is the backup?</li>
+    <li>Is there an existing sponsor rate card, even informally, that a sponsor page should reflect?</li>
+    <li>What does the region actually pay per name badge and umbrella?</li>
+    <li>Does the board want a memorable domain name for print and word of mouth, given that the site itself should stay where it is?</li>
+    <li>Has anyone confirmed a backup can actually be restored?</li>
+  </ol>
+
+  <h3 style="margin-top:30px">Sources</h3>
+  <p style="color:var(--ink-2);font-size:.9rem;margin-bottom:14px">All checked 25 or 26 August 2026 unless noted. Admin-side figures were read from the site's own WordPress and WooCommerce screens using the board's existing logged-in access.</p>
+  <div class="srcs">
+    <p><b>Subject site.</b> <span class="mono">mby.pca.org</span> home, /about-us/, /calendar/, /events/, /news/, /photos/, /history/, /montereyan/, /club-leadership/, /contact/, /shop/, /product/name-badge/, /terms-conditions/, /robots.txt, /wp-sitemap.xml, /wp-json/, /events/2026-night-at-the-races/, /events/2026-return-to-elkhorn-slough/, /events/2026-oktoberfest/</p>
+    <p><b>Subject site, admin.</b> Plugins screen, Updates screen, WooCommerce Orders screen (all pages, sorted ascending and descending), admin bar version indicators.</p>
+    <p><b>Live browser measurement.</b> Home page and calendar page, rendered in Chrome, measured for resource counts, script and stylesheet inventory, image dimensions, heading structure, link accessible names, tap target sizes, and layout at a 390 pixel viewport.</p>
+    <p><b>Comparators.</b> <span class="mono">pca-ggr.org</span>, <span class="mono">lprpca.org</span>, <span class="mono">diablo-pca.org</span>, <span class="mono">pcapotomac.org</span>, <span class="mono">mavpca.org</span>, <span class="mono">rmr.pca.org</span>, <span class="mono">pnwr.org</span> and <span class="mono">pnwr.clubexpress.com</span>, <span class="mono">bmw-club-psr.org</span>, <span class="mono">pca-chicago.org</span>, plus their robots, sitemap and REST endpoints where reachable, and their MotorsportReg and ClubRegistration.net organiser pages.</p>
+    <p><b>PCA National.</b> <span class="mono">pca.org/website-hosting</span>, <span class="mono">pca.org/connect/website-committee</span>, <span class="mono">regionwp.pca.org</span>, PCA Intellectual Property Policy approved 20 February 2017, <span class="mono">pca.org/terms-of-service</span>, Region Procedures Manual 2026, <span class="mono">pcawebstore.org</span> and its region index and region storefront pages, <span class="mono">zone7.pca.org/regions/</span></p>
+    <p><b>Vendors.</b> MotorsportReg service FAQ and signup pages, Eventbrite organiser pricing, ClubRegistration.net, Events Manager on wordpress.org and wp-events-plugin.com, Printful pricing, Bonfire pricing and fees, Custom Ink Fundraising help pages, SquadLocker fundraising, Spring FAQ, and published 2026 pricing pages for SiteGround, DreamHost, Cloudways, WP Engine, Kinsta, Pressable, Cloudflare Pages and Netlify.</p>
+    <p><b>Domain availability.</b> Verisign RDAP registry lookups for montereypca.com, montereybaypca.com, mbrpca.com and mbypca.com, all returning not-found on 25 August 2026.</p>
+  </div>
+</section>
+
+<footer class="foot">
+  <p>Prepared 26 August 2026 for the Monterey Bay Region board. Findings reflect the site as it stood on 25 and 26 August 2026 and will drift as the site changes. Figures marked not verified were not measured and should not be quoted as if they were.</p>
+</footer>
+
+  </main>
+</div>
+</body>
+</html>
