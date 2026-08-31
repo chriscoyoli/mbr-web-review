@@ -250,7 +250,7 @@ a.logoframe:hover{border-color:var(--amber)}
 .ecard .facts{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:.83rem;color:var(--ink-2)}
 .ecard .facts b{font-weight:600;color:var(--ink)}
 @container site (min-width:760px){
-  .ecard{grid-template-columns:auto 210px 1fr}
+  .ecard.has-thumb{grid-template-columns:auto 210px 1fr}
   .ecard .thumb{border-right:1px solid var(--line)}
 }
 .ecard .thumb{display:none}
@@ -304,6 +304,23 @@ a.logoframe:hover{border-color:var(--amber)}
 .checkrow{display:flex;gap:11px;align-items:flex-start;font-size:.86rem;color:var(--ink-2)}
 .checkrow input{width:22px;height:22px;flex:none;margin-top:2px;accent-color:var(--amber)}
 
+
+/* monogram avatars for board members whose photograph is not yet supplied */
+.mono{width:84px;height:84px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;
+  background:var(--sea);color:var(--on-sea);font-family:"Source Serif 4",Georgia,serif;font-weight:600;
+  font-size:1.7rem;letter-spacing:.03em;line-height:1}
+.boardcard{display:flex;gap:16px;align-items:center}
+/* what the national webstore carries, as information rather than a stock photograph */
+.catpanel{aspect-ratio:16/9;background:var(--sea);color:var(--on-sea);display:grid;
+  grid-template-columns:1fr 1fr;align-content:center;gap:2px 0;padding:20px 24px;border-radius:var(--r)}
+.catpanel span{font-size:.88rem;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.13);display:flex;align-items:center;gap:9px}
+.catpanel span::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--amber-hi);flex:none}
+.catpanel span:nth-last-child(-n+2){border-bottom:0}
+/* directions block in place of a map image */
+.wayfind{display:grid;gap:0}
+.wayfind dl{display:grid;grid-template-columns:auto 1fr;gap:10px 16px;margin:0;font-size:.9rem}
+.wayfind dt{color:var(--ink-3);font-weight:600;white-space:nowrap}
+.wayfind dd{margin:0;color:var(--ink-2)}
 /* ============ MISC ============ */
 .pill-lite{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
   background:var(--amber-soft);color:var(--amber);padding:4px 10px;border-radius:100px}
@@ -481,7 +498,7 @@ document.addEventListener('error', function(e){
       </div>
       <div class="stack">
 
-        <article class="ecard few">
+        <article class="ecard few has-thumb">
           <div class="rail" aria-hidden="true"></div>
           <div class="thumb photo r-card"><img src="https://mby.pca.org/wp-content/uploads/2025-05-18-elkhorn-slough-reserve-768x512.jpg" alt="Members' cars parked at Elkhorn Slough Reserve" decoding="async" loading="lazy"></div>
           <div class="in">
@@ -514,7 +531,7 @@ document.addEventListener('error', function(e){
           </div>
         </article>
 
-        <article class="ecard">
+        <article class="ecard has-thumb">
           <div class="rail" aria-hidden="true"></div>
           <div class="thumb photo r-card"><img src="https://mby.pca.org/wp-content/uploads/2025-10-18-oktoberfest-icon.jpg" alt="Members gathered at a previous Oktoberfest" decoding="async" loading="lazy"></div>
           <div class="in">
@@ -644,7 +661,7 @@ document.addEventListener('error', function(e){
           </div>
         </article>
 
-        <article class="ecard few">
+        <article class="ecard few has-thumb">
           <div class="rail" aria-hidden="true"></div>
           <div class="thumb photo r-card"><img src="https://mby.pca.org/wp-content/uploads/2024-elkhorn-slough-vega.jpg" alt="Members on the water at Elkhorn Slough" decoding="async" loading="lazy"><span class="credit">Vega Roecker</span></div>
           <div class="in">
@@ -666,7 +683,7 @@ document.addEventListener('error', function(e){
           </div>
         </article>
 
-        <article class="ecard">
+        <article class="ecard has-thumb">
           <div class="rail" aria-hidden="true"></div>
           <div class="thumb photo r-card"><img src="https://mby.pca.org/wp-content/uploads/2024-09-28-oktoberfest-vega.jpg" alt="Cars and members at a previous Oktoberfest" decoding="async" loading="lazy"><span class="credit">Vega Roecker</span></div>
           <div class="in">
@@ -787,10 +804,16 @@ document.addEventListener('error', function(e){
           </div>
 
           <div class="card" style="padding:0;overflow:hidden">
-            <div class="photo r-wide" data-shot="Placeholder: map of the meeting point"></div>
-            <div style="padding:16px 20px">
-              <h3 class="h-card" style="font-size:1rem">Monterey Bay Eco Tours</h3>
-              <p style="font-size:.88rem;color:var(--ink-2);margin-top:4px">Moss Landing, California. Parking is on site and free.</p>
+            <div style="padding:20px 22px" class="wayfind">
+              <span class="eyebrow">Getting there</span>
+              <h3 class="h-card" style="font-size:1.1rem;margin:8px 0 14px">Monterey Bay Eco Tours, Moss Landing</h3>
+              <dl>
+                <dt>Meet at</dt><dd>The dock, by 9:45am at the latest</dd>
+                <dt>Parking</dt><dd>On site and free</dd>
+                <dt>Driving up</dt><dd>Informal run north on Highway 1, leaves Seaside at 8:00am</dd>
+                <dt>If you are late</dt><dd>Call the tour chair. The boat cannot wait.</dd>
+              </dl>
+              <a href="#" class="btn btn-ghost" style="margin-top:16px;padding:9px 16px;min-height:42px;font-size:.85rem">Open in Maps</a>
             </div>
           </div>
 
@@ -957,13 +980,13 @@ document.addEventListener('error', function(e){
     <div class="shell">
       <div class="grid g2">
         <div class="card stack" style="gap:14px;padding:0;overflow:hidden">
-          <div class="photo r-wide" data-shot="Placeholder: webstore product shot"></div>
+          <div class="catpanel" role="list" aria-label="What the national webstore carries"><span role="listitem">Polo shirts</span><span role="listitem">Fleece</span><span role="listitem">T-shirts</span><span role="listitem">Soft shells</span><span role="listitem">Dress shirts</span><span role="listitem">Caps</span><span role="listitem">Decals</span><span role="listitem">Patches</span></div>
           <div style="padding:0 22px 24px" class="stack">
             <span class="eyebrow">Shirts, caps, jackets, decals</span>
             <h2 class="h-card" style="font-size:1.35rem">The PCA region webstore</h2>
             <p style="font-size:.94rem;color:var(--ink-2)">Polos, tees, dress shirts, fleece, soft shells and caps, all carrying the Monterey Bay Region logo. Printed to order by PCA National in Columbia, Maryland, and posted directly to you. Allow seven to twelve working days.</p>
             <p style="font-size:.85rem;color:var(--ink-3)">Sizes, colours and returns are handled by National. The region does not hold stock, so nothing sells out and nothing is ever left in a garage.</p>
-            <a href="#" class="btn btn-primary">Open the webstore</a>
+            <a href="#" class="btn btn-primary" style="margin-top:auto">Open the webstore</a>
             <p style="font-size:.78rem;color:var(--ink-3)"><span class="pill-lite">Not yet open</span> The region does not have a webstore today. Seventy-seven other regions do.</p>
           </div>
         </div>
@@ -975,7 +998,7 @@ document.addEventListener('error', function(e){
             <h2 class="h-card" style="font-size:1.35rem">Region name badge</h2>
             <p style="font-size:.94rem;color:var(--ink-2)">The engraved badge members wear at meetings and on the concours field. Magnetic clasp, no pin holes in your shirt. $15.</p>
             <p style="font-size:.85rem;color:var(--ink-3)">Made up in batches once enough orders come in, then handed to you at a meeting or an event. Not posted.</p>
-            <a href="#" data-goto="badge" class="btn btn-primary">Order a name badge</a>
+            <a href="#" data-goto="badge" class="btn btn-primary" style="margin-top:auto">Order a name badge</a>
           </div>
         </div>
       </div>
@@ -983,6 +1006,29 @@ document.addEventListener('error', function(e){
       <div class="card" style="margin-top:22px;border-left:3px solid var(--amber)">
         <h3 class="h-card" style="font-size:1.05rem">Why we do not run our own shop</h3>
         <p style="font-size:.92rem;color:var(--ink-2);margin-top:6px">A region this size sells a few dozen items a year. Running a full online shop for that means somebody has to keep the software patched, the payments secure, and the stock counted, and it slows down every other page on the site. The national webstore does the same job with none of that, and because PCA does the printing there is no question about who is allowed to use the club&rsquo;s marks.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sect alt">
+    <div class="shell">
+      <div class="sechead"><h2 class="h-sec" style="font-size:1.5rem">How ordering works</h2></div>
+      <div class="grid g3">
+        <div class="stack" style="gap:7px">
+          <span class="eyebrow">Clothing</span>
+          <h3 class="h-card" style="font-size:1.05rem">Ordered from National, posted to you</h3>
+          <p style="font-size:.9rem;color:var(--ink-2)">You buy directly from the PCA webstore. They print it, they post it, they handle sizes and returns. The region never touches your order and holds no stock.</p>
+        </div>
+        <div class="stack" style="gap:7px">
+          <span class="eyebrow">Name badges</span>
+          <h3 class="h-card" style="font-size:1.05rem">Ordered here, collected in person</h3>
+          <p style="font-size:.9rem;color:var(--ink-2)">You order and pay on this site. Payment is handled on Stripe&rsquo;s own secure page, so the region never sees your card details. You get a receipt by email straight away.</p>
+        </div>
+        <div class="stack" style="gap:7px">
+          <span class="eyebrow">Then what</span>
+          <h3 class="h-card" style="font-size:1.05rem">Made in a batch, handed over at an event</h3>
+          <p style="font-size:.9rem;color:var(--ink-2)">Badges are engraved in batches. We email you when yours is ready and which meeting or event to pick it up at. Nothing is posted.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -1095,10 +1141,10 @@ document.addEventListener('error', function(e){
       </div>
       <p class="lede" style="margin-bottom:24px">Every one of these is a volunteer with a day job. Email the role, not the person, and it will keep working after they hand over.</p>
       <div class="grid g4">
-        <div class="card stack" style="gap:10px"><div class="photo r-sq" data-shot="Photograph to add"></div><div><h3 class="h-card" style="font-size:1.02rem">Mark McMahon</h3><p class="meta" style="margin-top:2px">President</p><p style="font-size:.85rem;margin-top:6px"><a href="#">president@mby.pca.org</a></p></div></div>
-        <div class="card stack" style="gap:10px"><div class="photo r-sq" data-shot="Photograph to add"></div><div><h3 class="h-card" style="font-size:1.02rem">Al Munoz-Flores</h3><p class="meta" style="margin-top:2px">Vice President</p><p style="font-size:.85rem;margin-top:6px"><a href="#">vp@mby.pca.org</a></p></div></div>
-        <div class="card stack" style="gap:10px"><div class="photo r-sq" data-shot="Photograph to add"></div><div><h3 class="h-card" style="font-size:1.02rem">Steve Rouland</h3><p class="meta" style="margin-top:2px">Secretary</p><p style="font-size:.85rem;margin-top:6px"><a href="#">secretary@mby.pca.org</a></p></div></div>
-        <div class="card stack" style="gap:10px"><div class="photo r-sq" data-shot="Photograph to add"></div><div><h3 class="h-card" style="font-size:1.02rem">Paul Sedillos</h3><p class="meta" style="margin-top:2px">Treasurer</p><p style="font-size:.85rem;margin-top:6px"><a href="#">treasurer@mby.pca.org</a></p></div></div>
+        <div class="card boardcard"><div class="mono" aria-hidden="true">MM</div><div><h3 class="h-card" style="font-size:1.02rem">Mark McMahon</h3><p class="meta" style="margin-top:2px">President</p><p style="font-size:.85rem;margin-top:6px"><a href="#">president@mby.pca.org</a></p></div></div>
+        <div class="card boardcard"><div class="mono" aria-hidden="true">AM</div><div><h3 class="h-card" style="font-size:1.02rem">Al Munoz-Flores</h3><p class="meta" style="margin-top:2px">Vice President</p><p style="font-size:.85rem;margin-top:6px"><a href="#">vp@mby.pca.org</a></p></div></div>
+        <div class="card boardcard"><div class="mono" aria-hidden="true">SR</div><div><h3 class="h-card" style="font-size:1.02rem">Steve Rouland</h3><p class="meta" style="margin-top:2px">Secretary</p><p style="font-size:.85rem;margin-top:6px"><a href="#">secretary@mby.pca.org</a></p></div></div>
+        <div class="card boardcard"><div class="mono" aria-hidden="true">PS</div><div><h3 class="h-card" style="font-size:1.02rem">Paul Sedillos</h3><p class="meta" style="margin-top:2px">Treasurer</p><p style="font-size:.85rem;margin-top:6px"><a href="#">treasurer@mby.pca.org</a></p></div></div>
       </div>
 
       <h3 class="h-sec" style="font-size:1.3rem;margin:34px 0 14px">Committee chairs</h3>
@@ -1562,6 +1608,43 @@ document.addEventListener('error', function(e){
         </tbody>
       </table>
     </div>
+
+
+    <h3 style="margin-top:34px">How the store works once WooCommerce is gone</h3>
+    <p style="max-width:66ch">The review recommends retiring the self-hosted shop. This is what replaces it, in enough detail to actually set up.</p>
+
+    <div class="grid g2" style="margin-top:18px">
+      <div class="card">
+        <h4 style="font-family:'Public Sans',sans-serif;font-size:1rem;font-weight:600;margin-bottom:8px">Clothing goes to the national webstore</h4>
+        <p>Email <code>webstore@national.pca.org</code> to open a Monterey Bay storefront. PCA prints to order in Columbia, Maryland and posts direct to the member. The region supplies its logo once and then does nothing: no stock, no money fronted, no fulfilment, no returns, and no question about who is licensed to put the club&rsquo;s marks on a shirt. The Regalia page links out to it.</p>
+      </div>
+      <div class="card">
+        <h4 style="font-family:'Public Sans',sans-serif;font-size:1rem;font-weight:600;margin-bottom:8px">Badges are sold with one Stripe payment link</h4>
+        <p>A name badge is club-specific and nobody else can make it, so it stays on the site. One Stripe Payment Link, priced at $15, with adjustable quantity and three custom fields: <strong>Name as it should appear</strong> (required, 24 characters), <strong>Second line</strong> (optional), and <strong>Anything else</strong>. Stripe hosts the payment page and emails the receipt. The Regalia and Badge pages link straight to it.</p>
+      </div>
+    </div>
+
+    <h4 style="font-family:'Public Sans',sans-serif;font-size:1rem;font-weight:600;margin:26px 0 8px">What the volunteer actually does</h4>
+    <ol>
+      <li><strong>Watch orders come in.</strong> Stripe emails a notification per payment. No plugin, no admin login on the website.</li>
+      <li><strong>Run a batch.</strong> In the Stripe dashboard, filter Payments by the badge product, then export to CSV. The custom-field columns <em>are</em> the engraving list, already spelled the way each member typed it. That replaces reading free-text order notes.</li>
+      <li><strong>Mark them collected.</strong> Add a column to the same sheet, or add a note to each Stripe payment. Either survives a handover better than a WordPress order status nobody else can see.</li>
+      <li><strong>Refund a mistake</strong> in one click in Stripe, with the receipt handled automatically.</li>
+    </ol>
+
+    <h4 style="font-family:'Public Sans',sans-serif;font-size:1rem;font-weight:600;margin:26px 0 8px">What this changes on the site</h4>
+    <ul>
+      <li>Four plugins come off: WooCommerce, the WooCommerce Stripe gateway, WooCommerce Tax, and Store Vacation.</li>
+      <li>The shopping-cart scripts and Stripe&rsquo;s library stop loading on every page, including for the many visitors who came to read about a tour.</li>
+      <li>There is no checkout on the club&rsquo;s own server any more, so the region is no longer the party responsible for securing a payment page.</li>
+      <li><strong>Card fees do not change.</strong> Stripe charges the same 2.9% plus 30 cents either way, so this saves volunteer hours rather than money.</li>
+      <li><code>/shop/</code>, <code>/cart/</code> and the old product URLs should redirect to the new Regalia page rather than 404, so old links and search results keep working.</li>
+    </ul>
+
+    <h4 style="font-family:'Public Sans',sans-serif;font-size:1rem;font-weight:600;margin:26px 0 8px">What you give up, honestly</h4>
+    <p>A payment link has no basket, no stock levels, no coupon codes, no member-only pricing, and a cap of three custom fields. At two products and roughly one order a week none of that is being used today. If the region ever runs a real catalogue again, that is the moment to reconsider, not now. Two open questions for the board: what PCA pays the region per webstore item, which is published nowhere, and what the treasurer wants to do about sales tax once WooCommerce Tax is removed. Neither is a website decision.</p>
+
+    <p style="margin-top:14px"><strong>If the board would rather keep one admin screen:</strong> Events Manager Pro already takes Stripe and PayPal, so the badge could be sold as a permanently open &ldquo;ticket&rdquo;. It is conceptually odd, but it is one fewer system for a single maintainer to remember, and it keeps every payment the region takes in one place.</p>
 
     <h3 style="margin-top:30px">Three things to change when porting this to WordPress</h3>
     <ol>
