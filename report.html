@@ -121,6 +121,11 @@ code,.mono{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:.8
   font-family:"IBM Plex Mono",monospace;font-size:.7rem;font-weight:500;
   letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);
 }
+:root{--shoreline:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 14'><path d='M2 11c12-.5 17-8 27-8 9 0 12 5.4 22 5.4 11 0 16-7 29-7.8' fill='none' stroke='%2312594B' stroke-width='2.6' stroke-linecap='round'/></svg>")}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--shoreline:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 14'><path d='M2 11c12-.5 17-8 27-8 9 0 12 5.4 22 5.4 11 0 16-7 29-7.8' fill='none' stroke='%235FC0A5' stroke-width='2.6' stroke-linecap='round'/></svg>")}}
+:root[data-theme="dark"]{--shoreline:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 14'><path d='M2 11c12-.5 17-8 27-8 9 0 12 5.4 22 5.4 11 0 16-7 29-7.8' fill='none' stroke='%235FC0A5' stroke-width='2.6' stroke-linecap='round'/></svg>")}
+.shore{display:block;width:58px;height:9px;background:var(--shoreline) no-repeat left center/contain}
+.shorebar{height:11px;background:var(--shoreline) repeat-x left center/88px 11px;opacity:.8;margin-bottom:24px}
 
 /* ---------- masthead ---------- */
 .masthead{
@@ -268,6 +273,7 @@ hr.soft{border:0;border-top:1px solid var(--rule);margin:26px 0}
   <div class="wrap">
     <div class="eyebrow">Website review &middot; prepared for the board &middot; public edition</div>
     <h1>Monterey Bay Region<br>Web Review</h1>
+    <span class="shore" aria-hidden="true" style="margin:16px 0 2px"></span>
     <p class="dek">An independent look at mby.pca.org: what is working, what is broken, what it costs, and what to do about it over the next ninety days. Written for a volunteer board, not for a web developer.</p>
     <p class="dek" style="margin-top:18px;font-size:.93rem;padding:14px 16px;background:var(--surface);border-left:3px solid var(--crit);border-radius:4px"><strong>About this edition.</strong> This page is public, so three findings that named specific unpatched software on a live site taking card payments have been generalised. Every score, figure, cost and recommendation is unchanged. The board holds the full version. Once the first 30 days of updates are applied, the distinction stops mattering.</p>
     <div class="stamp">
@@ -1110,6 +1116,7 @@ hr.soft{border:0;border-top:1px solid var(--rule);margin:26px 0}
 </section>
 
 <footer class="foot">
+  <div class="shorebar" aria-hidden="true" style="margin-top:6px"></div>
   <p>Prepared 26 August 2026 for the Monterey Bay Region board. Findings reflect the site as it stood on 25 and 26 August 2026 and will drift as the site changes. Figures marked not verified were not measured and should not be quoted as if they were.</p>
 </footer>
 
