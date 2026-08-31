@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="assets/mbr-crest.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Public+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,500&family=Public+Sans:wght@400;500;600;700&display=swap">
 <style>
 /* ============ TOKENS ============ */
 :root{
@@ -375,6 +375,71 @@ table.rate th{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;colo
 table.rate td.tnum{font-variant-numeric:tabular-nums;font-weight:600}
 .scrollx{overflow-x:auto}
 
+
+/* ============ POLISH PASS ============ */
+:root{--shoreline:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 14'><path d='M2 11c12-.5 17-8 27-8 9 0 12 5.4 22 5.4 11 0 16-7 29-7.8' fill='none' stroke='%23A65510' stroke-width='2.6' stroke-linecap='round'/></svg>")}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--shoreline:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 14'><path d='M2 11c12-.5 17-8 27-8 9 0 12 5.4 22 5.4 11 0 16-7 29-7.8' fill='none' stroke='%23E39A4E' stroke-width='2.6' stroke-linecap='round'/></svg>")}}
+:root[data-theme="dark"]{--shoreline:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 14'><path d='M2 11c12-.5 17-8 27-8 9 0 12 5.4 22 5.4 11 0 16-7 29-7.8' fill='none' stroke='%23E39A4E' stroke-width='2.6' stroke-linecap='round'/></svg>")}
+p{text-wrap:pretty}
+
+/* the shoreline motif marks every section title */
+.sechead h2::before{content:"";display:block;width:58px;height:9px;margin-bottom:12px;
+  background:var(--shoreline) no-repeat left center/contain}
+
+/* full-bleed hero */
+.hero{position:relative;background:#0B1428;overflow:hidden}
+.hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 38%}
+.hero-media::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(12deg, rgba(8,13,26,.9) 18%, rgba(8,13,26,.46) 54%, rgba(8,13,26,.1) 92%),
+             linear-gradient(180deg, rgba(8,13,26,.34), rgba(8,13,26,0) 34%)}
+.hero-in{position:relative;z-index:1;padding-top:58px;padding-bottom:104px}
+@container site (min-width:900px){.hero-in{padding-top:112px;padding-bottom:158px}}
+.hero .eyebrow{color:#E8B36B}
+.hero h1{color:#F7F4ED;font-size:2.4rem;font-size:clamp(2.4rem,6.2cqi,4.4rem);line-height:1.04;
+  letter-spacing:-.022em;margin:16px 0 18px}
+.hero h1 em{font-style:italic;font-weight:500;color:#F0C285}
+.hero-lede{color:#CBD2DF;font-size:1.02rem;max-width:52ch;line-height:1.66}
+@container site (min-width:900px){.hero-lede{font-size:1.1rem}}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.btn-hero-ghost{background:rgba(255,255,255,.04);color:#F7F4ED;border-color:rgba(255,255,255,.44)}
+.btn-hero-ghost:hover{border-color:#F7F4ED;background:rgba(255,255,255,.12)}
+.hero .credit{position:absolute;right:14px;bottom:12px;z-index:1}
+.hero :focus-visible{outline-color:#F0C285}
+
+/* featured event card, overlapping the hero */
+.overlap{position:relative;z-index:2;margin-top:-64px}
+@container site (min-width:900px){.overlap{margin-top:-84px}}
+.ecard-feature{display:grid;background:var(--surface);border:1px solid var(--line);border-radius:6px;
+  overflow:hidden;box-shadow:0 24px 60px -24px rgba(9,15,29,.5),0 2px 8px rgba(9,15,29,.1)}
+@container site (min-width:820px){.ecard-feature{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}}
+.fmedia{position:relative;aspect-ratio:16/9}
+@container site (min-width:820px){.fmedia{aspect-ratio:auto;min-height:100%}}
+.fmedia img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.fmedia .status{position:absolute;top:14px;left:14px;background:var(--surface);z-index:1}
+.fbody{padding:24px 24px 26px;display:flex;flex-direction:column;gap:12px}
+@container site (min-width:820px){.fbody{padding:32px 34px 34px}}
+.fbody h2{font-size:1.55rem;line-height:1.15}
+@container site (min-width:820px){.fbody h2{font-size:1.9rem}}
+.fbody h2 a{color:var(--ink);text-decoration:none}
+.fbody h2 a:hover{color:var(--amber)}
+
+/* evening band */
+.sect-evening{background:linear-gradient(158deg,#182F55 0%,#0D1B36 78%)}
+.sect-evening .h-sec,.sect-evening h2{color:#F7F4ED}
+.sect-evening .sechead h2::before{filter:none}
+.sect-evening p{color:#C4CCDB}
+.sect-evening .eyebrow{color:#E8B36B}
+
+/* motion, kept quiet */
+a.card,.ecard,.ecard-feature,.tile,.logoframe{transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease}
+a.card:hover,a.tile:hover{transform:translateY(-3px);box-shadow:0 14px 34px -16px rgba(9,15,29,.28),0 2px 6px rgba(9,15,29,.08)}
+.ecard:hover{box-shadow:0 10px 30px -16px rgba(9,15,29,.24),0 1px 4px rgba(9,15,29,.06)}
+a.card .photo img{transition:transform .4s ease}
+a.card:hover .photo img{transform:scale(1.045)}
+
+/* footer shoreline */
+.shorebar{height:11px;background:var(--shoreline) repeat-x left center/88px 11px;opacity:.85;margin:0 0 30px}
+
 /* ============ NOTES (outside prototype) ============ */
 .notes{background:var(--surface-2);border-top:4px solid var(--sea);padding:52px 0 70px}
 .notes .shell{max-width:1160px}
@@ -473,50 +538,44 @@ document.addEventListener('error', function(e){
 
 <!-- ================= HOME ================= -->
 <div class="screen active" id="s-home">
-  <section class="sect tight" style="padding-top:22px;padding-bottom:22px">
-    <div class="shell">
-      <div class="side" style="align-items:center">
-        <div class="stack" style="gap:16px">
-          <span class="eyebrow">Monterey &amp; San Benito Counties &middot; Zone 7 &middot; Since 1961</span>
-          <h1 class="h-hero">It&rsquo;s not just the cars,<br>it&rsquo;s the people.</h1>
-          <p class="lede">Four hundred Porsche owners on the Central Coast, driving Highway 1 and Carmel Valley, judging concours under the oaks, and arguing about tyre pressures over dinner. Everyone from a vintage 356 to a daily driver is welcome.</p>
-          <div style="display:flex;flex-wrap:wrap;gap:11px">
-            <a href="#" data-goto="events" class="btn btn-primary">See what&rsquo;s on next</a>
-            <a href="#" data-goto="join" class="btn btn-ghost">Join the region</a>
-          </div>
-        </div>
-        <div class="photo r-hero"><img src="https://mby.pca.org/wp-content/uploads/2026-01-25-big-sur-tour-banner-fred.jpg" alt="A line of Porsches pulled over on the Big Sur tour, January 2026" decoding="async" fetchpriority="high"><span class="credit">Fred Brown</span></div>
+  <section class="hero">
+    <div class="hero-media" aria-hidden="true"><img src="https://mby.pca.org/wp-content/uploads/2026-01-25-big-sur-tour-banner-fred.jpg" alt="" decoding="async" fetchpriority="high"></div>
+    <div class="shell hero-in">
+      <span class="eyebrow">Monterey &amp; San Benito Counties &middot; Zone 7 &middot; Since 1961</span>
+      <h1>It&rsquo;s not just the cars,<br>it&rsquo;s the <em>people</em>.</h1>
+      <p class="hero-lede">Four hundred Porsche owners on the Central Coast, driving Highway 1 and Carmel Valley, judging concours under the oaks, and arguing about tyre pressures over dinner. Everyone from a vintage 356 to a daily driver is welcome.</p>
+      <div class="hero-cta">
+        <a href="#" data-goto="events" class="btn btn-primary">See what&rsquo;s on next</a>
+        <a href="#" data-goto="join" class="btn btn-hero-ghost">Join the region</a>
       </div>
     </div>
+    <span class="credit">Fred Brown, Big Sur tour</span>
   </section>
 
-  <section class="sect alt">
+  <section class="sect alt" style="padding-top:0">
     <div class="shell">
-      <div class="sechead">
-        <h2 class="h-sec">What&rsquo;s on next</h2>
+      <article class="ecard-feature overlap">
+        <div class="fmedia">
+          <img src="https://mby.pca.org/wp-content/uploads/2025-05-18-elkhorn-slough-reserve-768x512.jpg" alt="Members' cars parked at Elkhorn Slough Reserve" decoding="async" loading="lazy">
+          <span class="status s-few">5 spaces left</span>
+        </div>
+        <div class="fbody">
+          <span class="eyebrow">Next up &middot; Saturday 19 September &middot; 8:00am</span>
+          <h2><a href="#" data-goto="event">2026 Return to Elkhorn Slough</a></h2>
+          <p style="color:var(--ink-2)">A morning on the water with Monterey Bay Eco Tours, then lunch in Moss Landing. Family friendly and one of the most popular runs on the calendar.</p>
+          <div class="facts" style="display:flex;flex-wrap:wrap;gap:6px 18px;font-size:.86rem;color:var(--ink-2)">
+            <span><b style="color:var(--ink)">$30</b> per member</span>
+            <span>27 of 32 booked</span>
+            <span>Closes 19 Sep, noon</span>
+          </div>
+          <div style="margin-top:4px"><a href="#" data-goto="event" class="btn btn-primary" style="padding:12px 22px">Book a seat</a></div>
+        </div>
+      </article>
+      <div class="sechead" style="margin-top:44px">
+        <h2 class="h-sec">Also on the calendar</h2>
         <a href="#" data-goto="events">All events and calendar &rarr;</a>
       </div>
       <div class="stack">
-
-        <article class="ecard few has-thumb">
-          <div class="rail" aria-hidden="true"></div>
-          <div class="thumb photo r-card"><img src="https://mby.pca.org/wp-content/uploads/2025-05-18-elkhorn-slough-reserve-768x512.jpg" alt="Members' cars parked at Elkhorn Slough Reserve" decoding="async" loading="lazy"></div>
-          <div class="in">
-            <div class="dateline">
-              <span class="dstamp">Sat 19 Sep &middot; 8:00am</span>
-              <span class="status s-few">5 spaces left</span>
-            </div>
-            <h3 class="h-card"><a href="#" data-goto="event">2026 Return to Elkhorn Slough</a></h3>
-            <p style="color:var(--ink-2);font-size:.93rem">A morning on the water with Monterey Bay Eco Tours, then lunch in Moss Landing. Family friendly and one of the most popular runs on the calendar.</p>
-            <div class="facts">
-              <span><b>$30</b> per member</span>
-              <span>Moss Landing</span>
-              <span>27 of 32 booked</span>
-              <span>Closes 19 Sep, noon</span>
-            </div>
-            <div><a href="#" data-goto="event" class="btn btn-primary" style="padding:10px 18px;min-height:44px">Book a seat</a></div>
-          </div>
-        </article>
 
         <article class="ecard">
           <div class="rail" aria-hidden="true"></div>
@@ -563,13 +622,13 @@ document.addEventListener('error', function(e){
     </div>
   </section>
 
-  <section class="sect" style="background:var(--amber-soft)">
+  <section class="sect sect-evening">
     <div class="shell">
       <div class="side" style="align-items:center;gap:26px">
         <div class="stack" style="gap:12px">
           <span class="eyebrow">New around here?</span>
           <h2 class="h-sec">You do not need a special Porsche. You need a Porsche.</h2>
-          <p style="color:var(--ink-2);max-width:56ch">Membership is through PCA National and includes your choice of home region. Pick Monterey Bay and you are on the tour list, the dinner list, and the concours field.</p>
+          <p style="max-width:56ch">Membership is through PCA National and includes your choice of home region. Pick Monterey Bay and you are on the tour list, the dinner list, and the concours field.</p>
         </div>
         <div><a href="#" data-goto="join" class="btn btn-primary btn-block">What membership gets you</a></div>
       </div>
@@ -1350,14 +1409,14 @@ document.addEventListener('error', function(e){
     </div>
   </section>
 
-  <section class="sect alt">
+  <section class="sect sect-evening">
     <div class="shell">
       <div class="side">
         <div class="stack" style="gap:16px">
           <span class="eyebrow">Sponsor the region</span>
           <h2 class="h-sec">Four hundred Porsche owners, in one county</h2>
-          <p style="color:var(--ink-2);max-width:56ch">Our members spend money on their cars, and they ask each other where to spend it. Sponsorship puts you in front of that conversation for a year: on this website, in the emails that go out before every event, and on the field at Concours in Paradise.</p>
-          <p style="color:var(--ink-2);max-width:56ch">We keep the number of sponsors deliberately small so that each one is actually visible.</p>
+          <p style="max-width:56ch">Our members spend money on their cars, and they ask each other where to spend it. Sponsorship puts you in front of that conversation for a year: on this website, in the emails that go out before every event, and on the field at Concours in Paradise.</p>
+          <p style="max-width:56ch">We keep the number of sponsors deliberately small so that each one is actually visible.</p>
           <div><a href="#" data-goto="contact" class="btn btn-primary">Talk to us about sponsoring</a></div>
         </div>
         <div class="card">
@@ -1448,6 +1507,7 @@ document.addEventListener('error', function(e){
 
 <footer class="foot">
   <div class="shell">
+    <div class="shorebar" aria-hidden="true" style="margin-top:34px"></div>
     <div class="foot-grid">
       <div>
         <div class="mark" style="margin-bottom:14px">
